@@ -25,4 +25,7 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function toLogin(){
+        return view("auth.login");
+    }
 }
