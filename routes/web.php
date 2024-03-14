@@ -21,3 +21,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get("/welcome",function (){
    return view("welcome");
 });
+Route::get("/weather", [\App\Http\Controllers\WeatherController::class, 'getAllWeathers']);
