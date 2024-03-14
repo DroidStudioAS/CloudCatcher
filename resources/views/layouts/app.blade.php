@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="dark">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +14,7 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" id="theme">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -73,11 +73,27 @@
                     </ul>
                 </div>
             </div>
+
         </nav>
+
 
         <main class="py-4">
             @yield('content')
+            <button style="width: 5vw; margin-left: 47.5vw" class="toggleButton" onclick="toggleTheme()">
+                Change Theme
+            </button>
         </main>
+        <script>
+            function toggleTheme(){
+                let theme = document.documentElement.getAttribute("data-bs-theme");
+                if(theme==="dark"){
+                    document.documentElement.setAttribute("data-bs-theme","light");
+                }else{
+                    document.documentElement.setAttribute("data-bs-theme","dark");
+                }
+            }
+        </script>
     </div>
+
 </body>
 </html>
