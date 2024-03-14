@@ -18,3 +18,6 @@ Route::get("/",[\App\Http\Controllers\HomeController::class,"toLogin"]);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get("/welcome",function (){
+   return view("welcome");
+});
