@@ -11,6 +11,6 @@ class WeatherController extends Controller
         $weathers = WeatherModel::all();
 
 
-        return view("welcome", compact($weathers));
+        return view("welcome", compact('weathers'));
     }
 }
