@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\WeatherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,19 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/",[\App\Http\Controllers\HomeController::class,"toLogin"]);
+Route::get("/",[HomeController::class,"toLogin"]);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get("/welcome",function (){
    return view("welcome");
 });
-Route::get("/weather", [\App\Http\Controllers\WeatherController::class, 'getAllWeathers']);
+Route::get("/weather", [WeatherController::class, 'getAllWeathers']);
 
 
 //admin routes
-Route::get("/admin",[\App\Http\Controllers\WeatherController::class, 'getAllWeathersAdmin']);
-Route::post('admin/postWeather',[\App\Http\Controllers\WeatherController::class,'postWeatherEntry'])
+Route::get("/admin",[WeatherController::class, 'getAllWeathersAdmin']);
+Route::post('admin/postWeather',[WeatherController::class,'postWeatherEntry'])
     ->name('post-weather');
-Route::post('/admin/edit-entry/{weather}',[\App\Http\Controllers\WeatherController::class,'editWeatherEntry']);
+Route::post('/admin/edit-entry/{weather}',[WeatherController::class,'editWeatherEntry']);

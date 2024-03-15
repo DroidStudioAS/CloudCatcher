@@ -58,14 +58,7 @@ class WeatherController extends Controller
 
         return back();
     }
-    function editWeatherEntry(Request $request, $weatherModel){
-
-        $weatherToEdit = WeatherModel::where(['id'=>$weatherModel])->first();
-        if(!$weatherToEdit){
-            return  response([
-                "success"=>false
-                ]);
-        }
+    function editWeatherEntry(Request $request, WeatherModel $weather){
 
         $request->validate([
           "city"=>"required|string",
@@ -75,13 +68,13 @@ class WeatherController extends Controller
         //determine image path
         $path_to_image = $this->determinePathToImage($request->get("description"));
 
-        $weatherToEdit->city= $request->input("city");
-        $weatherToEdit->description= $request->input("description");
-        $weatherToEdit->temperature=$request->input("temperature");
-        $weatherToEdit->path_to_image = $path_to_image;
+        $weather->city= $request->input("city");
+        $weather->description= $request->input("description");
+        $weather->temperature=$request->input("temperature");
+        $weather->path_to_image = $path_to_image;
 
 
-        $weatherToEdit->save();
+        $weather->save();
 
         return response([
             'success'=>true
