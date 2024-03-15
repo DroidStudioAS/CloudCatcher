@@ -3,11 +3,25 @@
 @section("content")
 
     <div class="search_container">
-        <h3>Weather on: {{$date}}</h3>
-        <input class="date" type="text" id="datepicker" placeholder="select another date">
-        <button  class="submit-button">Search</button>
+        @if(isset($date))
+            <h3>Weather on: {{$date}}</h3>
+        @else
+            <h3>All Dates</h3>
+        @endif
+
+        <form id="searchForm">
+        <input name="date" class="date" type="text" id="datepicker" placeholder="select another date">
+        <input type="submit" class="submit-button" value="search">
+        </form>
+        <button onclick="showAllTime()" class="submit-button">Show All Records</button>
+
+
     </div>
     <div class="weather_cards_container">
+
+        @if(count($weathers)==0)
+        <h1>There Are No Entries For This Date</h1>
+        @endif
         @foreach($weathers as $weather)
             <div class="weather_card">
                 <p class="weather_city">{{$weather->city}}</p>
@@ -38,6 +52,24 @@
                 autoclose:true
             });
         });
+
+        $("#searchForm").on("submit", function (event){
+            event.preventDefault();
+            loadWeatherForDate();
+        })
+
+        function loadWeatherForDate(){
+            let date = $("#datepicker").val();
+            console.log(date)
+            if(date===""){
+                alert("Please Pick A Date")
+            }
+            window.location.href="/weather/"+date
+
+        }
+        function showAllTime(){
+            window.location.href="/all-time-weather";
+        }
     </script>
 
 @endsection

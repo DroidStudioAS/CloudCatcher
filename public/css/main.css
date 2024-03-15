@@ -224,6 +224,7 @@ table{
     flex-flow: column nowrap;
 }
 .search_container h3{
+    font-size: xx-large;
     color: white;
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 }

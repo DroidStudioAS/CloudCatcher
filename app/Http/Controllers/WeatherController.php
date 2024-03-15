@@ -14,7 +14,6 @@ class WeatherController extends Controller
         if ($date === null) {
             $date = Carbon::today()->format("Y-m-d");
         }
-
         $allWeathers = WeatherModel::all();
         $weathers = collect([]);
         foreach ($allWeathers as $weather){
@@ -24,7 +23,7 @@ class WeatherController extends Controller
                 $weathers->push($weather);
             }
         }
-        return view("welcome", compact('weathers'));
+        return view("welcome", compact('weathers', 'date'));
     }
     public function getAllWeathers(){
         $weathers = WeatherModel::all();
