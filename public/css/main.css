@@ -17,6 +17,11 @@
     background-color: #627e75;
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 }
+.header_title{
+    font-family: "Expo M", sans-serif;
+    font-size:xxx-large;
+    color: white;
+}
 
 /******Weather Card*****/
 .weather_cards_container{

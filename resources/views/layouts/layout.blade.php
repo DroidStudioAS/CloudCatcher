@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>@yield("title","Home")</title>
+    <title>@yield("title","CloudCatcher")</title>
     <link rel="stylesheet" href="{{asset("/css/main.css")}}">
 </head>
 <body>

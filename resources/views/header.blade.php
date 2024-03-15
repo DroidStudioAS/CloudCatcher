@@ -1,3 +1,3 @@
 <header class="app_header">
-   <h1>This Is A Weather App</h1>
+   <h1 class="header_title">CloudCatcher</h1>
 </header>
