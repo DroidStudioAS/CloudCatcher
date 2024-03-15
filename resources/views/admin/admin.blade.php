@@ -31,7 +31,8 @@
     <div class="admin_row">
         <div class="entry_form_container">
             <h1>Enter A Weather Record</h1>
-            <form class="entry-form">
+            <form METHOD="POST" action="{{route('post-weather')}}" class="entry-form">
+                {{csrf_field()}}
                 <label for="description">Description</label>
                 <select class="entry-form-dropdown" name="description">
                     <option value="sunny">Sunny</option>
@@ -43,9 +44,9 @@
                 <label for="temperature">Temperature (Celsius)</label>
                 <input class="weather_input" name="temperature" type="number">
                 <input class="submit-button" type="submit">
-
             </form>
         </div>
+
     </div>
 
 @endsection

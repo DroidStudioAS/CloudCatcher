@@ -26,3 +26,5 @@ Route::get("/weather", [\App\Http\Controllers\WeatherController::class, 'getAllW
 
 //admin routes
 Route::get("/admin",[\App\Http\Controllers\WeatherController::class, 'getAllWeathersAdmin']);
+Route::post('admin/postWeather',[\App\Http\Controllers\WeatherController::class,'postWeatherEntry'])
+    ->name('post-weather');

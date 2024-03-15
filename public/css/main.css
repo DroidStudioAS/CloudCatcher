@@ -148,6 +148,7 @@ table{
     margin: 8px;
     border-radius: 8px;
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    border-bottom: 4px solid #627e75;
 
 }
 .weather_input{
@@ -159,11 +160,15 @@ table{
     border-radius: 8px;
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 
+     border-bottom: 4px solid #627e75;
+
 }
 .submit-button{
     font-size: large;
     padding: 10px;
     margin: 8px;
     border-radius: 8px;
+    color: white;
+    background-color: #627e75;
 }
 

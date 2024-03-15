@@ -22,5 +22,14 @@ class WeatherController extends Controller
 
         return view("admin.admin", compact('weathers'));
     }
+    public function postWeatherEntry(Request $request){
+        $request->validate([
+           'description'=>'required|string',
+            'city'=>'required|string',
+            'temperature'=>'required|int'
+        ]);
+
+        echo 'validation passed';
+    }
 
 }
