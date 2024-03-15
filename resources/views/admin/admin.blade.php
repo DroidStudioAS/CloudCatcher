@@ -20,7 +20,7 @@
                         <td class="weather_table_data">{{$weather->temperature}}°</td>
                         <td class="weather_table_data">{{\Carbon\Carbon::parse($weather->created_at)->format('d F Y')}}</td>
                         <td class="weather_table_data">
-                            <button onclick="displayEditForm()" class="edit_button">Edit</button>
+                            <button onclick="displayEditForm({{json_encode($weather)}})" class="edit_button">Edit</button>
                             <button class="delete_button">Delete</button>
                         </td>
                     </tr>
@@ -55,21 +55,25 @@
         <form METHOD="POST" action="{{route('post-weather')}}" class="entry-form">
             {{csrf_field()}}
             <label for="description">Description</label>
-            <select class="entry-form-dropdown" name="description">
+            <select id="weather-edit-dropdown" class="entry-form-dropdown" name="description">
                 <option value="sunny">Sunny</option>
                 <option value="raining">Raining</option>
                 <option value="cloudy">Cloudy</option>
             </select>
             <label for="city">City</label>
-            <input class="weather_input" name="city" type="text">
+            <input id="weather-edit-city" class="weather_input" name="city" type="text">
             <label for="temperature">Temperature (Celsius)</label>
-            <input class="weather_input" name="temperature" type="number">
+            <input id="weather-edit-temp" class="weather_input" name="temperature" type="number">
             <input class="submit-button" type="submit">
         </form>
     </div>
 <script>
-    function displayEditForm(){
+    function displayEditForm(weatherEntry){
        $("#edit-form").css('display','flex');
+       $("#weather-edit-dropdown").val(weatherEntry.description);
+       $("#weather-edit-city").val(weatherEntry.city);
+       $("#weather-edit-temp").val(weatherEntry.temperature);
+
     }
     function closeEditContainer(){
         $("#edit-form").css('display','none');
