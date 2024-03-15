@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WeatherController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//user routes
 Route::middleware('auth')->group(function (){
     Route::get("/",[HomeController::class,"toLogin"]);
     Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -21,15 +23,19 @@ Route::middleware('auth')->group(function (){
         return view("welcome");
     });
     Route::get("/weather", [WeatherController::class, 'getAllWeathers']);
-
-
-//admin routes
-    Route::get("/admin",[WeatherController::class, 'getAllWeathersAdmin']);
-    Route::post('admin/postWeather',[WeatherController::class,'postWeatherEntry'])
-        ->name('post-weather');
-    Route::post('/admin/edit-entry/{weather}',[WeatherController::class,'editWeatherEntry']);
-    Route::post('/admin/delete-entry/{weather}',[WeatherController::class,'deleteWeatherEntry']);
 });
+//admin routes
+Route::middleware(['auth', AdminMiddleware::class])
+    ->prefix('admin')
+    ->group(function (){
+        Route::get("/",[WeatherController::class, 'getAllWeathersAdmin']);
+        Route::post('postWeather',[WeatherController::class,'postWeatherEntry'])
+            ->name('post-weather');
+        Route::post('/edit-entry/{weather}',[WeatherController::class,'editWeatherEntry']);
+        Route::post('/delete-entry/{weather}',[WeatherController::class,'deleteWeatherEntry']);
+});
+
+
 
 
 
