@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class WeatherModel extends Model
 {
     protected $table="weather";
-    protected $fillable = ["city", 'temperature', 'description'];
+    protected $fillable = ["city", 'temperature', 'description','path_to_image'];
 }
