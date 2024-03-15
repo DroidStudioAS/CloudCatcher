@@ -4,7 +4,6 @@
     justify-content: flex-start;
     align-items: center;
 
-    padding-top: 100px;
     background-color: #d2a985;
 }
 .app_header{
@@ -222,6 +221,7 @@ table{
     justify-content: space-around;
     align-items: center;
     flex-flow: column nowrap;
+
 }
 .search_container h3{
     font-size: xx-large;
