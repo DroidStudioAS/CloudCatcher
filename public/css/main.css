@@ -103,7 +103,23 @@
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
-    background-color: pink;
+   /* background-color: pink;*/
 }
+table{
+    border-collapse: collapse;
+}
+.table_header,
+.weather_table_data{
+    text-align: left;
+    width: 10vw;
+    border: 1px solid black;
+    padding: 5px;
+}
+/*table{
+    border-collapse: collapse;
+}
+th{
+    border: 1px solid black;
+}*/
 
 

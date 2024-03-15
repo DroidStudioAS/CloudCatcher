@@ -15,7 +15,7 @@
                 <div class="weather_column">
                     <div class="temperature_container">
                         <h1 class="weather_temperature">
-                            {{$weather->temperature}}
+                            {{$weather->temperature}}°
                         </h1>
                     </div>
                     <p class="weather_date">{{\Carbon\Carbon::parse($weather->created_at)->format('d F')}}</p>
