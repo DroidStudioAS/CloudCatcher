@@ -91,3 +91,19 @@
 }
 
 
+/*******Admin Dash*********/
+.admin_container{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+.admin_row{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: pink;
+}
+
+

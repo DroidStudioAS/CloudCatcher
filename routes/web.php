@@ -25,6 +25,4 @@ Route::get("/weather", [\App\Http\Controllers\WeatherController::class, 'getAllW
 
 
 //admin routes
-Route::get("/admin", function (){
-    return view('admin.admin');
-});
+Route::get("/admin",[\App\Http\Controllers\WeatherController::class, 'getAllWeathersAdmin']);

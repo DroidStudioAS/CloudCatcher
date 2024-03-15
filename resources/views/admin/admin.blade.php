@@ -1,4 +1,7 @@
 @extends("layouts.admin_layout")
 @section("admin-content")
-    hey
+    <div class="admin_row">
+        primer
+    </div>
+
 @endsection

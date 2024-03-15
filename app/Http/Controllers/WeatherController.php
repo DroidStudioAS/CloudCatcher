@@ -13,4 +13,14 @@ class WeatherController extends Controller
 
         return view("welcome", compact('weathers'));
     }
+
+
+    /*****Admin Functions*****/
+    public function getAllWeathersAdmin(){
+        $weathers = WeatherModel::all();
+
+
+        return view("admin.admin", compact('weathers'));
+    }
+
 }
