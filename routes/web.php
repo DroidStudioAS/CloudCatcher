@@ -22,3 +22,9 @@ Route::get("/welcome",function (){
    return view("welcome");
 });
 Route::get("/weather", [\App\Http\Controllers\WeatherController::class, 'getAllWeathers']);
+
+
+//admin routes
+Route::get("/admin", function (){
+    return view('admin.admin');
+});
