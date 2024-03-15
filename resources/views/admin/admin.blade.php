@@ -20,8 +20,8 @@
                         <td class="weather_table_data">{{$weather->temperature}}°</td>
                         <td class="weather_table_data">{{\Carbon\Carbon::parse($weather->created_at)->format('d F Y')}}</td>
                         <td class="weather_table_data">
-                            <button>Edit</button>
-                            <button>Delete</button>
+                            <button class="edit_button">Edit</button>
+                            <button class="delete_button">Delete</button>
                         </td>
                     </tr>
                 @endforeach
