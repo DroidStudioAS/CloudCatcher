@@ -3,10 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\WeatherModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class WeatherController extends Controller
 {
+
+    public function getWeathersForDate($date)
+    {
+        $weathers = WeatherModel::all();
+        $weatherToReturn = collect([]);
+        foreach ($weathers as $weather){
+            $carbonInstance = $weather->created_at;
+            $dateString = $carbonInstance->format("Y-m-d");
+            if($dateString==$date){
+                $weatherToReturn->push($weather);
+            }
+        }
+
+
+
+
+
+
+
+    }
     public function getAllWeathers(){
         $weathers = WeatherModel::all();
 
