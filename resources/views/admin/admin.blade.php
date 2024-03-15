@@ -64,7 +64,7 @@
             <input id="weather-edit-city" class="weather_input" name="city" type="text">
             <label for="temperature">Temperature (Celsius)</label>
             <input id="weather-edit-temp" class="weather_input" name="temperature" type="number">
-            <input class="submit-button" type="submit">
+            <input id="edit-submit" class="submit-button" type="submit">
         </form>
     </div>
 <script>
@@ -74,9 +74,28 @@
        $("#weather-edit-city").val(weatherEntry.city);
        $("#weather-edit-temp").val(weatherEntry.temperature);
 
+       $("#edit-submit").off('click').on('click', function (e) {
+            e.preventDefault();
+            editWeatherRecord(weatherEntry.id);
+       })
     }
     function closeEditContainer(){
         $("#edit-form").css('display','none');
+    }
+
+    //async functions
+    //edit record
+    function editWeatherRecord(id){
+        $.ajax({
+            url:"/admin/edit-entry/"+id,
+            type:"POST",
+            data:{
+              "_token": $('meta[name="csrf-token"]').attr('content'),
+            },
+            success:function (response){
+                console.log(response.success);
+            }
+        })
     }
 </script>
 @endsection

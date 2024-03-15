@@ -51,7 +51,11 @@ class WeatherController extends Controller
         ]);
 
         return back();
-
+    }
+    function editWeatherEntry(){
+        return response([
+            'success'=>true
+        ]);
     }
 
 }
