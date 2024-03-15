@@ -10,7 +10,7 @@
         @endif
 
         <form id="searchForm">
-        <input name="date" class="date" type="text" id="datepicker" placeholder="select another date">
+        <input autocomplete="off" name="date" class="date" type="text" id="datepicker" placeholder="select another date">
         <input type="submit" class="submit-button" value="search">
         </form>
         <button onclick="showAllTime()" class="submit-button">Show All Records</button>
@@ -20,7 +20,7 @@
     <div class="weather_cards_container">
 
         @if(count($weathers)==0)
-        <h1>There Are No Entries For This Date</h1>
+        <h1 class="no-entries-msg">There Are No <br> Entries<br> For {{$date}}</h1>
         @endif
         @foreach($weathers as $weather)
             <div class="weather_card">
@@ -63,6 +63,7 @@
             console.log(date)
             if(date===""){
                 alert("Please Pick A Date")
+                return;
             }
             window.location.href="/weather/"+date
 

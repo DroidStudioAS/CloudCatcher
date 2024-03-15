@@ -228,6 +228,13 @@ table{
     color: white;
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 }
+.no-entries-msg{
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    font-size: xxx-large;
+    text-align: center;
+    padding-bottom: 40px;
+    color: white;
+}
 .date{
     width: 15vw;
     padding: 10px 8px 10px 8px;
