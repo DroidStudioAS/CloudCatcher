@@ -14,22 +14,26 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get("/",[HomeController::class,"toLogin"]);
-
-Auth::routes();
-
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get("/welcome",function (){
-   return view("welcome");
-});
-Route::get("/weather", [WeatherController::class, 'getAllWeathers']);
+Route::middleware('auth')->group(function (){
+    Route::get("/",[HomeController::class,"toLogin"]);
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get("/welcome",function (){
+        return view("welcome");
+    });
+    Route::get("/weather", [WeatherController::class, 'getAllWeathers']);
 
 
 //admin routes
-Route::get("/admin",[WeatherController::class, 'getAllWeathersAdmin']);
-Route::post('admin/postWeather',[WeatherController::class,'postWeatherEntry'])
-    ->name('post-weather');
-Route::post('/admin/edit-entry/{weather}',[WeatherController::class,'editWeatherEntry']);
-Route::post('/admin/delete-entry/{weather}',[WeatherController::class,'deleteWeatherEntry']);
+    Route::get("/admin",[WeatherController::class, 'getAllWeathersAdmin']);
+    Route::post('admin/postWeather',[WeatherController::class,'postWeatherEntry'])
+        ->name('post-weather');
+    Route::post('/admin/edit-entry/{weather}',[WeatherController::class,'editWeatherEntry']);
+    Route::post('/admin/delete-entry/{weather}',[WeatherController::class,'deleteWeatherEntry']);
+});
+
+
+
+Auth::routes();
+
+
 
