@@ -217,4 +217,7 @@ table{
     margin: 5px;
     width: 50px;
 }
+.date-picker-container{
+    position: relative;
+}
 

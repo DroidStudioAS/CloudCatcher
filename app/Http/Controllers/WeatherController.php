@@ -11,28 +11,40 @@ class WeatherController extends Controller
 
     public function getWeathersForDate($date)
     {
-        $weathers = WeatherModel::all();
-        $weatherToReturn = collect([]);
-        foreach ($weathers as $weather){
+        if ($date === null) {
+            $date = Carbon::today()->format("Y-m-d");
+        }
+
+        $allWeathers = WeatherModel::all();
+        $weathers = collect([]);
+        foreach ($allWeathers as $weather){
             $carbonInstance = $weather->created_at;
             $dateString = $carbonInstance->format("Y-m-d");
             if($dateString==$date){
-                $weatherToReturn->push($weather);
+                $weathers->push($weather);
             }
         }
-
-
-
-
-
-
-
+        return view("welcome", compact('weathers'));
     }
     public function getAllWeathers(){
         $weathers = WeatherModel::all();
 
 
         return view("welcome", compact('weathers'));
+    }
+    public function loadTodaysWeathers(){
+        $date = Carbon::today()->format('Y-m-d');
+
+        $allWeathers = WeatherModel::all();
+        $weathers = collect([]);
+        foreach ($allWeathers as $weather){
+            $carbonInstance = $weather->created_at;
+            $dateString = $carbonInstance->format("Y-m-d");
+            if($dateString==$date){
+                $weathers->push($weather);
+            }
+        }
+        return view("welcome", compact('weathers', 'date'));
     }
 
 

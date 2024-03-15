@@ -1,5 +1,8 @@
 @extends("layouts.layout")
+
 @section("content")
+
+
     <div class="weather_cards_container">
         @foreach($weathers as $weather)
             <div class="weather_card">
@@ -23,4 +26,13 @@
             </div>
         @endforeach
     </div>
+    <script>
+        $(document).ready(function(){
+            $('#datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true
+            });
+        });
+    </script>
+
 @endsection

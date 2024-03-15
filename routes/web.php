@@ -19,10 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function (){
     Route::get("/",[HomeController::class,"toLogin"]);
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get("/welcome",function (){
-        return view("welcome");
-    });
-    Route::get("/weather", [WeatherController::class, 'getAllWeathers']);
+
+    Route::get("/weather",[WeatherController::class, 'loadTodaysWeathers']);
 });
 //admin routes
 Route::middleware(['auth', AdminMiddleware::class])
@@ -34,11 +32,7 @@ Route::middleware(['auth', AdminMiddleware::class])
         Route::post('/edit-entry/{weather}',[WeatherController::class,'editWeatherEntry']);
         Route::post('/delete-entry/{weather}',[WeatherController::class,'deleteWeatherEntry']);
 });
-Route::get("test/{date}",[WeatherController::class,'getWeathersForDate']);
-
-
-
-
+Route::get("/weather/{date?}",[WeatherController::class,'getWeathersForDate']);
 Auth::routes();
 
 
