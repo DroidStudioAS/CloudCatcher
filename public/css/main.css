@@ -144,7 +144,8 @@ table{
     color: white;
 }
 /*****End of table styling****/
-.entry_form_container{
+.entry_form_container,
+.entry_form_container-edit{
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -198,5 +199,22 @@ table{
     border-radius: 8px;
     color: white;
     background-color: #627e75;
+}
+
+/**Edit Popup**/
+.entry_form_container-edit{
+    display: none;
+    position: fixed;
+    top: 20vh;
+    background-color: #627e75;
+    width: 30vw;
+    height: 60vh;
+}
+.entry_form_container-edit img{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+    width: 50px;
 }
 
