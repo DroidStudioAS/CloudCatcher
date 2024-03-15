@@ -16,6 +16,23 @@ class WeatherController extends Controller
 
 
     /*****Admin Functions*****/
+    /****Start of helpers**/
+        public function determinePathToImage($description){
+            $path_to_image="";
+            switch ($description){
+                case "sunny":
+                    $path_to_image="/res/sunny.png";
+                    break;
+                case "raining":
+                    $path_to_image="/res/rainy.png";
+                    break;
+                case "cloudy":
+                    $path_to_image="/res/cloudy.png";
+                    break;
+            }
+            return $path_to_image;
+        }
+    /****End of helpers****/
     public function getAllWeathersAdmin(){
         $weathers = WeatherModel::all();
 
@@ -28,19 +45,8 @@ class WeatherController extends Controller
             'city'=>'required|string',
             'temperature'=>'required|int'
         ]);
-        $path_to_image = "";
         //determine the image path based on desc
-        switch ($request->get("description")){
-            case "sunny":
-                $path_to_image="/res/sunny.png";
-                break;
-            case "raining":
-                $path_to_image="/res/rainy.png";
-                break;
-            case "cloudy":
-                $path_to_image="/res/cloudy.png";
-                break;
-        }
+        $path_to_image = $this->determinePathToImage($request->get("description"));
        //IMAGE PATH DETERMINED
         //build weather model
         WeatherModel::create([
@@ -52,7 +58,31 @@ class WeatherController extends Controller
 
         return back();
     }
-    function editWeatherEntry(){
+    function editWeatherEntry(Request $request, $weatherModel){
+
+        $weatherToEdit = WeatherModel::where(['id'=>$weatherModel])->first();
+        if(!$weatherToEdit){
+            return  response([
+                "success"=>false
+                ]);
+        }
+
+        $request->validate([
+          "city"=>"required|string",
+          "description"=>"required|string",
+            "temperature"=>'required|int',
+        ]);
+        //determine image path
+        $path_to_image = $this->determinePathToImage($request->get("description"));
+
+        $weatherToEdit->city= $request->input("city");
+        $weatherToEdit->description= $request->input("description");
+        $weatherToEdit->temperature=$request->input("temperature");
+        $weatherToEdit->path_to_image = $path_to_image;
+
+
+        $weatherToEdit->save();
+
         return response([
             'success'=>true
         ]);

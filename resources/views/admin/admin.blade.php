@@ -73,9 +73,11 @@
        $("#weather-edit-dropdown").val(weatherEntry.description);
        $("#weather-edit-city").val(weatherEntry.city);
        $("#weather-edit-temp").val(weatherEntry.temperature);
+        console.log(weatherEntry.id);
 
        $("#edit-submit").off('click').on('click', function (e) {
             e.preventDefault();
+            console.log(weatherEntry.id);
             editWeatherRecord(weatherEntry.id);
        })
     }
@@ -91,9 +93,18 @@
             type:"POST",
             data:{
               "_token": $('meta[name="csrf-token"]').attr('content'),
+               "city":$("#weather-edit-city").val(),
+                "description": $("#weather-edit-dropdown").val(),
+                "temperature":$("#weather-edit-temp").val()
             },
             success:function (response){
                 console.log(response.success);
+                if(response.success===true){
+                   location.reload();
+                }
+            },
+            error:function(xhr) {
+                console.log(xhr.responseText)
             }
         })
     }
