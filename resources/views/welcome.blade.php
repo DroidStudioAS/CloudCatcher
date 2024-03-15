@@ -2,7 +2,11 @@
 
 @section("content")
 
-
+    <div class="search_container">
+        <h3>Weather on: {{$date}}</h3>
+        <input class="date" type="text" id="datepicker" placeholder="select another date">
+        <button  class="submit-button">Search</button>
+    </div>
     <div class="weather_cards_container">
         @foreach($weathers as $weather)
             <div class="weather_card">
@@ -29,8 +33,9 @@
     <script>
         $(document).ready(function(){
             $('#datepicker').datepicker({
-                format: 'yyyy-mm-dd',
-                autoclose: true
+                format:'yyyy-mm-dd',
+                endDate:new Date(),
+                autoclose:true
             });
         });
     </script>

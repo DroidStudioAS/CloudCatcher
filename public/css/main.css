@@ -217,7 +217,64 @@ table{
     margin: 5px;
     width: 50px;
 }
-.date-picker-container{
-    position: relative;
+.search_container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-flow: column nowrap;
 }
+.search_container h3{
+    color: white;
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+}
+.date{
+    width: 15vw;
+    padding: 10px 8px 10px 8px;
+    text-align: center;
+    font-size: large;
+    margin: 8px;
+    border-radius: 8px;
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+
+    border-bottom: 4px solid #627e75;
+}
+/*****Datepicker*****/
+.datepicker {
+    position: fixed;
+    padding: 20px;
+    font-size: large;
+}
+.datepicker table{
+    background-color: #627e75;
+    padding: 10px;
+}
+.datepicker th{
+    color: black;
+    padding: 10px;
+}
+.datepicker td{
+    padding: 10px;
+
+}
+.datepicker-dropdown{
+}
+.datepicker-months{
+    position: fixed;
+    padding: 20px;
+}
+.datepicker-months span{
+    margin-right: 10px;
+}
+.datepicker-years{
+    position: fixed;
+    padding: 20px;
+}
+.datepicker-years span{
+    margin-right: 10px;
+}
+.dropdown-menu{
+}
+.datepicker-orient-left{
+}
+
 
