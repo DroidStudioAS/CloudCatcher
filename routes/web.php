@@ -31,3 +31,5 @@ Route::get("/admin",[WeatherController::class, 'getAllWeathersAdmin']);
 Route::post('admin/postWeather',[WeatherController::class,'postWeatherEntry'])
     ->name('post-weather');
 Route::post('/admin/edit-entry/{weather}',[WeatherController::class,'editWeatherEntry']);
+Route::post('/admin/delete-entry/{weather}',[WeatherController::class,'deleteWeatherEntry']);
+

@@ -21,7 +21,7 @@
                         <td class="weather_table_data">{{\Carbon\Carbon::parse($weather->created_at)->format('d F Y')}}</td>
                         <td class="weather_table_data">
                             <button onclick="displayEditForm({{json_encode($weather)}})" class="edit_button">Edit</button>
-                            <button class="delete_button">Delete</button>
+                            <button onclick="deleteWeatherRecord({{$weather->id}})" class="delete_button">Delete</button>
                         </td>
                     </tr>
                 @endforeach
@@ -105,6 +105,20 @@
             },
             error:function(xhr) {
                 console.log(xhr.responseText)
+            }
+        })
+    }
+    function deleteWeatherRecord(id){
+        $.ajax({
+            url:"/admin/delete-entry/"+id,
+            type:"post",
+            data:{
+                "_token": $('meta[name="csrf-token"]').attr('content')
+            },
+            success:function(response){
+                if(response.success===true){
+                    location.reload();
+                }
             }
         })
     }

@@ -80,5 +80,12 @@ class WeatherController extends Controller
             'success'=>true
         ]);
     }
+    function deleteWeatherEntry(WeatherModel $weather){
+        $weather->delete();
+
+        return response([
+            'success'=>true
+        ]);
+    }
 
 }
