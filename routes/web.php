@@ -21,6 +21,8 @@ Route::middleware('auth')->group(function (){
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::get("/weather",[WeatherController::class, 'loadTodaysWeathers']);
+    Route::get("/weather/{date?}",[WeatherController::class,'getWeathersForDate'])->name("getWeatherForDate");
+    Route::get("/all-time-weather",[WeatherController::class,'getAllWeathers'])->name("alltime");
 });
 //admin routes
 Route::middleware(['auth', AdminMiddleware::class])
@@ -32,8 +34,7 @@ Route::middleware(['auth', AdminMiddleware::class])
         Route::post('/edit-entry/{weather}',[WeatherController::class,'editWeatherEntry']);
         Route::post('/delete-entry/{weather}',[WeatherController::class,'deleteWeatherEntry']);
 });
-Route::get("/weather/{date?}",[WeatherController::class,'getWeathersForDate'])->name("getWeatherForDate");
-Route::get("/all-time-weather",[WeatherController::class,'getAllWeathers'])->name("alltime");
+
 Auth::routes();
 
 

@@ -49,7 +49,8 @@
             $('#datepicker').datepicker({
                 format:'yyyy-mm-dd',
                 endDate:new Date(),
-                autoclose:true
+                autoclose:true,
+                todayHighlight:true
             });
         });
 
