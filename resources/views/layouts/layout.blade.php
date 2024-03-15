@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>@yield("title","CloudCatcher")</title>
     <link rel="stylesheet" href="{{asset("/css/main.css")}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--JQuery import-->
     <!-- Bootstrap CSS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

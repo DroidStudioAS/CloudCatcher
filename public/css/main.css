@@ -285,4 +285,31 @@ table{
 .datepicker-orient-left{
 }
 
+@media (max-width: 800px) {
+    .weather_card{
+        width: 90vw;
+    }
+    .weather_city{
+        padding:8px 14px 8px 14px;
+        font-size: x-large;
+    }
+    .divider{
+        left:45vw ;
+    }
+    .weather_image{
+        width: 25vw;
+    }
+    .weather_description{
+        font-size: x-large;
+    }
+    .weather_temperature{
+        font-size: 25vw;
+    }
+    .weather_date{
+        font-size: x-large;
+        width: 45vw;
+        text-align: center;
+    }
+}
+
 
