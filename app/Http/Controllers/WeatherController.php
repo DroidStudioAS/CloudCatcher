@@ -49,7 +49,7 @@ class WeatherController extends Controller
 
     /*****Admin Functions*****/
     /****Start of helpers**/
-        public function determinePathToImage($description){
+        public static function determinePathToImage($description){
             $path_to_image="";
             switch ($description){
                 case "sunny":
