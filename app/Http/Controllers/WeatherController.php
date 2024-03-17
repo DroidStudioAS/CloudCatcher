@@ -61,6 +61,9 @@ class WeatherController extends Controller
                 case "cloudy":
                     $path_to_image="/res/cloudy.png";
                     break;
+                case "snowing":
+                    $path_to_image="/res/snowy.png";
+                    break;
             }
             return $path_to_image;
         }
