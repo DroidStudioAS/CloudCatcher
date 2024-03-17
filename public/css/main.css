@@ -284,6 +284,10 @@ table{
 }
 .datepicker-orient-left{
 }
+.disabled{
+    color: red;
+
+}
 
 @media (max-width: 800px) {
     .weather_card{
@@ -310,6 +314,7 @@ table{
         width: 45vw;
         text-align: center;
     }
+
 }
 
 
