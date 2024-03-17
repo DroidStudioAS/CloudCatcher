@@ -101,6 +101,11 @@
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: center;
+    background-color: #d2a985;
+}
+.admin_container h1{
+    color: white;
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 }
 .admin_row{
     display: flex;

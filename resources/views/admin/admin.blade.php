@@ -61,6 +61,8 @@
                 <option value="sunny">Sunny</option>
                 <option value="raining">Raining</option>
                 <option value="cloudy">Cloudy</option>
+                <option value="snowing">Snowing</option>
+
             </select>
             <label for="city">City</label>
             <input id="weather-edit-city" class="weather_input" name="city" type="text">
