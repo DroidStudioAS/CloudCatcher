@@ -10,9 +10,13 @@
         @endif
 
         <form id="searchForm">
-        <input autocomplete="off" name="date" class="date" type="text" id="datepicker" placeholder="select another date">
+        <input autocomplete="off" name="date" class="date" type="text" id="datepicker" placeholder="Select A Date">
         <input type="submit" class="submit-button" value="search">
         </form>
+         <form id="searchByName">
+             <input id="cityInput" class="date"  placeholder="Search By City">
+             <input type="submit" class="submit-button" value="search">
+         </form>
 
 
 
@@ -59,6 +63,16 @@
             event.preventDefault();
             loadWeatherForDate();
         })
+        $("#searchByName").on('submit',function(event){
+            event.preventDefault();
+            let city = $("#cityInput").val()
+            if(city===null || city===""){
+                alert("please enter a city")
+                return;
+            }
+            showCityForecast(city);
+        })
+
 
         function loadWeatherForDate(){
             let date = $("#datepicker").val();
