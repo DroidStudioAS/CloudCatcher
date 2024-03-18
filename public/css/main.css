@@ -30,7 +30,7 @@
     justify-content: center;
     align-items: center;
 }
-.weather_card{
+.weather_card {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
@@ -51,7 +51,8 @@
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
     font-weight: 700;
 }
-.weather_city{
+.weather_city,
+.weather_city-forecast{
     padding:5px 10px 5px 10px;
     border-radius: 12px;
     background-color: #913639;
@@ -93,6 +94,86 @@
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 
 }
+/****Forecast card******/
+.forecast_card{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #226ba3;
+
+    width: 70vw;
+    height: 70vh;
+    margin: 20px 20px 150px 20px;
+
+    position: relative;
+    border-radius: 8px;
+
+
+}
+.forecast_card p{
+    color: white;
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    font-weight: bold;
+    font-size: large;
+}
+.forecast_row_container,
+.forecast_four_day_container{
+    display: flex;
+    flex-flow:row nowrap;
+    width: 68vw;
+    margin: 20px;
+}
+.forecast_row_container{
+    height: 40vh;
+    padding-bottom: 10px;
+    border-bottom: 1px solid white;
+    justify-content: space-evenly;
+}
+.forecast_four_day_container{
+    justify-content: space-evenly;
+    align-items: flex-start;
+
+}
+.forecast_box{
+    height: 40vh;
+    width: 30vw;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+.forecast_box img{
+    width: 23vw;
+    height: 30vh;
+}
+.forecast-divider{
+    position: absolute;
+    left: 35vw;
+    height: 40vh;
+}
+.forecast_day{
+    height: 20vh;
+    width: 15vw ;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 15px;
+}
+.forecast_day p{
+    font-weight: bold;
+    color: black;
+}
+.forecast_day img{
+    width: 5vw;
+}
+.weather_city-forecast{
+    padding-bottom: 16px;
+}
+
 
 
 /*******Admin Dash*********/

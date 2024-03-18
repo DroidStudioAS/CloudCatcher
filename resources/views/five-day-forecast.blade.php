@@ -3,28 +3,34 @@
     @if(count($weathers)===0)
         <div>{{$city}} Not Found In Our Records</div>
     @else
-    @foreach($weathers->reverse() as $weather)
-        <div class="weather_card">
-            <p class="weather_city">{{$weather->city_name}}</p>
-            <div class="weather_column">
-                <img class="weather_image" src="{{asset($weather->path_to_image)}}" alt="weather photo">
-                <p class="weather_description">{{$weather->description}}</p>
-            </div>
-            <svg class="divider">
-                <rect x="0" y="0" width="1px" height="30vh" fill="white"></rect>
-            </svg>
+   <div class="forecast_card">
+       <p class="weather_city-forecast">{{$weathers[4]->city_name}}</p>
+       <div class="forecast_row_container">
+           <div class="forecast_box">
+               <img src="{{asset($weathers[4]->path_to_image)}}"/>
+               <p>{{$weathers[4]->description}}</p>
+           </div>
+           <svg class="forecast-divider">
+               <rect x="0" y="0" width="1px" height="40vh" fill="white"></rect>
+           </svg>
+           <div class="forecast_box">
+               <div class="temperature_container">
+                   <h1 class="weather_temperature">
+                       {{$weathers[4]->temperature}}°
+                   </h1>
+               </div>
+               <p class="weather_date">{{$weathers[4]->date}}</p>
+           </div>
+       </div>
+       <div class="forecast_four_day_container">
+           @for($i=3; $i>=0; $i--)
+               <div class="forecast_day">
+                   <p class="weather_date">{{$weathers[$i]->date}}</p>
+                   <img src="{{asset($weathers[$i]->path_to_image)}}" alt="weather_photo" class="forecast_photo">
+               </div>
+           @endfor
 
-            <div class="weather_column">
-                <div class="temperature_container">
-                    <h1 class="weather_temperature">
-                        {{$weather->temperature}}°
-                    </h1>
-                </div>
-                <p class="weather_date">
-                    {{$weather->date}}
-                </p>
-            </div>
-        </div>
-    @endforeach
+       </div>
+   </div>
     @endif
 @endsection
