@@ -27,6 +27,7 @@
                <div class="forecast_day">
                    <p class="weather_date">{{$weathers[$i]->date}}</p>
                    <img src="{{asset($weathers[$i]->path_to_image)}}" alt="weather_photo" class="forecast_photo">
+                   <p>{{$weathers[$i]->temperature}}°</p>
                </div>
            @endfor
 
