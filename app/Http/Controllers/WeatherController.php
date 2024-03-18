@@ -27,7 +27,6 @@ class WeatherController extends Controller
 
         }
 
-
         return view("welcome", compact('weathers', 'date'));
     }
 
