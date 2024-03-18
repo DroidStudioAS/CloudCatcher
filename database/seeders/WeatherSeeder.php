@@ -37,7 +37,7 @@ class WeatherSeeder extends Seeder
     public function run()
     {
         $rulesForValidation = [
-          "city"=>"required|string",
+          "city"=>"required|string|unique:weather",
           "temperature"=>"required|int",
             "description"=>"required|int|gte:1|lte:4"
         ];
@@ -66,9 +66,6 @@ class WeatherSeeder extends Seeder
                 "description"=>$description,
                 "path_to_image"=>$pathToImage
             ]);
-
         }
-
-
     }
 }
