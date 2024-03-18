@@ -33,6 +33,7 @@ class WeatherController extends Controller
     }
     public function getWeathersForDate($date)
     {
+
         if ($date === null) {
             $date = Carbon::today()->format("Y-m-d");
         }
