@@ -7,6 +7,7 @@ use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Validator;
 
 
 class UserSeeder extends Seeder
@@ -18,30 +19,25 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $rulesForValidation = [
+            "name" => "required|string",
+            "email" => "required|string|unique:users",
+            "password" => "required|string|min:8"
+        ];
+        $validator = Validator::make([
+            "name" => $this->command->getOutput()->ask("What is the users name?"),
+            "email" => $this->command->getOutput()->ask("What Is The Users Email"),
+            "password" => $this->command->getOutput()->ask("What should the password be")
+        ], $rulesForValidation);
 
-        $amountToCreate = $this->command->getOutput()->ask("How Many Users Should The Seeder Create",500);
-
-        $passToSet = (string)$this->command->ask("What Should The Password Be", "12345678");
-
-        $faker = Factory::create();
-
-        $this->command->getOutput()->progressStart($amountToCreate);
-
-        for($i=0; $i<$amountToCreate; $i++) {
-
-            $username="user_" . $faker->userName;
-            $password = $passToSet;
-            $email=$faker->safeEmail();
-
-            User::create([
-                'name' => $username,
-                "email" => $email,
-                "password" => $password
-            ]);
-            $this->command->getOutput()->progressAdvance(1);
+        if ($validator->fails()) {
+            foreach ($validator->errors()->all() as $error) {
+                $this->command->error($error);
+            }
+            exit();
         }
-        $this->command->getOutput()->progressFinish();
 
+        $this->command->getOutput()->writeln("Passed validation");
 
 
     }
