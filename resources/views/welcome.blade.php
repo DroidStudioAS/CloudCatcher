@@ -41,6 +41,8 @@
                     </div>
                     <p class="weather_date">{{\Carbon\Carbon::parse($weather->date)->format('d F Y')}}</p>
                 </div>
+                <div onclick="showCityForecast('{{$weather->city_name}}')" class="show_more_button">Forecast</div>
+
             </div>
         @endforeach
     </div>
@@ -71,6 +73,11 @@
         }
         function showAllTime(){
             window.location.href="/all-time-weather";
+        }
+        function showCityForecast(city){
+           if(city!==null || city!==""){
+               window.location.href="/weather-for/"+city
+           }
         }
     </script>
 

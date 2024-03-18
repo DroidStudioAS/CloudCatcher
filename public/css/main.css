@@ -45,6 +45,10 @@
 
     margin: 20px;
 
+
+}
+.weather_card:hover .show_more_button {
+    opacity: 1;
 }
 .weather_card p{
     color: white;
@@ -93,6 +97,30 @@
     color: white;
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 
+}
+.show_more_button{
+    opacity: 0;
+
+    width: 20vw;
+    height: 10vh;
+
+    position: absolute;
+    top: 10vh;
+    left: 10vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 15px;
+    border:4px solid black;
+
+    background-color: #627e75;
+    font-size: xx-large;
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    color: white;
+
+    transition: opacity 1s ease;
+    cursor: pointer;
 }
 /****Forecast card******/
 .forecast_card{
