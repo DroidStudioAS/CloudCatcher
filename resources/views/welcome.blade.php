@@ -50,7 +50,6 @@
         $(document).ready(function(){
             $('#datepicker').datepicker({
                 format:'yyyy-mm-dd',
-                endDate:new Date(),
                 autoclose:true,
                 todayHighlight:true
             });
