@@ -67,15 +67,21 @@ class CitySeeder extends Seeder
             "Turkey" => array("Istanbul", "Ankara", "Izmir", "Bursa", "Adana", "Gaziantep", "Konya", "Antalya", "Mersin", "Kayseri"),
             "Ukraine" => array("Kyiv", "Kharkiv", "Dnipro", "Odesa", "Donetsk", "Zaporizhzhia", "Lviv", "Kryvyi Rih", "Mykolaiv", "Mariupol"),
             "United Kingdom" => array("London", "Birmingham", "Manchester", "Glasgow", "Newcastle upon Tyne", "Sheffield", "Liverpool", "Leeds", "Bristol", "Edinburgh"),
-            "Vatican City" => array("Vatican City"),
         );
 
+        $this->command->getOutput()->progressStart();
         foreach ($european_countries as $country=>$cities){
             $this->command->getOutput()->write($country . " : ");
             foreach ($cities as $city){
                 $this->command->getOutput()->write($city . " : ");
+                CityModel::create([
+                    "country"=>$country,
+                    "city_name"=>$city
+                ]);
+                $this->command->getOutput()->progressAdvance(1);
             }
         }
+        $this->command->getOutput()->progressFinish();
 
 
     }
