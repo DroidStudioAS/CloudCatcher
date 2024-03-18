@@ -32,10 +32,10 @@ class ForecastSeeder extends Seeder
         //the refactor to generate random dates will be fairly simple
         $dates=[
           "2024-03-18",
-            "2024-04-18".
-            "2024-05-18",
-            "2024-06-18",
-            "2024-07-18"
+            "2024-03-19",
+            "2024-03-20",
+            "2024-03-21",
+            "2024-03-22"
         ];
         //end index
         $pathsEnd = count($pathsToImages)-1;
@@ -48,7 +48,7 @@ class ForecastSeeder extends Seeder
         //loop through all cities
         //for all purposes, i is the id of the city we are referencing, j counts how many entries are entered
         $this->command->getOutput()->progressStart();
-        for($i=$startIndex; $i<=3; $i++){
+        for($i=$startIndex; $i<=$endIndex; $i++){
             //5 temps for each city with a random date need to be generated
             for($j=0; $j<=4; $j++){
              $pathIndex = rand(0,$pathsEnd);
