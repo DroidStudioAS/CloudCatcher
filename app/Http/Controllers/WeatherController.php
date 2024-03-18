@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CityModel;
 use App\Models\WeatherModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -15,13 +16,17 @@ class WeatherController extends Controller
 
         $allWeathers = WeatherModel::all();
         $weathers = collect([]);
-        foreach ($allWeathers as $weather){
-            $carbonInstance = $weather->created_at;
-            $dateString = $carbonInstance->format("Y-m-d");
-            if($dateString==$date){
-                $weathers->push($weather);
-            }
+        foreach ($allWeathers as $weatherEntry){
+            $city= CityModel::where(["id"=>$weatherEntry->city_id])->first()->city_name;
+
+            $weatherEntry->city_name=$city;
+
+            $weathers->push($weatherEntry);
+
+
         }
+
+
         return view("welcome", compact('weathers', 'date'));
     }
 

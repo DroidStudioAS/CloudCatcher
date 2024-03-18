@@ -24,7 +24,7 @@
         @endif
         @foreach($weathers->reverse() as $weather)
             <div class="weather_card">
-                <p class="weather_city">{{$weather->city}}</p>
+                <p class="weather_city">{{$weather->city_name}}</p>
                 <div class="weather_column">
                     <img class="weather_image" src="{{asset($weather->path_to_image)}}" alt="weather photo">
                     <p class="weather_description">{{$weather->description}}</p>
