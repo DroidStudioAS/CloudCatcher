@@ -13,7 +13,7 @@ class CitySeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function  run()
     {
         $faker = Factory::create();
         $amount = $this->command->getOutput()->ask("How many cities should we generate?",5);

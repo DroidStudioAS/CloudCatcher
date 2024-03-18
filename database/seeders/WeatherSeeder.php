@@ -54,7 +54,8 @@ class WeatherSeeder extends Seeder
                 $this->command->error($error);
             }
             exit();
-        }else{
+        }
+
             $city = $validator->validated()["city"];
             $temperature = $validator->validated()["temperature"];
             $description = $this->determineDescriptionString($validator->validated()["description"]);
@@ -66,6 +67,6 @@ class WeatherSeeder extends Seeder
                 "description"=>$description,
                 "path_to_image"=>$pathToImage
             ]);
-        }
+
     }
 }
