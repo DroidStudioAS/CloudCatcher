@@ -52,25 +52,25 @@ class WeatherController extends Controller
         return view("welcome", compact("weathers","date"));
     }
     public function getWeatherForecastForCity($city){
-        $date = Carbon::today()->format("Y-m-d");
-        $mockArray = [
-            "beograd"=>"22 24 23 30 26",
-            "sarajevo"=>"19 20 16 20 18"
-        ];
-        $weathers = [];
+        $today = Carbon::today()->format("Y-m-d");
 
-        $lowercaseCity = strtolower($city);
-
-        if(array_key_exists($lowercaseCity,$mockArray)){
-            foreach ($mockArray as $cityInArr=>$weather){
-                if($cityInArr===$city){
-                    $forecast = $mockArray[$lowercaseCity];
-                    $forecastValues = explode(' ', $forecast);
-                    $weathers = array_merge($weathers, $forecastValues);
-                }
-            }
+        $weathers = collect([]);
+        //get id from the city name
+        $cityFromDb = CityModel::where(["city_name"=>$city])->first();
+        if($cityFromDb===null){
+            //return right away (empty array);
+            return view("five-day-forecast",compact("weathers"));
         }
-        return view("five-day-forecast",compact("weathers", "date", "city"));
+        //city found
+        $cityId = $cityFromDb->id;
+        $forecast = ForecastModel::where(["city_id"=>$cityId])->get();
+        //populate return array
+        foreach ($forecast as $cast){
+            $cast->city_name=$cityFromDb->city_name;
+            $weathers->push($cast);
+        }
+        //return weathers
+        return view("five-day-forecast",compact("weathers"));
 
     }
 
