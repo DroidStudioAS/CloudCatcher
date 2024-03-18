@@ -15,6 +15,7 @@ class InsertDescriptionToForecastTable extends Migration
     {
         Schema::table('forecast', function (Blueprint $table) {
             //
+            $table->string("description")->after("date");
         });
     }
 
