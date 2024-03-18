@@ -9,6 +9,28 @@ use Illuminate\Http\Request;
 class WeatherController extends Controller
 {
 
+
+    public function loadTodaysWeathers(){
+        $date = Carbon::today()->format('Y-m-d');
+
+        $allWeathers = WeatherModel::all();
+        $weathers = collect([]);
+        foreach ($allWeathers as $weather){
+            $carbonInstance = $weather->created_at;
+            $dateString = $carbonInstance->format("Y-m-d");
+            if($dateString==$date){
+                $weathers->push($weather);
+            }
+        }
+        return view("welcome", compact('weathers', 'date'));
+    }
+
+    public function getAllWeathers(){
+        $weathers = WeatherModel::all();
+
+
+        return view("welcome", compact('weathers'));
+    }
     public function getWeathersForDate($date)
     {
         if ($date === null) {
@@ -25,29 +47,30 @@ class WeatherController extends Controller
         }
         return view("welcome", compact('weathers', 'date'));
     }
-    public function getAllWeathers(){
-        $weathers = WeatherModel::all();
+    public function getWeatherForecastForCity($city){
+        $date = Carbon::today()->format("Y-m-d");
+        $mockArray = [
+            "beograd"=>"22 24 23 30 26",
+            "sarajevo"=>"19 20 16 20 18"
+        ];
+        $weathers = [];
 
+        $lowercaseCity = strtolower($city);
 
-        return view("welcome", compact('weathers'));
-    }
-    public function loadTodaysWeathers(){
-        $date = Carbon::today()->format('Y-m-d');
-
-        $allWeathers = WeatherModel::all();
-        $weathers = collect([]);
-        foreach ($allWeathers as $weather){
-            $carbonInstance = $weather->created_at;
-            $dateString = $carbonInstance->format("Y-m-d");
-            if($dateString==$date){
-                $weathers->push($weather);
+        if(array_key_exists(strtolower($city),$mockArray)){
+            foreach ($mockArray as $cityInArr=>$weather){
+                if($cityInArr===$city){
+                    $forecast = $mockArray[$lowercaseCity];
+                    $forecastValues = explode(' ', $forecast);
+                    $weathers = array_merge($weathers, $forecastValues);
+                }
             }
         }
-        return view("welcome", compact('weathers', 'date'));
+        return view("five-day-forecast",compact("weathers", "date", "city"));
+
     }
 
 
-    /*****Admin Functions*****/
     /****Start of helpers**/
         public static function determinePathToImage($description){
             $path_to_image="";
@@ -68,6 +91,8 @@ class WeatherController extends Controller
             return $path_to_image;
         }
     /****End of helpers****/
+    /*****Admin Functions*****/
+
     public function getAllWeathersAdmin(){
         $weathers = WeatherModel::all();
 
