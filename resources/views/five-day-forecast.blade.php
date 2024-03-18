@@ -1,8 +1,7 @@
 @extends("layouts.layout")
 @section("content")
     @if(count($weathers)===0)
-        <div>No Forecasts For This City Right Now</div>
-
+        <div>{{$city}} Not Found In Our Records</div>
     @else
     @foreach($weathers->reverse() as $weather)
         <div class="weather_card">

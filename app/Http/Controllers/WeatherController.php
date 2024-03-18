@@ -47,8 +47,6 @@ class WeatherController extends Controller
             }
 
         }
-
-
         return view("welcome", compact("weathers","date"));
     }
     public function getWeatherForecastForCity($city){
@@ -59,11 +57,11 @@ class WeatherController extends Controller
         $cityFromDb = CityModel::where(["city_name"=>$city])->first();
         if($cityFromDb===null){
             //return right away (empty array);
-            return view("five-day-forecast",compact("weathers"));
+            return view("five-day-forecast",compact("weathers", 'city'));
         }
         //city found
         $cityId = $cityFromDb->id;
-        $forecast = ForecastModel::where(["city_id"=>$cityId])->get();
+        $forecast = ForecastModel::where(["city_id"=>$cityId])->latest()->take(5)->get();
         //populate return array
         foreach ($forecast as $cast){
             $cast->city_name=$cityFromDb->city_name;
