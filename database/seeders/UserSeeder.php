@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
     {
         $rulesForValidation = [
             "name" => "required|string",
-            "email" => "required|string|unique:users",
+            "email" => "required|string|email|unique:users",
             "password" => "required|string|min:8"
         ];
         $validator = Validator::make([
@@ -37,7 +37,19 @@ class UserSeeder extends Seeder
             exit();
         }
 
-        $this->command->getOutput()->writeln("Passed validation");
+        $this->command->getOutput()->writeln("Passed validation...Creating User...");
+
+        //validation passed
+        User::create([
+           "name"=>$validator->validated()["name"],
+           "email"=>$validator->validated()["email"],
+           "password"=>Hash::make($validator->validated()["password"])
+        ]);
+
+        $this->command->getOutput()->writeln("User " . $validator->validated()["name"] . " Created Successfully");
+
+
+
 
 
     }
