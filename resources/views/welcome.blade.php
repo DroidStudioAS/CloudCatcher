@@ -39,7 +39,7 @@
                             {{$weather->temperature}}°
                         </h1>
                     </div>
-                    <p class="weather_date">{{\Carbon\Carbon::parse($weather->created_at)->format('d F Y')}}</p>
+                    <p class="weather_date">{{\Carbon\Carbon::parse($weather->date)->format('d F Y')}}</p>
                 </div>
             </div>
         @endforeach

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CityModel;
+use App\Models\ForecastModel;
 use App\Models\WeatherModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -33,20 +34,22 @@ class WeatherController extends Controller
 
     public function getWeathersForDate($date)
     {
-
         if ($date === null) {
             $date = Carbon::today()->format("Y-m-d");
         }
-        $allWeathers = WeatherModel::all();
         $weathers = collect([]);
-        foreach ($allWeathers as $weather){
-            $carbonInstance = $weather->created_at;
-            $dateString = $carbonInstance->format("Y-m-d");
-            if($dateString==$date){
-                $weathers->push($weather);
+        $forecast = ForecastModel::all();
+        foreach ($forecast as $cast){
+            if($cast->date===$date){
+                $city= CityModel::where(["id"=>$cast->city_id])->first()->city_name;
+                $cast->city_name=$city;
+                $weathers->push($cast);
             }
+
         }
-        return view("welcome", compact('weathers', 'date'));
+
+
+        return view("welcome", compact("weathers","date"));
     }
     public function getWeatherForecastForCity($city){
         $date = Carbon::today()->format("Y-m-d");
