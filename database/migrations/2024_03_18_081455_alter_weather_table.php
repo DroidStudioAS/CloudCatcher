@@ -13,7 +13,13 @@ class AlterWeatherTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::table("weather", function (Blueprint $table){
+            $table->dropColumn("city");
+
+           $table->unsignedBigInteger("city_id")->after("id")->default(rand(1,100));
+           $table->foreign("city_id")->references("id")->on("cities")->onDelete("restrict");
+
+        });
     }
 
     /**
