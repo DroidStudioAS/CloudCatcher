@@ -22,7 +22,6 @@ Route::middleware('auth')->group(function (){
 
     Route::get("/weather",[WeatherController::class, 'loadTodaysWeathers']);
     Route::get("/weather/{date?}",[WeatherController::class,'getWeathersForDate'])->name("getWeatherForDate");
-    Route::get("/all-time-weather",[WeatherController::class,'getAllWeathers'])->name("alltime");
 });
 //admin routes
 Route::middleware(['auth', AdminMiddleware::class])

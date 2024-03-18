@@ -30,12 +30,7 @@ class WeatherController extends Controller
         return view("welcome", compact('weathers', 'date'));
     }
 
-    public function getAllWeathers(){
-        $weathers = WeatherModel::all();
 
-
-        return view("welcome", compact('weathers'));
-    }
     public function getWeathersForDate($date)
     {
 

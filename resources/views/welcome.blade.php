@@ -13,7 +13,7 @@
         <input autocomplete="off" name="date" class="date" type="text" id="datepicker" placeholder="select another date">
         <input type="submit" class="submit-button" value="search">
         </form>
-        <button onclick="showAllTime()" class="submit-button">Show All Records</button>
+
 
 
     </div>
