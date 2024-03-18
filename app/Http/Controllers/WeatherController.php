@@ -57,7 +57,7 @@ class WeatherController extends Controller
 
         $lowercaseCity = strtolower($city);
 
-        if(array_key_exists(strtolower($city),$mockArray)){
+        if(array_key_exists($lowercaseCity,$mockArray)){
             foreach ($mockArray as $cityInArr=>$weather){
                 if($cityInArr===$city){
                     $forecast = $mockArray[$lowercaseCity];
