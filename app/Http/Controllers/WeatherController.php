@@ -61,12 +61,18 @@ class WeatherController extends Controller
         }
         //city found
         $cityId = $cityFromDb->id;
-        $forecast = ForecastModel::where(["city_id"=>$cityId])->latest()->take(5)->get();
+        $forecast = ForecastModel::where(["city_id"=>$cityId])
+            ->orderBy("date", "asc")
+            ->latest()
+            ->take(5)
+            ->get();
         //populate return array
         foreach ($forecast as $cast){
             $cast->city_name=$cityFromDb->city_name;
             $weathers->push($cast);
         }
+
+
         //return weathers
         return view("five-day-forecast",compact("weathers"));
 
