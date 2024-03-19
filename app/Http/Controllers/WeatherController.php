@@ -16,16 +16,12 @@ class WeatherController extends Controller
     public function loadTodaysWeathers(){
         $date = Carbon::today()->format('Y-m-d');
 
-        $allWeathers = WeatherModel::all();
-        $weathers = collect([]);
-        foreach ($allWeathers as $weatherEntry){
+        $weathers = WeatherModel::paginate(6);
+
+        /*weathers = collect([])*/;
+        foreach ($weathers as $weatherEntry){
             $city= CityModel::where(["id"=>$weatherEntry->city_id])->first()->city_name;
-
             $weatherEntry->city_name=$city;
-
-            $weathers->push($weatherEntry);
-
-
         }
 
         return view("welcome", compact('weathers', 'date'));
@@ -35,15 +31,11 @@ class WeatherController extends Controller
         if ($date === null) {
             $date = Carbon::today()->format("Y-m-d");
         }
-        $weathers = collect([]);
-        $forecast = ForecastModel::all();
-        foreach ($forecast as $cast){
-            if($cast->date===$date){
+
+        $weathers = ForecastModel::where(['date'=>$date])->paginate(6);
+        foreach ($weathers as $cast){
                 $city= CityModel::where(["id"=>$cast->city_id])->first()->city_name;
                 $cast->city_name=$city;
-                $weathers->push($cast);
-            }
-
         }
         return view("welcome", compact("weathers","date"));
     }
@@ -80,20 +72,20 @@ class WeatherController extends Controller
     public function getCountryForecast($country){
         $date = Carbon::today()->format("Y-m-d");
 
-        $weathers = collect([]);
         /*****Need to get the id's of all the countries cities for comparison****/
         $cities = CityModel::where(["country"=>$country])->pluck("id", "city_name");
-
+        $weathers = WeatherModel::whereIn("city_id", $cities->values())->paginate(6);
         //country not found
         if(count($cities)===0){
-            return view("welcome", compact("weathers","date"));
+            return view("welcome", compact("weathers","date", 'country'));
         }
-        //index = city_id $city=city_name
-        foreach ($cities as $city=>$index){
-           $weatherToAdd = WeatherModel::where(["city_id"=>$index])->first();
-           $weatherToAdd->city_name=$city;
-           $weathers->push($weatherToAdd);
+
+
+        foreach ($weathers as $weather){
+          $cityName = $cities->search($weather->city_id);
+          $weather->city_name=$cityName;
         }
+
         return view("welcome", compact("weathers","date","country"));
     }
 

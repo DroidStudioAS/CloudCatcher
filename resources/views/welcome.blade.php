@@ -28,9 +28,8 @@
 
     </div>
     <div class="weather_cards_container">
-
         @if(count($weathers)==0)
-        <h1 class="no-entries-msg">There Are No <br> Entries<br> For {{$date}}</h1>
+        <h1 class="no-entries-msg">There Are No <br> Entries<br> For {{$date}} @if(isset($country)) in {{$country}} @endif</h1>
         @endif
         @foreach($weathers->reverse() as $weather)
             <div class="weather_card">
@@ -56,6 +55,7 @@
             </div>
         @endforeach
     </div>
+    {{$weathers->links()}}
     <script>
         $(document).ready(function(){
             $('#datepicker').datepicker({
