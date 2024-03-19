@@ -13,10 +13,16 @@
         <input autocomplete="off" name="date" class="date" type="text" id="datepicker" placeholder="Select A Date">
         <input type="submit" class="submit-button" value="search">
         </form>
-         <form id="searchByName">
-             <input id="cityInput" class="date"  placeholder="Search By City">
-             <input type="submit" class="submit-button" value="search">
-         </form>
+        <div class="geo_search_container">
+            <form id="searchByName">
+                <input id="cityInput" class="date"  placeholder="Search By City">
+                <input type="submit" class="submit-button" value="search">
+            </form>
+            <form id="searchByCountry">
+                <input id="countryInput" class="date"  placeholder="Search By Country">
+                <input type="submit" class="submit-button" value="search">
+            </form>
+        </div>
 
 
 
@@ -72,6 +78,16 @@
             }
             showCityForecast(city);
         })
+        $("#searchByCountry").on("submit",function (e){
+            e.preventDefault();
+            let country = $("#countryInput").val();
+            if(country==="" || country===null){
+                alert("Please Enter A Country");
+                return;
+            }
+            showCountryWeather(country);
+
+        })
 
 
         function loadWeatherForDate(){
@@ -91,6 +107,11 @@
            if(city!==null || city!==""){
                window.location.href="/weather-for/"+city
            }
+        }
+        function showCountryWeather(country){
+            if(country!==null || country!==""){
+                window.location.href="/weather-for-country/"+country;
+            }
         }
     </script>
 

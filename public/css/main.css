@@ -330,13 +330,17 @@ table{
     margin: 5px;
     width: 50px;
 }
-.search_container{
+.search_container,
+.geo_search_container{
     display: flex;
     justify-content: space-around;
     align-items: center;
     flex-flow: column nowrap;
-
 }
+.geo_search_container{
+    flex-flow: row nowrap;
+}
+
 .search_container h3{
     font-size: xx-large;
     color: white;
