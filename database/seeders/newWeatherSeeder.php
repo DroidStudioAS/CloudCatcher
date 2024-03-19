@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\WeatherHelper;
 use App\Models\CityModel;
 use App\Models\WeatherModel;
 use Illuminate\Database\Seeder;
@@ -13,18 +14,7 @@ class newWeatherSeeder extends Seeder
      *
      * @return int
      */
-    public function descriptionDeterminer($temp){
-        if($temp<-5){
-            //snowing
-            return 2;
-        }else if($temp>-5 && $temp<5){
-            //cloudy
-            return 3;
-        }else if($temp>15){
-            return 0;
-        }
-        return 1;
-    }
+
     public function run()
     {
         //
@@ -51,7 +41,7 @@ class newWeatherSeeder extends Seeder
         //execution i=city_id
         for($i=$startIndex; $i<=$endIndex; $i++){
             $temperature = rand($temperatureRange[0],$temperatureRange[1]);
-            $indexOfDescAndImage=$this->descriptionDeterminer($temperature);
+            $indexOfDescAndImage=WeatherHelper::descriptionDeterminer($temperature);
            WeatherModel::create([
                "city_id"=>$i,
                "temperature"=>$temperature,

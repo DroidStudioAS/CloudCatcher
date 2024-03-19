@@ -7,27 +7,11 @@ use Illuminate\Database\Seeder;
 //import this for the determineimagepath function
 use App\Http\Controllers\WeatherController;
 use Illuminate\Support\Facades\Validator;
+use App\Helpers\WeatherHelper;
 
 class WeatherSeeder extends Seeder
 {
-   public function determineDescriptionString($index){
-       $descriptionString = "";
-       switch ($index){
-           case 1:
-               $descriptionString= "sunny";
-               break;
-           case 2:
-               $descriptionString =  "cloudy";
-               break;
-           case 3:
-               $descriptionString = "raining";
-               break;
-           case 4:
-               $descriptionString = "snowing";
-               break;
-       }
-       return $descriptionString;
-   }
+
 
     /**
      * Run the database seeds.
@@ -58,7 +42,7 @@ class WeatherSeeder extends Seeder
 
             $city = $validator->validated()["city"];
             $temperature = $validator->validated()["temperature"];
-            $description = $this->determineDescriptionString($validator->validated()["description"]);
+            $description = WeatherHelper::determineDescriptionString($validator->validated()["description"]);
             $pathToImage = WeatherController::determinePathToimage($description);
 
             WeatherModel::create([

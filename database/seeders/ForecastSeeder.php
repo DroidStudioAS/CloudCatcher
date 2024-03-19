@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\WeatherHelper;
 use App\Models\CityModel;
 use App\Models\ForecastModel;
 use Illuminate\Database\Seeder;
@@ -31,33 +32,34 @@ class ForecastSeeder extends Seeder
         //i will hardcode these values simply so i can test the 5 day forecast for all the cities,
         //the refactor to generate random dates will be fairly simple
         $dates=[
-          "2024-03-18",
-            "2024-03-19",
-            "2024-03-20",
+          "2024-03-20",
             "2024-03-21",
-            "2024-03-22"
+            "2024-03-22",
+            "2024-03-23",
+            "2024-03-24",
+            "2024-03-25",
+            "2024-03-26"
         ];
-        //end index
-        $pathsEnd = count($pathsToImages)-1;
         $temperatureRange = [-10,30];
 
 
         $startIndex = CityModel::first()->id;
-        $endIndex = CityModel::latest()->first()->id;
+        $endIndex = CityModel::all()->last()->id;
 
         //loop through all cities
         //for all purposes, i is the id of the city we are referencing, j counts how many entries are entered
         $this->command->getOutput()->progressStart();
         for($i=$startIndex; $i<=$endIndex; $i++){
             //5 temps for each city with a random date need to be generated
-            for($j=0; $j<=4; $j++){
-             $pathIndex = rand(0,$pathsEnd);
+            for($j=0; $j<=6; $j++){
+             $temperature = rand($temperatureRange[0],$temperatureRange[1]);
+             $indexOfImagePathAndDescription = WeatherHelper::descriptionDeterminer($temperature);
              ForecastModel::create([
                  "city_id"=>$i,
-                 "temperature"=>rand($temperatureRange[0],$temperatureRange[1]),
+                 "temperature"=> $temperature,
                  "date"=>$dates[$j],
-                 "description"=>$descriptions[$pathIndex],
-                 "path_to_image"=>$pathsToImages[$pathIndex]
+                 "description"=>$descriptions[$indexOfImagePathAndDescription],
+                 "path_to_image"=>$pathsToImages[$indexOfImagePathAndDescription]
              ]);
              $this->command->getOutput()->progressAdvance(1);
             }

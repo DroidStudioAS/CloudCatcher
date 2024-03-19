@@ -7,6 +7,7 @@ use App\Models\ForecastModel;
 use App\Models\WeatherModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Helpers\WeatherHelper;
 
 class WeatherController extends Controller
 {
@@ -54,12 +55,14 @@ class WeatherController extends Controller
         $weathers = collect([]);
         //get id from the city name
         $cityFromDb = CityModel::where(["city_name"=>$city])->first();
+
         if($cityFromDb===null){
             //return right away (empty array);
             return view("five-day-forecast",compact("weathers", 'city'));
         }
         //city found
         $cityId = $cityFromDb->id;
+
         $forecast = ForecastModel::where(["city_id"=>$cityId])
             ->orderBy("date", "asc")
             ->latest()
@@ -73,11 +76,9 @@ class WeatherController extends Controller
 
 
         //return weathers
-        return view("five-day-forecast",compact("weathers"));
+        return view("five-day-forecast",compact("weathers",'city'));
 
     }
-
-
     /****Start of helpers**/
         public static function determinePathToImage($description){
             $path_to_image="";
