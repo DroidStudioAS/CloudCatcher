@@ -11,8 +11,20 @@ class newWeatherSeeder extends Seeder
     /**
      * Run the database seeds.
      *
-     * @return void
+     * @return int
      */
+    public function descriptionDeterminer($temp){
+        if($temp<-5){
+            //snowing
+            return 2;
+        }else if($temp>-5 && $temp<5){
+            //cloudy
+            return 3;
+        }else if($temp>15){
+            return 0;
+        }
+        return 1;
+    }
     public function run()
     {
         //
@@ -28,30 +40,27 @@ class newWeatherSeeder extends Seeder
             "Snowing",
             "Cloudy"
         ];
-        //end index
-        $pathsEnd = count($pathsToImages)-1;
-
         $temperatureRange = [-10,30];
 
-        $firstEntry = CityModel::first()->id;
-        $lastEntry = CityModel::latest()->first()->id;
+        $startIndex = CityModel::get()->first()->id;
+        $endIndex = CityModel::all()->last()->id;
+        //
 
 
-        $this->command->getOutput()->progressStart($lastEntry);
-        for($i=$firstEntry; $i<=$lastEntry; $i++){
-            //index of image path and description to insert
-            $descriptionIndex = rand(0,$pathsEnd);
-
-            WeatherModel::create([
-                "city_id"=>$i,
-                "temperature"=>rand($temperatureRange[0],$temperatureRange[1]),
-                "description"=>$descriptions[$descriptionIndex],
-                "path_to_image"=>$pathsToImages[$descriptionIndex]
-            ]);
-
-            $this->command->getOutput()->progressAdvance(1);
+        $this->command->getOutput()->progressStart();
+        //execution i=city_id
+        for($i=$startIndex; $i<=$endIndex; $i++){
+            $temperature = rand($temperatureRange[0],$temperatureRange[1]);
+            $indexOfDescAndImage=$this->descriptionDeterminer($temperature);
+           WeatherModel::create([
+               "city_id"=>$i,
+               "temperature"=>$temperature,
+               "description"=>$descriptions[$indexOfDescAndImage],
+               "path_to_image"=>$pathsToImages[$indexOfDescAndImage]
+           ]);
+           $this->command->getOutput()->progressAdvance(1);
         }
         $this->command->getOutput()->progressFinish();
-
     }
+
 }

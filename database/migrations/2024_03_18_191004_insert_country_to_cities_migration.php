@@ -14,7 +14,7 @@ class InsertCountryToCitiesMigration extends Migration
     public function up()
     {
         Schema::table('cities', function (Blueprint $table) {
-            $table->string("countries")->after("id");
+            $table->string("country")->after("id");
             //
         });
     }
