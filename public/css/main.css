@@ -265,6 +265,14 @@ table{
     justify-content: flex-start;
     align-items: center;
     text-align: center;
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    color: white;
+}
+.pagination_nav a:visited{
+    color: white;
+}
+.pagination_nav a:link{
+    color: white;
 }
 .result_nav{
     text-align: center;
