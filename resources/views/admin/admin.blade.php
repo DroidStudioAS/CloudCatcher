@@ -28,7 +28,9 @@
            </tbody>
        </table>
     </div>
-    <!--{{$weathers->links()}}-->
+    <div class="pagination_container">
+        {{$weathers->links()}}
+    </div>
     <div class="admin_row">
         <div class="entry_form_container">
             <h1>Enter A Weather Record</h1>
@@ -109,6 +111,7 @@
                 }
             },
             error:function(xhr) {
+                alert("Something went wrong!");
                 console.log(xhr.responseText)
             }
         })

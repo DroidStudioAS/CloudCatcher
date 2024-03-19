@@ -258,6 +258,29 @@ table{
     border-radius: 8px;
     color: white;
 }
+
+.pagination_nav{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+}
+.result_nav{
+    text-align: center;
+}
+.pages{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+}
+.pages svg{
+    width: 2vw;
+}
+.pages span{
+    text-align: center;
+
+}
 /*****End of table styling****/
 .entry_form_container,
 .entry_form_container-edit{
