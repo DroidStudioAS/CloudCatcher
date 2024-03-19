@@ -78,8 +78,25 @@ class WeatherController extends Controller
 
     }
     public function getCountryForecast($country){
-        dd($country);
+        $date = Carbon::today()->format("Y-m-d");
+
+        $weathers = collect([]);
+        /*****Need to get the id's of all the countries cities for comparison****/
+        $cities = CityModel::where(["country"=>$country])->pluck("id", "city_name");
+
+        //country not found
+        if(count($cities)===0){
+            return view("welcome", compact("weathers","date"));
+        }
+        //index = city_id $city=city_name
+        foreach ($cities as $city=>$index){
+           $weatherToAdd = WeatherModel::where(["city_id"=>$index])->first();
+           $weatherToAdd->city_name=$city;
+           $weathers->push($weatherToAdd);
+        }
+        return view("welcome", compact("weathers","date"));
     }
+
 
 
 
