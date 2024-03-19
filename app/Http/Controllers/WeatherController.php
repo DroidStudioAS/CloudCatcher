@@ -132,28 +132,46 @@ class WeatherController extends Controller
 
         return back();
     }
-    function editWeatherEntry(Request $request, WeatherModel $weather){
+    function editWeatherEntry(Request $request, WeatherModel $weather)
+    {
+
+        //city name of the original entry
+        $dbCity = CityModel::where(["id" => $weather->city_id])->first()->city_name;
+        $normalCity = \Normalizer::normalize($dbCity, \Normalizer::FORM_C);
+        $uppercaseCity = strtoupper($normalCity);
+
 
         $request->validate([
-          "city"=>"required|string",
-          "description"=>"required|string",
-            "temperature"=>'required|int',
+            "city" => "required|string",
+            "description" => "required|string",
+            "temperature" => 'required|int',
         ]);
-        //determine image path
+
+        //try and see if the city exists in the db
+        $cityEntered = CityModel::where(["city_name" => ucfirst($request->input("city"))])->first();
+        //activate this block if not found
+        if (!$cityEntered) {
+            return response([
+                "success" => false
+            ]);
+        }
+        //entered city found, can continue
         $path_to_image = WeatherHelper::determinePathToImage($request->get("description"));
 
-        $weather->city= $request->input("city");
-        $weather->description= $request->input("description");
-        $weather->temperature=$request->input("temperature");
+        $weather->city_id = $cityEntered->id;
+        $weather->description = $request->input("description");
+        $weather->temperature = $request->input("temperature");
         $weather->path_to_image = $path_to_image;
-
 
         $weather->save();
 
         return response([
-            'success'=>true
+            'success' => true
         ]);
+
     }
+
+
     function deleteWeatherEntry(WeatherModel $weather){
         $weather->delete();
 

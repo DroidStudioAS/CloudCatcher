@@ -28,6 +28,7 @@
            </tbody>
        </table>
     </div>
+    <!--{{$weathers->links()}}-->
     <div class="admin_row">
         <div class="entry_form_container">
             <h1>Enter A Weather Record</h1>
