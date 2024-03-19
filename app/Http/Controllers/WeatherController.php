@@ -79,26 +79,7 @@ class WeatherController extends Controller
         return view("five-day-forecast",compact("weathers",'city'));
 
     }
-    /****Start of helpers**/
-        public static function determinePathToImage($description){
-            $path_to_image="";
-            switch ($description){
-                case "sunny":
-                    $path_to_image="/res/sunny.png";
-                    break;
-                case "raining":
-                    $path_to_image="/res/rainy.png";
-                    break;
-                case "cloudy":
-                    $path_to_image="/res/cloudy.png";
-                    break;
-                case "snowing":
-                    $path_to_image="/res/snowy.png";
-                    break;
-            }
-            return $path_to_image;
-        }
-    /****End of helpers****/
+
     /*****Admin Functions*****/
 
     public function getAllWeathersAdmin(){
@@ -114,7 +95,7 @@ class WeatherController extends Controller
             'temperature'=>'required|int'
         ]);
         //determine the image path based on desc
-        $path_to_image = $this->determinePathToImage($request->get("description"));
+        $path_to_image = WeatherHelper::determinePathToImage($request->get("description"));
        //IMAGE PATH DETERMINED
         //build weather model
         WeatherModel::create([
@@ -134,7 +115,7 @@ class WeatherController extends Controller
             "temperature"=>'required|int',
         ]);
         //determine image path
-        $path_to_image = $this->determinePathToImage($request->get("description"));
+        $path_to_image = WeatherHelper::determinePathToImage($request->get("description"));
 
         $weather->city= $request->input("city");
         $weather->description= $request->input("description");
