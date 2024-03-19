@@ -74,8 +74,8 @@
 <script>
     function displayEditForm(weatherEntry){
        $("#edit-form").css('display','flex');
-       $("#weather-edit-dropdown").val(weatherEntry.description);
-       $("#weather-edit-city").val(weatherEntry.city);
+       $("#weather-edit-dropdown").val(weatherEntry.description.toLowerCase());
+       $("#weather-edit-city").val(weatherEntry.city_name);
        $("#weather-edit-temp").val(weatherEntry.temperature);
         console.log(weatherEntry.id);
 
