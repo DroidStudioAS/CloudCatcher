@@ -114,25 +114,28 @@ class WeatherController extends Controller
         return view("admin.admin", compact('weathers'));
     }
     public function postWeatherEntry(Request $request){
-        $request->validate([
+       $request->validate([
            'description'=>'required|string',
-            'city'=>'required|string',
+            'city'=>'required|string|exists:cities,city_name',
             'temperature'=>'required|int'
         ]);
-        //determine the image path based on desc
+
+       //validation passed
+        //find city in db
+        $cityId = CityModel::where(["city_name"=>$request->input("city")])->first()->id;
         $path_to_image = WeatherHelper::determinePathToImage($request->get("description"));
-       //IMAGE PATH DETERMINED
         //build weather model
         WeatherModel::create([
-            'city'=>$request->get("city"),
+            'city_id'=>$cityId,
             "description"=>$request->get("description"),
             "temperature"=>$request->get("temperature"),
             "path_to_image"=>$path_to_image
         ]);
 
         return back();
+
     }
-    function editWeatherEntry(Request $request, WeatherModel $weather)
+    public function editWeatherEntry(Request $request, WeatherModel $weather)
     {
 
         //city name of the original entry
@@ -170,9 +173,7 @@ class WeatherController extends Controller
         ]);
 
     }
-
-
-    function deleteWeatherEntry(WeatherModel $weather){
+    public function deleteWeatherEntry(WeatherModel $weather){
         $weather->delete();
 
         return response([
