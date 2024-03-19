@@ -4,6 +4,9 @@ namespace App\Helpers;
 
 class WeatherHelper
 {
+    //this function just returns a string based on a random index,
+    //while the second descriptionDeterminer() determines the most
+    //likely description based on the generated temperature
     public static function determineDescriptionString($index){
         $descriptionString = "";
         switch ($index){

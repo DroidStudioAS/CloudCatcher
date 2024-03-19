@@ -30,8 +30,6 @@ class WeatherController extends Controller
 
         return view("welcome", compact('weathers', 'date'));
     }
-
-
     public function getWeathersForDate($date)
     {
         if ($date === null) {
@@ -79,9 +77,13 @@ class WeatherController extends Controller
         return view("five-day-forecast",compact("weathers",'city'));
 
     }
+    public function getCountryForecast($country){
+        dd($country);
+    }
+
+
 
     /*****Admin Functions*****/
-
     public function getAllWeathersAdmin(){
         $weathers = WeatherModel::all();
 
