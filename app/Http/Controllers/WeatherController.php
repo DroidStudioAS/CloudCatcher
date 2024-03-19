@@ -94,7 +94,7 @@ class WeatherController extends Controller
            $weatherToAdd->city_name=$city;
            $weathers->push($weatherToAdd);
         }
-        return view("welcome", compact("weathers","date"));
+        return view("welcome", compact("weathers","date","country"));
     }
 
 
