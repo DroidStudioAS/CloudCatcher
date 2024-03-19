@@ -8,4 +8,7 @@
     }else{
         $("#header-title").text("CloudCatcher");
     }
+    $("h1").on("click",function (){
+        location.href="/weather";
+    })
 </script>
