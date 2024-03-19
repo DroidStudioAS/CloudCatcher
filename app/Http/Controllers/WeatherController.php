@@ -11,8 +11,6 @@ use App\Helpers\WeatherHelper;
 
 class WeatherController extends Controller
 {
-
-
     public function loadTodaysWeathers(){
         $date = Carbon::today()->format('Y-m-d');
 
@@ -88,8 +86,6 @@ class WeatherController extends Controller
 
         return view("welcome", compact("weathers","date","country"));
     }
-
-
 
 
     /*****Admin Functions*****/
