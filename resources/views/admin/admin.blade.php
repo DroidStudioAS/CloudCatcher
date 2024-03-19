@@ -15,7 +15,7 @@
            <tbody>
                 @foreach($weathers as $weather)
                     <tr>
-                        <td class="weather_table_data">{{$weather->city}}</td>
+                        <td class="weather_table_data">{{$weather->city_name}}</td>
                         <td class="weather_table_data">{{$weather->description}}</td>
                         <td class="weather_table_data">{{$weather->temperature}}°</td>
                         <td class="weather_table_data">{{\Carbon\Carbon::parse($weather->created_at)->format('d F Y')}}</td>

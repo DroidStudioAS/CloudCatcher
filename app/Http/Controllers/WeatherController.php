@@ -102,7 +102,13 @@ class WeatherController extends Controller
 
     /*****Admin Functions*****/
     public function getAllWeathersAdmin(){
-        $weathers = WeatherModel::all();
+        $weathers = WeatherModel::paginate(6);
+
+        foreach ($weathers as $weather){
+            $cityId = $weather->city_id;
+            $city_name = CityModel::where(['id'=>$cityId])->first()->city_name;
+            $weather->city_name=$city_name;
+        }
 
 
         return view("admin.admin", compact('weathers'));
