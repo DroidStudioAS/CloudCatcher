@@ -280,7 +280,8 @@ table{
 .pages{
     display: flex;
     flex-flow: row nowrap;
-    justify-content: flex-start;
+    justify-content: center;
+
 }
 .pages svg{
     width: 2vw;
