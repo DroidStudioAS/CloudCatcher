@@ -231,6 +231,16 @@ table{
     color: white;
 
 }
+.table_container{
+    height: 50vh;
+    overflow-y: auto;
+    margin: 20px;
+}
+.cities_table{
+    height: 200px;
+    overflow-y: auto;
+
+}
 .table_header{
     font-size: xx-large;
 }
@@ -352,6 +362,7 @@ table{
     color: white;
     background-color: #627e75;
 }
+
 
 /**Edit Popup**/
 .entry_form_container-edit{

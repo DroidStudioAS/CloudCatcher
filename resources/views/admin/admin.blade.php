@@ -1,7 +1,7 @@
 <!--Todo
 1)Weather Entries will by default be the current date- no reason to have a post weather entry form anymore- refactor it to enter city
 2)Display all the forecasts for a certain all cities
-3)Add an add forecast function
+3)Add an add forecast function -- DONE
 -->
 @extends("layouts.admin_layout")
 @section("admin-content")
@@ -92,8 +92,28 @@
             </form>
         </div>
     </div>
-
     <!--Forecast Browse-->
+    <h1>Forecasts For All Cities</h1>
+        <div class="table_container">
+            <table class="cities_table">
+                <thead>
+                <th class="table_header">Country:</th>
+                <th class="table_header">Name:</th>
+                <th class="table_header">View Forecast</th>
+                </thead>
+                <tbody>
+                @foreach($cities as $city)
+                    <tr>
+                        <td class="weather_table_data">{{$city->country}}</td>
+                        <td class="weather_table_data">{{$city->city_name}}</td>
+                        <td class="weather_table_data">
+                            <button class="edit_button">See Forecast</button>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
 
 
 
