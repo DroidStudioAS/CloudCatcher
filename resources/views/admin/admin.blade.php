@@ -42,10 +42,13 @@
                     <option value="raining">Raining</option>
                     <option value="cloudy">Cloudy</option>
                     <option value="snowing">Snowing</option>
-
                 </select>
                 <label for="city">City</label>
-                <input class="weather_input" name="city" type="text">
+                <select class="weather_input" name="city" type="text">
+                    @foreach($cities as $city)
+                        <option value="{{$city->city_id}}">{{$city->city_name}}</option>
+                    @endforeach
+                </select>
                 <label for="temperature">Temperature (Celsius)</label>
                 <input class="weather_input" name="temperature" type="number">
                 <input class="submit-button" type="submit">

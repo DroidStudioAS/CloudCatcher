@@ -77,12 +77,13 @@ class WeatherController extends Controller
     public function getAllWeathersAdmin(){
         $weathers = WeatherModel::paginate(6);
 
+        $cities = CityModel::all();
         foreach ($weathers as $weather){
             $weather->city_name=$weather->city->city_name;
         }
 
 
-        return view("admin.admin", compact('weathers'));
+        return view("admin.admin", compact('weathers','cities'));
     }
     public function postWeatherEntry(Request $request){
        $request->validate([
