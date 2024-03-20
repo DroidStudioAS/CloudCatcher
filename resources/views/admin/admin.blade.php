@@ -46,7 +46,7 @@
                 <label for="city">City</label>
                 <select class="weather_input" name="city" type="text">
                     @foreach($cities as $city)
-                        <option value="{{$city->city_id}}">{{$city->city_name}}</option>
+                        <option value="{{$city->id}}">{{$city->city_name}}</option>
                     @endforeach
                 </select>
                 <label for="temperature">Temperature (Celsius)</label>
@@ -71,7 +71,11 @@
 
             </select>
             <label for="city">City</label>
-            <input id="weather-edit-city" class="weather_input" name="city" type="text">
+            <select id="weather-edit-city" class="weather_input" name="city" type="text">
+                @foreach($cities as $city)
+                    <option value="{{$city->id}}">{{$city->city_name}}</option>
+                @endforeach
+            </select>
             <label for="temperature">Temperature (Celsius)</label>
             <input id="weather-edit-temp" class="weather_input" name="temperature" type="number">
             <input id="edit-submit" class="submit-button" type="submit">
@@ -81,9 +85,9 @@
     function displayEditForm(weatherEntry){
        $("#edit-form").css('display','flex');
        $("#weather-edit-dropdown").val(weatherEntry.description.toLowerCase());
-       $("#weather-edit-city").val(weatherEntry.city_name);
+       $("#weather-edit-city").val(weatherEntry.city_id);
        $("#weather-edit-temp").val(weatherEntry.temperature);
-        console.log(weatherEntry.id);
+        console.log(weatherEntry.cityid);
 
        $("#edit-submit").off('click').on('click', function (e) {
             e.preventDefault();

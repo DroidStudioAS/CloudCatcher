@@ -79,6 +79,7 @@ class WeatherController extends Controller
 
         $cities = CityModel::all();
         foreach ($weathers as $weather){
+            $weather->city_id=$weather->city->id;
             $weather->city_name=$weather->city->city_name;
         }
 
