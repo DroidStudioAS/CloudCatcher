@@ -110,13 +110,6 @@ class WeatherController extends Controller
     }
     public function editWeatherEntry(Request $request, WeatherModel $weather)
     {
-
-        //city name of the original entry
-        $dbCity = $weather->city;
-        $normalCity = \Normalizer::normalize($dbCity, \Normalizer::FORM_C);
-        $uppercaseCity = strtoupper($normalCity);
-
-
         $request->validate([
             "city" => "required|int|gte:1",
             "description" => "required|string",
@@ -128,7 +121,7 @@ class WeatherController extends Controller
         //activate this block if not found
         if (!$cityEntered) {
             return response([
-                "success" => $dbCity
+                "success" => false
             ]);
         }
         //entered city found, can continue
