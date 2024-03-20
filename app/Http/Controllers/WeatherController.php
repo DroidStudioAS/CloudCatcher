@@ -27,11 +27,9 @@ class WeatherController extends Controller
         if ($date === null) {
             $date = Carbon::today()->format("Y-m-d");
         }
-
         $weathers = ForecastModel::where(['date'=>$date])->paginate(6);
         foreach ($weathers as $cast){
-                $city= CityModel::where(["id"=>$cast->city_id])->first()->city_name;
-                $cast->city_name=$city;
+                $cast->city_name=$cast->city->city_name;
         }
         return view("welcome", compact("weathers","date"));
     }
@@ -56,7 +54,7 @@ class WeatherController extends Controller
             ->get();
         //populate return array
         foreach ($forecast as $cast){
-            $cast->city_name=$cityFromDb->city_name;
+            $cast->city_name=$cast->city->city_name;
             $weathers->push($cast);
         }
 
@@ -167,7 +165,7 @@ class WeatherController extends Controller
     }
     public function test(){
         $i=1;
-        foreach (WeatherModel::all() as $weathers){
+        foreach (ForecastModel::all() as $weathers){
             echo $i . " " . $weathers->temperature . " " . $weathers->city->country . " " . $weathers->city->city_name ;
             $i++;
         }
