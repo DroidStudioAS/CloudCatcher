@@ -46,11 +46,7 @@ class WeatherController extends Controller
         //city found
         $cityId = $cityFromDb->id;
 
-        $forecast = ForecastModel::where(["city_id"=>$cityId])
-            ->orderBy("date", "asc")
-            ->latest()
-            ->take(5)
-            ->get();
+        $forecast = $cityFromDb->forecast;
         //populate return array
         foreach ($forecast as $cast){
             $cast->city_name=$cast->city->city_name;
@@ -163,9 +159,10 @@ class WeatherController extends Controller
     }
     public function test(){
         $i=1;
-        foreach (ForecastModel::all() as $weathers){
-            echo $i . " " . $weathers->temperature . " " . $weathers->city->country . " " . $weathers->city->city_name ;
-            $i++;
+        foreach (CityModel::all() as $cities){
+           foreach ($cities->forecast as $forecast){
+               echo $i . " " . $cities->city_name . " " . $forecast->date . " " . $forecast->temperature;
+           }
         }
     }
 
