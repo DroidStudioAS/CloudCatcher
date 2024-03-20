@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Helpers\WeatherHelper;
 use App\Models\CityModel;
 use App\Models\ForecastModel;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class ForecastSeeder extends Seeder
@@ -29,17 +30,11 @@ class ForecastSeeder extends Seeder
             "Snowing",
             "Cloudy"
         ];
-        //i will hardcode these values simply so i can test the 5 day forecast for all the cities,
-        //the refactor to generate random dates will be fairly simple
-        $dates=[
-          "2024-03-20",
-            "2024-03-21",
-            "2024-03-22",
-            "2024-03-23",
-            "2024-03-24",
-            "2024-03-25",
-            "2024-03-26"
-        ];
+
+
+        $date = Carbon::now();
+        $daysToAdd = rand(1,30);
+        $date->addDays($daysToAdd);
         $temperatureRange = [-10,30];
 
 
@@ -57,7 +52,7 @@ class ForecastSeeder extends Seeder
              ForecastModel::create([
                  "city_id"=>$i,
                  "temperature"=> $temperature,
-                 "date"=>$dates[$j],
+                 "date"=>Carbon::now()->addDays($j),
                  "description"=>$descriptions[$indexOfImagePathAndDescription],
                  "path_to_image"=>$pathsToImages[$indexOfImagePathAndDescription]
              ]);
