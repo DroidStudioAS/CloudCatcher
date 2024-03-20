@@ -54,6 +54,7 @@ class ForecastSeeder extends Seeder
                  "temperature"=> $temperature,
                  "date"=>Carbon::now()->addDays($j),
                  "description"=>$descriptions[$indexOfImagePathAndDescription],
+                 "probability"=>WeatherHelper::returnProbability($indexOfImagePathAndDescription),
                  "path_to_image"=>$pathsToImages[$indexOfImagePathAndDescription]
              ]);
              $this->command->getOutput()->progressAdvance(1);
