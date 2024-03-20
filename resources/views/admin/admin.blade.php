@@ -107,7 +107,7 @@
                         <td class="weather_table_data">{{$city->country}}</td>
                         <td class="weather_table_data">{{$city->city_name}}</td>
                         <td class="weather_table_data">
-                            <button class="edit_button">See Forecast</button>
+                            <button onclick="displayForecastContainer('{{$city->city_name}}',{{json_encode($city->forecast)}})" class="edit_button">See Forecast</button>
                         </td>
                     </tr>
                 @endforeach
@@ -143,6 +143,32 @@
             <input id="edit-submit" class="submit-button" type="submit">
         </form>
     </div>
+    <!--forecasts popup-->
+    <div id="forecast-popup" class="forecast_popup">
+        <img onclick="closeForecastContainer()" src="{{asset("/res/close.png")}}" alt="close">
+        <h1 id="forecast_title">City:</h1>
+       <table>
+           <thead>
+            <th class="table_header">
+                Date:
+            </th>
+           <th class="table_header">
+               Temperature
+           </th>
+           <th class="table_header">
+               Description:
+           </th>
+           <th class="table_header">
+               Probability
+           </th>
+           </thead>
+           <tbody id="tbody">
+                <tr>
+                    <td>hey</td>
+                </tr>
+           </tbody>
+       </table>
+    </div>
     <script>
         $(document).ready(function(){
             let currentDate = new Date();
@@ -167,9 +193,39 @@
                 editWeatherRecord(weatherEntry.id);
             })
         }
+        function displayForecastContainer(name, forecastEntry){
+            let tableBody = $("#tbody");
+            tableBody.empty();
+
+            $("#forecast_title").text(name);
+            $("#forecast-popup").css("display", "flex");
+            console.log(forecastEntry);
+
+
+            forecastEntry.forEach(entry=> {
+                const row = $("<tr>")
+
+                $("<td class='weather_table_data'>").text(entry.date).appendTo(row);
+                $("<td class='weather_table_data'>").text(entry.temperature).appendTo(row);
+                $("<td class='weather_table_data'>").text(entry.description).appendTo(row);
+                if(entry.probability===null){
+                    $("<td class='weather_table_data'>").text("/").appendTo(row);
+                }else{
+                    $("<td class='weather_table_data'>").text(entry.probability + "%").appendTo(row);
+                }
+
+
+                row.appendTo(tableBody);
+            })
+
+
+        }
 
         function closeEditContainer() {
             $("#edit-form").css('display', 'none');
+        }
+        function closeForecastContainer(){
+            $("#forecast-popup").css("display","none")
         }
 
         //async functions

@@ -373,7 +373,8 @@ table{
     width: 30vw;
     height: 60vh;
 }
-.entry_form_container-edit img{
+.entry_form_container-edit img,
+.forecast_popup img{
     position: absolute;
     top: 0;
     right: 0;
@@ -413,6 +414,23 @@ table{
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 
     border-bottom: 4px solid #627e75;
+}
+/******Forecast popup****/
+.forecast_popup{
+    display: none;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    left: 25vw;
+    top: 15vh;
+
+    width: 50vw;
+    height: 70vh;
+
+    background-color: #226ba3;
+    padding: 20px;
 }
 /*****Datepicker*****/
 .datepicker {
