@@ -112,23 +112,23 @@ class WeatherController extends Controller
     {
 
         //city name of the original entry
-        $dbCity = $weather->city->city_name;
+        $dbCity = $weather->city;
         $normalCity = \Normalizer::normalize($dbCity, \Normalizer::FORM_C);
         $uppercaseCity = strtoupper($normalCity);
 
 
         $request->validate([
-            "city" => "required|string",
+            "city" => "required|int|gte:1",
             "description" => "required|string",
             "temperature" => 'required|int',
         ]);
 
         //try and see if the city exists in the db
-        $cityEntered = CityModel::where(["city_name" => ucfirst($request->input("city"))])->first();
+        $cityEntered = CityModel::where(["id" =>$request->input("city")])->first();
         //activate this block if not found
         if (!$cityEntered) {
             return response([
-                "success" => false
+                "success" => $dbCity
             ]);
         }
         //entered city found, can continue

@@ -87,7 +87,7 @@
        $("#weather-edit-dropdown").val(weatherEntry.description.toLowerCase());
        $("#weather-edit-city").val(weatherEntry.city_id);
        $("#weather-edit-temp").val(weatherEntry.temperature);
-        console.log(weatherEntry.cityid);
+        console.log(weatherEntry.city_id);
 
        $("#edit-submit").off('click').on('click', function (e) {
             e.preventDefault();
@@ -102,6 +102,7 @@
     //async functions
     //edit record
     function editWeatherRecord(id){
+
         $.ajax({
             url:"/admin/edit-entry/"+id,
             type:"POST",
