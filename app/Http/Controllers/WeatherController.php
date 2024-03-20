@@ -33,8 +33,6 @@ class WeatherController extends Controller
         return view("welcome", compact("weathers","date"));
     }
     public function getWeatherForecastForCity($city){
-        $today = Carbon::today()->format("Y-m-d");
-
         $weathers = collect([]);
         //get id from the city name
         $cityFromDb = CityModel::where(["city_name"=>$city])->first();
@@ -45,7 +43,6 @@ class WeatherController extends Controller
             return view("five-day-forecast",compact("weathers", 'city'));
         }
         //city found
-        $cityId = $cityFromDb->id;
         $forecast = $cityFromDb->forecast;
         //populate return array
         foreach ($forecast as $cast){
