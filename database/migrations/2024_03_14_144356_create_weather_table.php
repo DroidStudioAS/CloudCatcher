@@ -17,7 +17,7 @@ class CreateWeatherTable extends Migration
             $table->id();
 
             $table->string("city",70);
-            $table->integer('temperature');
+            $table->float('temperature');
             $table->string('description');
             $table->string('path_to_image');
 
