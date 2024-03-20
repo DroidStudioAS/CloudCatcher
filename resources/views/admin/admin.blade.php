@@ -1,3 +1,8 @@
+<!--Todo
+1)Weather Entries will by default be the current date- no reason to have a post weather entry form anymore- refactor it to enter city
+2)Display all the forecasts for a certain all cities
+3)Add an add forecast function
+-->
 @extends("layouts.admin_layout")
 @section("admin-content")
     <h1>Current Records:</h1>
@@ -18,7 +23,7 @@
                         <td class="weather_table_data">{{$weather->city_name}}</td>
                         <td class="weather_table_data">{{$weather->description}}</td>
                         <td class="weather_table_data">{{$weather->temperature}}°</td>
-                        <td class="weather_table_data">{{\Carbon\Carbon::parse($weather->created_at)->format('d F Y')}}</td>
+                        <td class="weather_table_data">{{\Carbon\Carbon::now()->format('d F Y')}}</td>
                         <td class="weather_table_data">
                             <button onclick="displayEditForm({{json_encode($weather)}})" class="edit_button">Edit</button>
                             <button onclick="deleteWeatherRecord({{$weather->id}})" class="delete_button">Delete</button>
@@ -31,11 +36,19 @@
     <div class="pagination_container">
         {{$weathers->links()}}
     </div>
+    <h1>Enter Data</h1>
     <div class="admin_row">
+         <!--Forecast Form-->
         <div class="entry_form_container">
-            <h1>Enter A Weather Record</h1>
-            <form METHOD="POST" action="{{route('post-weather')}}" class="entry-form">
+            <h1>Enter A Forecast For <br>An Existing City:</h1>
+            <form method="POST" action="/admin/post-forecast" class="entry-form">
                 {{csrf_field()}}
+                <label for="country">Country:</label>
+                <input class="weather_input" name="country"/>
+                <label for="city_name">Name:</label>
+                <input class="weather_input" name="city_name"/>
+                <label for="temperature">Current Temperature (Celsius)</label>
+                <input class="weather_input" name="temperature" type="number">
                 <label for="description">Description</label>
                 <select class="entry-form-dropdown" name="description">
                     <option value="sunny">Sunny</option>
@@ -43,24 +56,45 @@
                     <option value="cloudy">Cloudy</option>
                     <option value="snowing">Snowing</option>
                 </select>
-                <label for="city">City</label>
-                <select class="weather_input" name="city" type="text">
-                    @foreach($cities as $city)
-                        <option value="{{$city->id}}">{{$city->city_name}}</option>
-                    @endforeach
-                </select>
-                <label for="temperature">Temperature (Celsius)</label>
+                <label for="precipitation">Chance Of Precipitation (%)</label>
+                <input class="weather_input" name="precipitation" type="number" min="0" max="100">
+                <input class="submit-button" type="submit">
+            </form>
+        </div>
+        <!--city form-->
+        <div class="entry_form_container">
+            <h1>Enter A New City</h1>
+            <form class="entry-form">
+                {{csrf_field()}}
+                <label for="country">Country:</label>
+                <input class="weather_input" name="country"/>
+                <label for="city_name">Name:</label>
+                <input class="weather_input" name="city_name"/>
+                <label for="temperature">Current Temperature (Celsius)</label>
                 <input class="weather_input" name="temperature" type="number">
+                <label for="description">Description</label>
+                <select class="entry-form-dropdown" name="description">
+                    <option value="sunny">Sunny</option>
+                    <option value="raining">Raining</option>
+                    <option value="cloudy">Cloudy</option>
+                    <option value="snowing">Snowing</option>
+                </select>
                 <input class="submit-button" type="submit">
             </form>
         </div>
     </div>
 
+    <!--Forecast Browse-->
+
+
+
+
+
     <!--EditPoput-->
     <div id="edit-form" class="entry_form_container-edit">
         <img onclick="closeEditContainer()" src="{{asset("/res/close.png")}}" alt="close">
         <h3>Edit Weather Record</h3>
-        <form METHOD="POST" action="{{route('post-weather')}}" class="entry-form">
+        <form METHOD="POST"  class="entry-form">
             {{csrf_field()}}
             <label for="description">Description</label>
             <select id="weather-edit-dropdown" class="entry-form-dropdown" name="description">
@@ -68,7 +102,6 @@
                 <option value="raining">Raining</option>
                 <option value="cloudy">Cloudy</option>
                 <option value="snowing">Snowing</option>
-
             </select>
             <label for="city">City</label>
             <select id="weather-edit-city" class="weather_input" name="city" type="text">

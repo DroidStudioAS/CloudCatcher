@@ -298,12 +298,17 @@ table{
     justify-content: center;
     align-items: center;
     background-color: #627e75;
+
+    margin: 30px;
     padding: 15px;
     border-radius: 8px;
 
     color: white;
 
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+}
+.entry_form_container h1{
+    text-align: center;
 }
 .entry-form{
     display: flex;

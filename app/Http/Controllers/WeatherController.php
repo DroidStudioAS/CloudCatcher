@@ -9,6 +9,7 @@ use App\Models\WeatherModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
+
 class WeatherController extends Controller
 {
     public function loadTodaysWeathers(){
@@ -86,28 +87,6 @@ class WeatherController extends Controller
 
         return view("admin.admin", compact('weathers','cities'));
     }
-    public function postWeatherEntry(Request $request){
-       $request->validate([
-           'description'=>'required|string',
-            'city'=>'required|int|exists:cities,id',
-            'temperature'=>'required|int'
-        ]);
-
-       //validation passed
-        //find city in db
-        $cityId = $request->input("city");
-        $path_to_image = WeatherHelper::determinePathToImage($request->get("description"));
-        //build weather model
-        WeatherModel::create([
-            'city_id'=>$cityId,
-            "description"=>$request->get("description"),
-            "temperature"=>$request->get("temperature"),
-            "path_to_image"=>$path_to_image
-        ]);
-
-        return back();
-
-    }
     public function editWeatherEntry(Request $request, WeatherModel $weather)
     {
         $request->validate([
@@ -146,6 +125,14 @@ class WeatherController extends Controller
             'success'=>true
         ]);
     }
+
+    public function postForecastEntry(Request $request){
+        dd($request);
+      return redirect()->back();
+    }
+
+
+    //test function, pay it no mind
     public function test(){
         $i=1;
         foreach (CityModel::all() as $cities){

@@ -30,10 +30,9 @@ Route::middleware(['auth', AdminMiddleware::class])
     ->prefix('admin')
     ->group(function (){
         Route::get("/",[WeatherController::class, 'getAllWeathersAdmin']);
-        Route::post('postWeather',[WeatherController::class,'postWeatherEntry'])
-            ->name('post-weather');
-        Route::post('/edit-entry/{weather}',[WeatherController::class,'editWeatherEntry']);
+        Route::post('/edit-entry/{weather}',[WeatherController::class,'editWeatherEntry'])->name("edit-weather");
         Route::post('/delete-entry/{weather}',[WeatherController::class,'deleteWeatherEntry']);
+        Route::post('/post-forecast', [WeatherController::class,'postForecastEntry']);
 });
 Route::get("/testing", [WeatherController::class,'test']);
 
