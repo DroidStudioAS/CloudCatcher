@@ -17,8 +17,7 @@ class WeatherController extends Controller
         $weathers = WeatherModel::paginate(6);
 
         foreach ($weathers as $weatherEntry){
-            $city= $weatherEntry->city->city_name;
-            $weatherEntry->city_name=$city;
+            $weatherEntry->city_name=$weatherEntry->city->city_name;
         }
         return view("welcome", compact('weathers', 'date'));
     }
@@ -89,8 +88,7 @@ class WeatherController extends Controller
         $weathers = WeatherModel::paginate(6);
 
         foreach ($weathers as $weather){
-            $city_name = $weather->city->city_name;
-            $weather->city_name=$city_name;
+            $weather->city_name=$weather->city->city_name;
         }
 
 
