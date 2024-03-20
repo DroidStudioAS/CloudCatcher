@@ -1,6 +1,6 @@
 <!--Todo
 1)Weather Entries will by default be the current date- no reason to have a post weather entry form anymore- refactor it to enter city
-2)Display all the forecasts for a certain all cities
+2)Display all the forecasts for a certain all cities Done
 3)Add an add forecast function -- DONE
 -->
 @extends("layouts.admin_layout")
@@ -161,6 +161,9 @@
            <th class="table_header">
                Probability
            </th>
+            <th class="table_header">
+                Edit
+            </th>
            </thead>
            <tbody id="tbody">
                 <tr>
@@ -205,6 +208,7 @@
             forecastEntry.forEach(entry=> {
                 const row = $("<tr>")
 
+                console.log(entry)
                 $("<td class='weather_table_data'>").text(entry.date).appendTo(row);
                 $("<td class='weather_table_data'>").text(entry.temperature).appendTo(row);
                 $("<td class='weather_table_data'>").text(entry.description).appendTo(row);
@@ -213,8 +217,16 @@
                 }else{
                     $("<td class='weather_table_data'>").text(entry.probability + "%").appendTo(row);
                 }
-
-
+                //append edit button and set its onclick listener
+                let editField = $("<td id='bzju' class='weather_table_data'>");
+                let editButton = $("<button class='edit_button'>").text("Edit");
+                let deleteButton = $("<button class='delete_button'>").text("delete");
+                editButton.on("click",function (){
+                    console.log(entry.city_id + " "+ entry.id + " " + entry.temperature);
+                })
+                editButton.appendTo(editField);
+                deleteButton.appendTo(editField);
+                editField.appendTo(row);
                 row.appendTo(tableBody);
             })
 

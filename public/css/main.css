@@ -423,14 +423,15 @@ table{
     align-items: center;
 
     position: fixed;
-    left: 25vw;
-    top: 15vh;
+    left: 5vw;
+    top: 5vh;
 
-    width: 50vw;
-    height: 70vh;
+    width: 90vw;
+    height: 90vh;
 
     background-color: #226ba3;
     padding: 20px;
+    overflow-y: auto;
 }
 /*****Datepicker*****/
 .datepicker {
