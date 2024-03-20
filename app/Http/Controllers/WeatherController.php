@@ -89,13 +89,13 @@ class WeatherController extends Controller
     public function postWeatherEntry(Request $request){
        $request->validate([
            'description'=>'required|string',
-            'city'=>'required|string|exists:cities,city_name',
+            'city'=>'required|int|exists:cities,id',
             'temperature'=>'required|int'
         ]);
 
        //validation passed
         //find city in db
-        $cityId = CityModel::where(["city_name"=>$request->input("city")])->first()->id;
+        $cityId = $request->input("city");
         $path_to_image = WeatherHelper::determinePathToImage($request->get("description"));
         //build weather model
         WeatherModel::create([
