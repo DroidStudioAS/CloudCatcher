@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function (){
     Route::get("/weather",[WeatherController::class, 'loadTodaysWeathers']);
     Route::get("/weather/{date?}",[WeatherController::class,'getWeathersForDate'])->name("getWeatherForDate");
     Route::get("/weather-for/{city}",[WeatherController::class,"getWeatherForecastForCity"]);
+    Route::get("/weather-for-country/{country}",[WeatherController::class,"getCountryForecast"]);
 });
 //admin routes
 Route::middleware(['auth', AdminMiddleware::class])
@@ -34,7 +35,6 @@ Route::middleware(['auth', AdminMiddleware::class])
         Route::post('/edit-entry/{weather}',[WeatherController::class,'editWeatherEntry']);
         Route::post('/delete-entry/{weather}',[WeatherController::class,'deleteWeatherEntry']);
 });
-Route::get("/weather-for-country/{country}",[WeatherController::class,"getCountryForecast"]);
 
 
 Auth::routes();
