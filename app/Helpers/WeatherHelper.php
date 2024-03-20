@@ -56,8 +56,8 @@ class WeatherHelper
         return $path_to_image;
     }
     public static function returnProbability($description){
-        //sunny
-        if($description===0){
+        //sunny and cloudy
+        if($description===0 || $description===3){
             return null;
         }
         //returning 0 is kind of counter intuitive, because we are saying our own forecast is completely incorrect
