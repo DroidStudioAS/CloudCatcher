@@ -49,7 +49,11 @@
                 @endif
                 {{csrf_field()}}
                 <label for="city_name">Name:</label>
-                <input class="weather_input" name="city_name"/>
+                    <select class="weather_input" name="city_id">
+                    @foreach($cities as $city)
+                        <option value="{{$city->id}}">{{$city->city_name}}</option>
+                    @endforeach
+                    </select>
                 <label for="temperature">Current Temperature (Celsius)</label>
                 <input class="weather_input" name="temperature" type="number">
                 <label for="description">Description</label>

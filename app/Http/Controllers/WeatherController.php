@@ -127,15 +127,16 @@ class WeatherController extends Controller
     }
 
     public function postForecastEntry(Request $request){
+        //validate request
       $request->validate([
-          "city_name"=>"required|string|exists:cities",
+          "city_id"=>"required|int|exists:cities,id",
           "temperature"=>"required|numeric",
           "description"=>"required|string",
           "date"=>"required|date",
           "precipitation"=>"nullable|int"
       ]);
       //get cityId
-        $city = CityModel::where(["city_name"=>$request->input("city_name")])->first();
+        $city = CityModel::where(["id"=>$request->input("city_id")])->first();
         $cityId = $city->id;
       //check if forecast for city on date already exists, if it does, change it;
         foreach ($city->forecast as $cast){
@@ -153,7 +154,7 @@ class WeatherController extends Controller
                 return redirect()->back();
             }
         }
-
+        //if there are no entries for this city on this date
       //create model
       ForecastModel::create([
           "city_id"=>$cityId,
