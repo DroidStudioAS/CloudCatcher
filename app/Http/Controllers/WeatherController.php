@@ -127,7 +127,43 @@ class WeatherController extends Controller
     }
 
     public function postForecastEntry(Request $request){
-        dd($request);
+      $request->validate([
+          "city_name"=>"required|string|exists:cities",
+          "temperature"=>"required|numeric",
+          "description"=>"required|string",
+          "date"=>"required|date",
+          "precipitation"=>"nullable|int"
+      ]);
+      //get cityId
+        $city = CityModel::where(["city_name"=>$request->input("city_name")])->first();
+        $cityId = $city->id;
+      //check if forecast for city on date already exists, if it does, change it;
+        foreach ($city->forecast as $cast){
+            if($cast->date === $request->input("date")){
+               //edit current entry
+                $cast->city_id=$cityId;
+                $cast->temperature=$request->input("temperature");
+                $cast->date=$request->input("date");
+                $cast->description=$request->input("description");
+                $cast->probability=$request->input("precipitation");
+                $cast->path_to_image = WeatherHelper::determinePathToImage($request->input("description"));
+
+                $cast->save();
+
+                return redirect()->back();
+            }
+        }
+
+      //create model
+      ForecastModel::create([
+          "city_id"=>$cityId,
+          "temperature"=>$request->input("temperature"),
+          "date"=>$request->input("date") ,
+          "description"=>$request->input("description"),
+          "probability"=>$request->input("precipitation"),
+          "path_to_image"=>WeatherHelper::determinePathToImage($request->input("description"))
+      ]);
+        //in case of success send user back
       return redirect()->back();
     }
 

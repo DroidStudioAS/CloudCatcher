@@ -7,44 +7,47 @@
 @section("admin-content")
     <h1>Current Records:</h1>
     <div class="admin_row">
-       <table>
-           <thead>
-             <tr>
-                 <th class="table_header">City</th>
-                 <th class="table_header">Description</th>
-                 <th class="table_header">Temperature</th>
-                 <th class="table_header">Date</th>
-                 <th class="table_header">Actions</th>
-             </tr>
-           </thead>
-           <tbody>
-                @foreach($weathers as $weather)
-                    <tr>
-                        <td class="weather_table_data">{{$weather->city_name}}</td>
-                        <td class="weather_table_data">{{$weather->description}}</td>
-                        <td class="weather_table_data">{{$weather->temperature}}°</td>
-                        <td class="weather_table_data">{{\Carbon\Carbon::now()->format('d F Y')}}</td>
-                        <td class="weather_table_data">
-                            <button onclick="displayEditForm({{json_encode($weather)}})" class="edit_button">Edit</button>
-                            <button onclick="deleteWeatherRecord({{$weather->id}})" class="delete_button">Delete</button>
-                        </td>
-                    </tr>
-                @endforeach
-           </tbody>
-       </table>
+        <table>
+            <thead>
+            <tr>
+                <th class="table_header">City</th>
+                <th class="table_header">Description</th>
+                <th class="table_header">Temperature</th>
+                <th class="table_header">Date</th>
+                <th class="table_header">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($weathers as $weather)
+                <tr>
+                    <td class="weather_table_data">{{$weather->city_name}}</td>
+                    <td class="weather_table_data">{{$weather->description}}</td>
+                    <td class="weather_table_data">{{$weather->temperature}}°</td>
+                    <td class="weather_table_data">{{\Carbon\Carbon::now()->format('d F Y')}}</td>
+                    <td class="weather_table_data">
+                        <button onclick="displayEditForm({{json_encode($weather)}})" class="edit_button">Edit</button>
+                        <button onclick="deleteWeatherRecord({{$weather->id}})" class="delete_button">Delete</button>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
     </div>
     <div class="pagination_container">
         {{$weathers->links()}}
     </div>
     <h1>Enter Data</h1>
     <div class="admin_row">
-         <!--Forecast Form-->
+        <!--Forecast Form-->
         <div class="entry_form_container">
             <h1>Enter A Forecast For <br>An Existing City:</h1>
             <form method="POST" action="/admin/post-forecast" class="entry-form">
+                @if($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <p>{{$error}}</p>
+                    @endforeach
+                @endif
                 {{csrf_field()}}
-                <label for="country">Country:</label>
-                <input class="weather_input" name="country"/>
                 <label for="city_name">Name:</label>
                 <input class="weather_input" name="city_name"/>
                 <label for="temperature">Current Temperature (Celsius)</label>
@@ -58,6 +61,8 @@
                 </select>
                 <label for="precipitation">Chance Of Precipitation (%)</label>
                 <input class="weather_input" name="precipitation" type="number" min="0" max="100">
+                <input autocomplete="off" name="date" class="date" type="text" id="datepicker"
+                       placeholder="Select A Date">
                 <input class="submit-button" type="submit">
             </form>
         </div>
@@ -94,7 +99,7 @@
     <div id="edit-form" class="entry_form_container-edit">
         <img onclick="closeEditContainer()" src="{{asset("/res/close.png")}}" alt="close">
         <h3>Edit Weather Record</h3>
-        <form METHOD="POST"  class="entry-form">
+        <form METHOD="POST" class="entry-form">
             {{csrf_field()}}
             <label for="description">Description</label>
             <select id="weather-edit-dropdown" class="entry-form-dropdown" name="description">
@@ -114,62 +119,74 @@
             <input id="edit-submit" class="submit-button" type="submit">
         </form>
     </div>
-<script>
-    function displayEditForm(weatherEntry){
-       $("#edit-form").css('display','flex');
-       $("#weather-edit-dropdown").val(weatherEntry.description.toLowerCase());
-       $("#weather-edit-city").val(weatherEntry.city_id);
-       $("#weather-edit-temp").val(weatherEntry.temperature);
-        console.log(weatherEntry.city_id);
+    <script>
+        $(document).ready(function(){
+            let currentDate = new Date();
+            let sevenDaysFromNow = new Date();
+            sevenDaysFromNow.setDate(currentDate.getDate() + 7);
+            $('#datepicker').datepicker({
+                dateFormat:'yy-mm-dd',
+                minDate: 0,
+                maxDate:sevenDaysFromNow
+            });
+        });
+        function displayEditForm(weatherEntry) {
+            $("#edit-form").css('display', 'flex');
+            $("#weather-edit-dropdown").val(weatherEntry.description.toLowerCase());
+            $("#weather-edit-city").val(weatherEntry.city_id);
+            $("#weather-edit-temp").val(weatherEntry.temperature);
+            console.log(weatherEntry.city_id);
 
-       $("#edit-submit").off('click').on('click', function (e) {
-            e.preventDefault();
-            console.log(weatherEntry.id);
-            editWeatherRecord(weatherEntry.id);
-       })
-    }
-    function closeEditContainer(){
-        $("#edit-form").css('display','none');
-    }
+            $("#edit-submit").off('click').on('click', function (e) {
+                e.preventDefault();
+                console.log(weatherEntry.id);
+                editWeatherRecord(weatherEntry.id);
+            })
+        }
 
-    //async functions
-    //edit record
-    function editWeatherRecord(id){
+        function closeEditContainer() {
+            $("#edit-form").css('display', 'none');
+        }
 
-        $.ajax({
-            url:"/admin/edit-entry/"+id,
-            type:"POST",
-            data:{
-              "_token": $('meta[name="csrf-token"]').attr('content'),
-               "city":$("#weather-edit-city").val(),
-                "description": $("#weather-edit-dropdown").val(),
-                "temperature":$("#weather-edit-temp").val()
-            },
-            success:function (response){
-                console.log(response.success);
-                if(response.success===true){
-                   location.reload();
+        //async functions
+        //edit record
+        function editWeatherRecord(id) {
+
+            $.ajax({
+                url: "/admin/edit-entry/" + id,
+                type: "POST",
+                data: {
+                    "_token": $('meta[name="csrf-token"]').attr('content'),
+                    "city": $("#weather-edit-city").val(),
+                    "description": $("#weather-edit-dropdown").val(),
+                    "temperature": $("#weather-edit-temp").val()
+                },
+                success: function (response) {
+                    console.log(response.success);
+                    if (response.success === true) {
+                        location.reload();
+                    }
+                },
+                error: function (xhr) {
+                    alert("Something went wrong!");
+                    console.log(xhr.responseText)
                 }
-            },
-            error:function(xhr) {
-                alert("Something went wrong!");
-                console.log(xhr.responseText)
-            }
-        })
-    }
-    function deleteWeatherRecord(id){
-        $.ajax({
-            url:"/admin/delete-entry/"+id,
-            type:"post",
-            data:{
-                "_token": $('meta[name="csrf-token"]').attr('content')
-            },
-            success:function(response){
-                if(response.success===true){
-                    location.reload();
+            })
+        }
+
+        function deleteWeatherRecord(id) {
+            $.ajax({
+                url: "/admin/delete-entry/" + id,
+                type: "post",
+                data: {
+                    "_token": $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    if (response.success === true) {
+                        location.reload();
+                    }
                 }
-            }
-        })
-    }
-</script>
+            })
+        }
+    </script>
 @endsection
