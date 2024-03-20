@@ -30,11 +30,6 @@ class ForecastSeeder extends Seeder
             "Snowing",
             "Cloudy"
         ];
-
-
-        $date = Carbon::now();
-        $daysToAdd = rand(1,30);
-        $date->addDays($daysToAdd);
         $temperatureRange = [-10,30];
 
 
