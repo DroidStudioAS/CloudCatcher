@@ -168,5 +168,13 @@ class WeatherController extends Controller
             'success'=>true
         ]);
     }
+    public function test(){
+        $i=1;
+        foreach (WeatherModel::all() as $weathers){
+            echo $i . " " . $weathers->temperature . " " . $weathers->city->country . " " . $weathers->city->city_name ;
+            $i++;
+        }
+    }
+
 
 }

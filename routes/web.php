@@ -35,6 +35,7 @@ Route::middleware(['auth', AdminMiddleware::class])
         Route::post('/edit-entry/{weather}',[WeatherController::class,'editWeatherEntry']);
         Route::post('/delete-entry/{weather}',[WeatherController::class,'deleteWeatherEntry']);
 });
+Route::get("/testing", [WeatherController::class,'test']);
 
 
 Auth::routes();
