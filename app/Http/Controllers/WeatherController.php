@@ -16,12 +16,10 @@ class WeatherController extends Controller
 
         $weathers = WeatherModel::paginate(6);
 
-        /*weathers = collect([])*/;
         foreach ($weathers as $weatherEntry){
-            $city= CityModel::where(["id"=>$weatherEntry->city_id])->first()->city_name;
+            $city= $weatherEntry->city->city_name;
             $weatherEntry->city_name=$city;
         }
-
         return view("welcome", compact('weathers', 'date'));
     }
     public function getWeathersForDate($date)
@@ -80,7 +78,7 @@ class WeatherController extends Controller
 
 
         foreach ($weathers as $weather){
-          $cityName = $cities->search($weather->city_id);
+          $cityName = $weather->city->city_name;
           $weather->city_name=$cityName;
         }
 
@@ -93,8 +91,7 @@ class WeatherController extends Controller
         $weathers = WeatherModel::paginate(6);
 
         foreach ($weathers as $weather){
-            $cityId = $weather->city_id;
-            $city_name = CityModel::where(['id'=>$cityId])->first()->city_name;
+            $city_name = $weather->city->city_name;
             $weather->city_name=$city_name;
         }
 
@@ -127,7 +124,7 @@ class WeatherController extends Controller
     {
 
         //city name of the original entry
-        $dbCity = CityModel::where(["id" => $weather->city_id])->first()->city_name;
+        $dbCity = $weather->city->city_name;
         $normalCity = \Normalizer::normalize($dbCity, \Normalizer::FORM_C);
         $uppercaseCity = strtoupper($normalCity);
 
