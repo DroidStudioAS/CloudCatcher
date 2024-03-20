@@ -8,7 +8,7 @@ class ForecastModel extends Model
 {
     protected $table="forecast";
 
-    protected $fillable=["city_id","temperature","description","date","path_to_image"];
+    protected $fillable=["city_id","temperature","description","date","path_to_image","probability"];
 
     public function city(){
         //this defines many to one relationship, because many forecast entries are connected to
