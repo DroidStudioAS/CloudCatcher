@@ -221,8 +221,12 @@
                 let editField = $("<td id='bzju' class='weather_table_data'>");
                 let editButton = $("<button class='edit_button'>").text("Edit");
                 let deleteButton = $("<button class='delete_button'>").text("delete");
+                //onclick listeners
                 editButton.on("click",function (){
-                    console.log(entry.city_id + " "+ entry.id + " " + entry.temperature);
+                    console.log("Edit entry: " + entry.id);
+                })
+                deleteButton.on("click",function(){
+                    console.log("delete entry: " + entry.id);
                 })
                 editButton.appendTo(editField);
                 deleteButton.appendTo(editField);
