@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\WeatherHelper;
 use App\Models\CityModel;
 use App\Models\ForecastModel;
 use App\Models\WeatherModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Helpers\WeatherHelper;
 
 class WeatherController extends Controller
 {

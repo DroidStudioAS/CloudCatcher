@@ -2,12 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\WeatherHelper;
+use App\Http\Controllers\WeatherController;
 use App\Models\WeatherModel;
 use Illuminate\Database\Seeder;
-//import this for the determineimagepath function
-use App\Http\Controllers\WeatherController;
 use Illuminate\Support\Facades\Validator;
-use App\Helpers\WeatherHelper;
+
+//import this for the determineimagepath function
 
 class WeatherSeeder extends Seeder
 {

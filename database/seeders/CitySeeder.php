@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\CityModel;
-use Faker\Factory;
 use Illuminate\Database\Seeder;
 
 class CitySeeder extends Seeder
