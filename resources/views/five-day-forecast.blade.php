@@ -8,7 +8,7 @@
        <div class="forecast_row_container">
            <div class="forecast_box">
                <img src="{{asset($weathers[0]->path_to_image)}}"/>
-               <p>{{$weathers[0]->description}}</p>
+               <p>{{$weathers[0]->description}} @if($weathers[0]->probability!==null) <span>{{$weathers[0]->probability}}%</span> @endif</p>
            </div>
            <svg class="forecast-divider">
                <rect x="0" y="0" width="1px" height="40vh" fill="white"></rect>
@@ -32,8 +32,8 @@
                            <p>{{$weathers[$i]->temperature}}°</p>
                        </div>
                        <div class="back_content">
-                            <p>Chance Of Rain Snow:</p>
-                            <p>{{$weathers[$i]->probability}}%</p>
+                            <p>Chance Of Rain/Snow:</p>
+                            <p>@if($weathers[$i]->probability===null)0% @else{{$weathers[$i]->probability}}%@endif</p>
                        </div>
                    </div>
 
