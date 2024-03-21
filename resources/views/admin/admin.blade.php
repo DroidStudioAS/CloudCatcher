@@ -1,7 +1,7 @@
 <!--Todo
 1)Weather Entries will by default be the current date- no reason to have a post weather entry form anymore- refactor it to enter city
-2)Display all the forecasts for a certain all cities Done
-    2.1- Link edit but to edit form,
+2)Display all the forecasts for a certain all cities DONE
+    2.1- Link edit but to edit form, DONE
     2.2-Link delete but to delete method in controller
 3)Add an add forecast function -- DONE
 -->
@@ -74,7 +74,7 @@
         </div>
         <!--city form-->
         <div class="entry_form_container">
-            <h1>Enter A New City</h1>
+            <h1>Enter<br> A<br> New City</h1>
             <form class="entry-form">
                 {{csrf_field()}}
                 <label for="country">Country:</label>
@@ -246,8 +246,8 @@
 
                     console.log("Edit entry: " + entry.id);
                 })
-                deleteButton.on("click",function(){
-                    console.log("delete entry: " + entry.id);
+                deleteButton.on("click",function (){
+                    deleteForecastRecord(entry);
                 })
                 editButton.appendTo(editField);
                 deleteButton.appendTo(editField);
@@ -302,6 +302,21 @@
                     if (response.success === true) {
                         location.reload();
                     }
+                }
+            })
+        }
+
+        function deleteForecastRecord(entry){
+            $.ajax({
+                url:"admin/delete-forecast/"+entry.id,
+                type:"post",
+                data:{
+                    "_token": $('meta[name="csrf-token"]').attr('content')
+                },
+                success:function (response){
+                 if(response.success===true){
+                     location.reload();
+                 }
                 }
             })
         }

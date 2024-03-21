@@ -126,6 +126,7 @@ class WeatherController extends Controller
         ]);
     }
 
+
     public function postForecastEntry(Request $request){
         //validate request
       $request->validate([
@@ -167,6 +168,14 @@ class WeatherController extends Controller
         //in case of success send user back
       return redirect()->back();
     }
+   public function deleteForecastEntry(ForecastModel $forecast)
+   {
+
+       $forecast->delete();
+       return response([
+           "success"=>true
+       ]);
+   }
 
 
     //test function, pay it no mind
