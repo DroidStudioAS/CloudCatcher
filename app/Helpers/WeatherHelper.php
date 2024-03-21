@@ -38,17 +38,25 @@ class WeatherHelper
         }
         return $descriptionString;
     }
+
+ const descriptions=[
+"Sunny",
+"Raining",
+"Snowing",
+"Cloudy"
+];
     public static function descriptionDeterminer($temp){
         if($temp<-5){
-            //snowing
-            return 2;
-        }else if($temp>-5 && $temp<5){
-            //cloudy
-            return 3;
+            //snowing if random num is 0 return sunny else return snowing
+            return rand(0,1)===0? self::descriptions[0]:self::descriptions[2];
+        }else if($temp>-5 && $temp<15){
+            //cloudy if random num = - return rain else return cloudy
+            return rand(0,1)===0? self::descriptions[1]:self::descriptions[3];
         }else if($temp>15){
-            return 0;
+            //if random num is 0 return raining else return sunny
+            return rand(0,1)===0? self::descriptions[1]:self::descriptions[0];
         }
-        return 1;
+        return self::descriptions[0];
     }
 
     public static function determinePathToImage($description){

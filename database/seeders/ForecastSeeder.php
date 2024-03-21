@@ -50,9 +50,9 @@ class ForecastSeeder extends Seeder
                     "city_id"=>$i,
                     "temperature"=>$temperature,
                     "date"=>Carbon::now()->addDays($j),
-                    "description"=>$descriptions[WeatherHelper::descriptionDeterminer($temperature)],
-                    "probability"=>WeatherHelper::returnProbability($descriptions[WeatherHelper::descriptionDeterminer($temperature)]),
-                    "path_to_image"=>WeatherHelper::determinePathToImage($descriptions[WeatherHelper::descriptionDeterminer($temperature)])
+                    "description"=>WeatherHelper::descriptionDeterminer($temperature),
+                    "probability"=>WeatherHelper::returnProbability(WeatherHelper::descriptionDeterminer($temperature)),
+                    "path_to_image"=>WeatherHelper::determinePathToImage(WeatherHelper::descriptionDeterminer($temperature))
                 ]);
 
             }
