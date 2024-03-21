@@ -1,6 +1,8 @@
 <!--Todo
 1)Weather Entries will by default be the current date- no reason to have a post weather entry form anymore- refactor it to enter city
 2)Display all the forecasts for a certain all cities Done
+    2.1- Link edit but to edit form,
+    2.2-Link delete but to delete method in controller
 3)Add an add forecast function -- DONE
 -->
 @extends("layouts.admin_layout")
@@ -39,7 +41,7 @@
     <h1>Enter Data</h1>
     <div class="admin_row">
         <!--Forecast Form-->
-        <div class="entry_form_container">
+        <div id="forecast_entry_container" class="entry_form_container">
             <h1>Enter A Forecast For <br>An Existing City:</h1>
             <form method="POST" action="/admin/post-forecast" class="entry-form">
                 @if($errors->any())
@@ -49,22 +51,22 @@
                 @endif
                 {{csrf_field()}}
                 <label for="city_name">Name:</label>
-                    <select class="weather_input" name="city_id">
+                    <select class="weather_input" name="city_id" id="city_id">
                     @foreach($cities as $city)
                         <option value="{{$city->id}}">{{$city->city_name}}</option>
                     @endforeach
                     </select>
                 <label for="temperature">Current Temperature (Celsius)</label>
-                <input class="weather_input" name="temperature" type="number">
+                <input id="forecast_temp" class="weather_input" name="temperature" type="number">
                 <label for="description">Description</label>
-                <select class="entry-form-dropdown" name="description">
+                <select id="forecast_desc" class="entry-form-dropdown" name="description">
                     <option value="sunny">Sunny</option>
                     <option value="raining">Raining</option>
                     <option value="cloudy">Cloudy</option>
                     <option value="snowing">Snowing</option>
                 </select>
                 <label for="precipitation">Chance Of Precipitation (%)</label>
-                <input class="weather_input" name="precipitation" type="number" min="0" max="100">
+                <input id="forecast_precipitation" class="weather_input" name="precipitation" type="number" min="0" max="100">
                 <input autocomplete="off" name="date" class="date" type="text" id="datepicker"
                        placeholder="Select A Date">
                 <input class="submit-button" type="submit">
@@ -183,6 +185,7 @@
                 maxDate:sevenDaysFromNow
             });
         });
+
         function displayEditForm(weatherEntry) {
             $("#edit-form").css('display', 'flex');
             $("#weather-edit-dropdown").val(weatherEntry.description.toLowerCase());
@@ -223,6 +226,24 @@
                 let deleteButton = $("<button class='delete_button'>").text("delete");
                 //onclick listeners
                 editButton.on("click",function (){
+                    //close container and scroll to edit form
+                    closeForecastContainer();
+                    $("html").animate({
+                        scrollTop:$("#forecast_entry_container").offset().top
+                    });
+                    //fill the form with current entry data
+                    $("#city_id").val(entry.city_id);
+                    $("#forecast_temp").val(entry.temperature);
+                    $("#forecast_desc").val(entry.description.toLowerCase());
+                    if(entry.probability!==null){
+                        $("#forecast_precipitation").val(entry.probability);
+                    }else{
+                        $("#forecast_precipitation").val(null);
+                    }
+                    $("#datepicker").val(entry.date);
+
+
+
                     console.log("Edit entry: " + entry.id);
                 })
                 deleteButton.on("click",function(){
