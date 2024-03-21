@@ -75,7 +75,7 @@
         <!--city form-->
         <div class="entry_form_container">
             <h1>Enter<br> A<br> New City</h1>
-            <form class="entry-form">
+            <form action="{{route("addCity")}}" class="entry-form">
                 {{csrf_field()}}
                 <label for="country">Country:</label>
                 <input class="weather_input" name="country"/>

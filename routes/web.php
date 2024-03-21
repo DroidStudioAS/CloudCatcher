@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WeatherController;
 use App\Http\Middleware\AdminMiddleware;
@@ -34,6 +35,8 @@ Route::middleware(['auth', AdminMiddleware::class])
         Route::post('/delete-entry/{weather}',[WeatherController::class,'deleteWeatherEntry']);
         Route::post('/post-forecast', [WeatherController::class,'postForecastEntry']);
         Route::post("/delete-forecast/{forecast}",[WeatherController::class,"deleteForecastEntry"]);
+        Route::get("/add-city",[CityController::class,"addCity"])
+            ->name("addCity");
 });
 Route::get("/testing", [WeatherController::class,'test']);
 
