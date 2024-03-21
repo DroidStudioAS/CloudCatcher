@@ -95,6 +95,7 @@
 .weather_temperature{
     text-align: center;
     font-size: 8vw;
+    margin-left: 10px;
     color: white;
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 
@@ -151,7 +152,7 @@
     display: flex;
     flex-flow:row nowrap;
     width: 68vw;
-    margin: 20px;
+    margin: 15px;
 }
 .forecast_row_container{
     height: 40vh;
@@ -162,7 +163,6 @@
 .forecast_four_day_container{
     justify-content: space-evenly;
     align-items: flex-start;
-
 }
 .forecast_box{
     height: 40vh;
@@ -171,6 +171,7 @@
     flex-flow: column nowrap;
     justify-content: space-around;
     align-items: center;
+    text-align: center;
 }
 .forecast_box img{
     width: 23vw;
@@ -504,6 +505,7 @@ table{
     }
     .weather_temperature{
         font-size: 25vw;
+        text-align: center;
     }
     .weather_date{
         font-size: x-large;
