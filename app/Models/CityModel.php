@@ -8,7 +8,7 @@ class CityModel extends Model
 {
     protected $table="cities";
 
-    protected $fillable = ['city_name'];
+    protected $fillable = ["country",'city_name'];
 
     public function forecast(){
         //one to many relationship: One city has many forecasts;
