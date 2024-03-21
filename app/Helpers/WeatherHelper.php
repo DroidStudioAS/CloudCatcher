@@ -13,6 +13,12 @@ class WeatherHelper
         "snowing"=>"/res/snow.svg",
         "cloudy"=>"/res/clouds.svg"
     ];
+    const images = [
+        "sunny"=> "/res/sunny.png",
+        "raining"=> "/res/rainy.png",
+        "cloudy"=>"/res/cloudy.png",
+        "snowing"=>"/res/snowy.png"
+    ];
 
     public static function determineDescriptionString($index){
         $descriptionString = "";
@@ -44,22 +50,9 @@ class WeatherHelper
         }
         return 1;
     }
+
     public static function determinePathToImage($description){
-        $path_to_image="";
-        switch ($description){
-            case "sunny":
-                $path_to_image="/res/sunny.png";
-                break;
-            case "raining":
-                $path_to_image="/res/rainy.png";
-                break;
-            case "cloudy":
-                $path_to_image="/res/cloudy.png";
-                break;
-            case "snowing":
-                $path_to_image="/res/snowy.png";
-                break;
-        }
+        $path_to_image=self::images[strtolower($description)];
         return $path_to_image;
     }
     public static function returnProbability($description){
