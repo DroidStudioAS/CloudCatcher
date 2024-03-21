@@ -207,6 +207,9 @@
             $("#forecast-popup").css("display", "flex");
             console.log(forecastEntry);
 
+            //sort the entries
+            forecastEntry.sort((a, b) => new Date(a.date) - new Date(b.date));
+
 
             forecastEntry.forEach(entry=> {
                 const row = $("<tr>")
