@@ -18,46 +18,34 @@ class ForecastSeeder extends Seeder
     //WHEN RAN, IT WILL SEED TODAY AND THE NEXT 6 DAYS
     public function run()
     {
-        //important: for now the paths and the descriptions need to be in symmetric order so there is not a discrepancy in the frontend!
-        $pathsToImages = [
-            "res/sunny.png",
-            "res/rainy.png",
-            "res/snowy.png",
-            "res/cloudy.png"
-        ];
-        $descriptions=[
-            "Sunny",
-            "Raining",
-            "Snowing",
-            "Cloudy"
-        ];
         $temperatureRange = [-10,30];
-
 
         $startIndex = CityModel::first()->id;
         $endIndex = CityModel::all()->last()->id;
-        //$this->command->getOutput()->progressStart();
+        $this->command->getOutput()->progressStart();
         for($i=$startIndex; $i<$endIndex; $i++){
             $temperature = null;
             for($j=0; $j<=6; $j++){
+                //set the temperature to a random num if there is not a temp for yesterday
+                //if there is, set the temp to a number either 5 larger or 5 smaller
                 if($temperature===null){
                     $temperature=rand($temperatureRange[0],$temperatureRange[1]);
                 }else{
                     $temperature=rand($temperature-5,$temperature+5);
                 }
-
+                $description = WeatherHelper::descriptionDeterminer($temperature);
                 ForecastModel::create([
                     "city_id"=>$i,
                     "temperature"=>$temperature,
                     "date"=>Carbon::now()->addDays($j),
-                    "description"=>WeatherHelper::descriptionDeterminer($temperature),
-                    "probability"=>WeatherHelper::returnProbability(WeatherHelper::descriptionDeterminer($temperature)),
-                    "path_to_image"=>WeatherHelper::determinePathToImage(WeatherHelper::descriptionDeterminer($temperature))
+                    "description"=>$description,
+                    "probability"=>WeatherHelper::returnProbability($description),
+                    "path_to_image"=>WeatherHelper::determinePathToImage($description)
                 ]);
-
+                $this->command->getOutput()->progressAdvance(1);
             }
         }
-
+        $this->command->getOutput()->progressFinish();
 
     }
 }
