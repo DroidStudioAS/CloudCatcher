@@ -30,11 +30,11 @@ Route::middleware('auth')->group(function (){
 Route::middleware(['auth', AdminMiddleware::class])
     ->prefix('admin')
     ->group(function (){
-        Route::get("/",[WeatherController::class, 'getAllWeathersAdmin']);
-        Route::post('/edit-entry/{weather}',[WeatherController::class,'editWeatherEntry'])->name("edit-weather");
-        Route::post('/delete-entry/{weather}',[WeatherController::class,'deleteWeatherEntry']);
-        Route::post('/post-forecast', [WeatherController::class,'postForecastEntry']);
-        Route::post("/delete-forecast/{forecast}",[WeatherController::class,"deleteForecastEntry"]);
+        Route::get("/",[App\Http\Controllers\admin\WeatherController::class, 'getAllWeathersAdmin']);
+        Route::post('/edit-entry/{weather}',[App\Http\Controllers\admin\WeatherController::class,'editWeatherEntry'])->name("edit-weather");
+        Route::post('/delete-entry/{weather}',[App\Http\Controllers\admin\WeatherController::class,'deleteWeatherEntry']);
+        Route::post('/post-forecast', [App\Http\Controllers\admin\WeatherController::class,'postForecastEntry']);
+        Route::post("/delete-forecast/{forecast}",[App\Http\Controllers\admin\WeatherController::class,"deleteForecastEntry"]);
         Route::post("/add-city",[CityController::class,"addCity"])
             ->name("addCity");
 });
