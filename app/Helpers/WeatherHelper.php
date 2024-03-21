@@ -7,6 +7,13 @@ class WeatherHelper
     //this function just returns a string based on a random index,
     //while the second descriptionDeterminer() determines the most
     //likely description based on the generated temperature
+    const icons = [
+        "sunny"=>"/res/sun.svg",
+        "raining"=>"/res/rain.svg",
+        "snowing"=>"/res/snow.svg",
+        "cloudy"=>"/res/clouds.svg"
+    ];
+
     public static function determineDescriptionString($index){
         $descriptionString = "";
         switch ($index){
@@ -77,23 +84,10 @@ class WeatherHelper
         }
         return $color;
     }
+
     public static function determineIconPath($description){
-        $path_to_image="";
-        switch (strtolower($description)){
-            case "sunny":
-                $path_to_image="/res/sun.svg";
-                break;
-            case "raining":
-                $path_to_image="/res/rain.svg";
-                break;
-            case "cloudy":
-                $path_to_image="/res/clouds.svg";
-                break;
-            case "snowing":
-                $path_to_image="/res/snow.svg";
-                break;
-        }
-        return $path_to_image;
+       $path_to_icon = self::icons[strtolower($description)];
+       return $path_to_icon;
     }
 }
 
