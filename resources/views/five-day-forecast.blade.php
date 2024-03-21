@@ -25,9 +25,19 @@
        <div class="forecast_four_day_container">
            @for($i=1; $i<=4; $i++)
                <div class="forecast_day">
-                   <p class="weather_date">{{$weathers[$i]->date}}</p>
-                   <img src="{{asset($weathers[$i]->path_to_image)}}" alt="weather_photo" class="forecast_photo">
-                   <p>{{$weathers[$i]->temperature}}°</p>
+                   <div class="card">
+                       <div class="front_content">
+                           <p class="weather_date">{{$weathers[$i]->date}}</p>
+                           <img src="{{asset($weathers[$i]->path_to_image)}}" alt="weather_photo" class="forecast_photo">
+                           <p>{{$weathers[$i]->temperature}}°</p>
+                       </div>
+                       <div class="back_content">
+                            <p>Chance Of Rain Snow:</p>
+                            <p>{{$weathers[$i]->probability}}%</p>
+                       </div>
+                   </div>
+
+
                </div>
            @endfor
 

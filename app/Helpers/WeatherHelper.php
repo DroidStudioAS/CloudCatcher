@@ -65,7 +65,7 @@ class WeatherHelper
     }
     public static function returnProbability($description){
         //sunny and cloudy
-        if($description===0 || $description===3){
+        if(strtolower($description)==="sunny" || strtolower($description)==="cloudy"){
             return null;
         }
         //returning 0 is kind of counter intuitive, because we are saying our own forecast is completely incorrect
