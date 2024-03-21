@@ -44,7 +44,21 @@
 
                 <div class="weather_column">
                     <div class="temperature_container">
-                        <h1 class="weather_temperature">
+                        @php
+                            $color="";
+                            if ($weather->temperature<0){
+                                $color="#bfe8f5";
+                            }
+                            else if($weather->temperature>0&&$weather->temperature<15){
+                                $color="#a9d8f7";
+                            }else if($weather->temperature>15 && $weather->temperature<25){
+                                $color="#627e75";
+                            }else{
+                                $color="#e50000";
+                            }
+
+                        @endphp
+                        <h1 class="weather_temperature" style="color: {{$color}}">
                             {{$weather->temperature}}°
                         </h1>
                     </div>
