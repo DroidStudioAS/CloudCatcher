@@ -24,7 +24,10 @@
                 <tr>
                     <td class="weather_table_data">{{$weather->city_name}}</td>
                     <td class="weather_table_data">{{$weather->description}}</td>
-                    <td class="weather_table_data">{{$weather->temperature}}°</td>
+                    <td class="weather_table_data">
+                        {{$weather->temperature}}°
+                        <img class="weather_icon" src="{{asset(\App\Helpers\WeatherHelper::determineIconPath($weather->description))}}">
+                    </td>
                     <td class="weather_table_data">{{\Carbon\Carbon::now()->format('d F Y')}}</td>
                     <td class="weather_table_data">
                         <button onclick="displayEditForm({{json_encode($weather)}})" class="edit_button">Edit</button>

@@ -77,7 +77,24 @@ class WeatherHelper
         }
         return $color;
     }
-
+    public static function determineIconPath($description){
+        $path_to_image="";
+        switch (strtolower($description)){
+            case "sunny":
+                $path_to_image="/res/sun.svg";
+                break;
+            case "raining":
+                $path_to_image="/res/rain.svg";
+                break;
+            case "cloudy":
+                $path_to_image="/res/clouds.svg";
+                break;
+            case "snowing":
+                $path_to_image="/res/snow.svg";
+                break;
+        }
+        return $path_to_image;
+    }
 }
 
 
