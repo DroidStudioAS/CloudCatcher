@@ -147,7 +147,7 @@
     </div>
     <!--forecasts popup-->
     <div id="forecast-popup" class="forecast_popup">
-        <img onclick="closeForecastContainer()" src="{{asset("/res/close.png")}}" alt="close">
+        <img class="closeButton" onclick="closeForecastContainer()" src="{{asset("/res/close.png")}}" alt="close">
         <h1 id="forecast_title">City:</h1>
        <table>
            <thead>
@@ -185,6 +185,18 @@
                 maxDate:sevenDaysFromNow
             });
         });
+        function determineIconPath(description){
+            lowercaseDesc = description.toLowerCase();
+            if(lowercaseDesc==="sunny"){
+                return "/res/sun.svg"
+            }else if(lowercaseDesc==="snowing"){
+                return "/res/snow.svg"
+            }else if(lowercaseDesc==="raining"){
+                return "/res/rain.svg"
+            }else{
+                return "/res/clouds.svg"
+            }
+        }
 
         function displayEditForm(weatherEntry) {
             $("#edit-form").css('display', 'flex');
@@ -217,7 +229,11 @@
                 console.log(entry)
                 $("<td class='weather_table_data'>").text(entry.date).appendTo(row);
                 $("<td class='weather_table_data'>").text(entry.temperature).appendTo(row);
-                $("<td class='weather_table_data'>").text(entry.description).appendTo(row);
+               let descriptionField = $("<td class='weather_table_data'>").text(entry.description);
+                let imageOfDesc = $("<img class='weather_icon'>")
+                    .attr("src", determineIconPath(entry.description));
+                imageOfDesc.appendTo(descriptionField);
+               descriptionField.appendTo(row);
                 if(entry.probability===null){
                     $("<td class='weather_table_data'>").text("/").appendTo(row);
                 }else{

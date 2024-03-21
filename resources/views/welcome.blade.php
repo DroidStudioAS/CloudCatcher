@@ -44,7 +44,7 @@
 
                 <div class="weather_column">
                     <div class="temperature_container">
-                        <h1 class="weather_temperature" style="color: {{$color}}">
+                        <h1 class="weather_temperature" style="color: {{\App\Helpers\WeatherHelper::determineTemperatureColor($weather->temperature)}}">
                             {{$weather->temperature}}°
                         </h1>
                     </div>

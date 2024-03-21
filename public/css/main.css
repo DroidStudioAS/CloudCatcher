@@ -244,15 +244,18 @@ table{
 .table_header{
     font-size: xx-large;
 }
-.weather_table_data{
-    font-size: x-large;
-}
 .table_header,
 .weather_table_data{
+    font-size: xx-large;
     text-align: left;
     width: 14vw;
     border: 1px solid white;
     padding: 10px;
+}
+.weather_table_data_flex{
+
+
+
 }
 .edit_button{
     background-color: #226ba3;
@@ -374,13 +377,14 @@ table{
     height: 60vh;
 }
 .entry_form_container-edit img,
-.forecast_popup img{
+.closeButton{
     position: absolute;
     top: 0;
     right: 0;
     margin: 5px;
     width: 50px;
 }
+
 .search_container,
 .geo_search_container{
     display: flex;
@@ -432,6 +436,11 @@ table{
     background-color: #226ba3;
     padding: 20px;
     overflow-y: auto;
+}
+.weather_icon{
+    width: 20px;
+    margin-left: 20px;
+
 }
 /*****Datepicker*****/
 .datepicker {

@@ -63,6 +63,21 @@ class WeatherHelper
         //returning 0 is kind of counter intuitive, because we are saying our own forecast is completely incorrect
         return rand(1,100);
     }
+    public static function determineTemperatureColor($temperature){
+        $color="";
+        if ($temperature<0){
+            $color="#bfe8f5";
+        }
+        else if($temperature>0&&$temperature<15){
+            $color="#a9d8f7";
+        }else if($temperature>15 &&$temperature<25){
+            $color="#627e75";
+        }else{
+            $color="#e50000";
+        }
+        return $color;
+    }
+
 }
 
 
