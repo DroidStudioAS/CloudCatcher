@@ -15,7 +15,7 @@
         </form>
         <div class="geo_search_container">
             <form id="searchByName">
-                <input id="cityInput" class="date"  placeholder="Search By City">
+                <input name="city_name" id="cityInput" class="date"  placeholder="Search By City">
                 <input type="submit" class="submit-button" value="search">
             </form>
             <form id="searchByCountry">

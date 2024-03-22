@@ -33,7 +33,17 @@ class WeatherController extends Controller
         }
         return view("welcome", compact("weathers","date"));
     }
-    public function getWeatherForecastForCity($city){
+    public function getSearchResults($city_name){
+       $weathers = CityModel::where("city_name", "LIKE", "%$city_name%")->get();
+
+
+
+       return view("search_results", compact("weathers"));
+    }
+    /*public function getWeatherForecastForCity($city){
+        TODO
+        1)send the user to a page where all the we
+
         $weathers = collect([]);
         //get id from the city name
         $cityFromDb = CityModel::where(["city_name"=>$city])->first();
@@ -53,7 +63,7 @@ class WeatherController extends Controller
         //return weathers
         return view("five-day-forecast",compact("weathers",'city'));
 
-    }
+    }  */
     public function getCountryForecast($country){
         $date = Carbon::today()->format("Y-m-d");
 
