@@ -3,7 +3,13 @@
     @if(count($weathers)==0)
         <h1>No Results For: {{$city_name}}</h1>
     @else
-        <h1>{{count($weathers)}} Results For: {{$city_name}}</h1>
+        <h1>
+            @if(count($weathers)==1)
+                1 Result For {{$city_name}}
+            @else
+                {{count($weathers)}} Results For: {{$city_name}}
+            @endif
+        </h1>
     @endif
     <div class="weather_cards_container">
         @foreach($weathers as $weather)
