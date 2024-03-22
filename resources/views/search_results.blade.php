@@ -1,6 +1,32 @@
 @extends("layouts.layout")
 @section("content")
-@foreach($weathers as $weather)
-    <p>{{$weather->city_name}}:{{$weather->weather->temperature}}</p>
-@endforeach
+    @if(count($weathers)==0)
+        <h1>No Results For: {{$city_name}}</h1>
+    @else
+        <h1>{{count($weathers)}} Results For: {{$city_name}}</h1>
+    @endif
+    <div class="weather_cards_container">
+        @foreach($weathers as $weather)
+            <div class="weather_card">
+                <p class="weather_city">{{$weather->city_name}}</p>
+                <div class="weather_column">
+                    <img class="weather_image" src="{{asset($weather->weather->path_to_image)}}" alt="weather photo">
+                    <p class="weather_description">{{$weather->weather->description}}</p>
+                </div>
+                <svg class="divider">
+                    <rect x="0" y="0" width="1px" height="30vh" fill="white"></rect>
+                </svg>
+
+                <div class="weather_column">
+                    <div class="temperature_container">
+                        <h1 class="weather_temperature" style="color: {{\App\Helpers\WeatherHelper::determineTemperatureColor($weather->temperature)}}">
+                            {{$weather->weather->temperature}}°
+                        </h1>
+                    </div>
+                    <p class="weather_date">{{\Carbon\Carbon::parse($weather->weather->created_at)->format('d F Y')}}</p>
+                </div>
+                <div onclick="showCityForecast('{{$weather->city_name}}')" class="show_more_button">Forecast</div>
+            </div>
+        @endforeach
+    </div>
 @endsection
