@@ -65,7 +65,7 @@
     <script>
         $(document).ready(function(){
             $('#datepicker').datepicker({
-                format:'yyyy-mm-dd',
+                dateFormat:'yy-mm-dd',
                 autoclose:true,
                 todayHighlight:true
             });
