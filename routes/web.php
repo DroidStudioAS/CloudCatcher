@@ -23,7 +23,7 @@ Route::middleware('auth')->group(function (){
 
     Route::get("/weather",[WeatherController::class, 'loadTodaysWeathers']);
     Route::get("/weather/{date?}",[WeatherController::class,'getWeathersForDate'])->name("getWeatherForDate");
-    Route::get("/weather-for/{city}",[WeatherController::class,"getWeatherForecastForCity"]);
+    Route::get("/weather-for/{city}",[WeatherController::class,"getWeatherForecastForCity"])->name("forecast-city.permalink");
     Route::get("/weather-search/{city}",[WeatherController::class,"getSearchResults"]);
     Route::get("/weather-for-country/{country}",[WeatherController::class,"getCountryForecast"]);
 });

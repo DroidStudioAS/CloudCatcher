@@ -55,7 +55,9 @@
             </div>
         @endforeach
     </div>
-    {{$weathers->links()}}
+    @if(count($weathers)>6)
+        {{$weathers->links()}}
+    @endif
     <script>
         $(document).ready(function(){
             $('#datepicker').datepicker({

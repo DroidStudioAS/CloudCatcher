@@ -8,6 +8,7 @@ use App\Models\ForecastModel;
 use App\Models\WeatherModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use function PHPUnit\Framework\isEmpty;
 
 
 class WeatherController extends Controller
@@ -35,6 +36,10 @@ class WeatherController extends Controller
     }
     public function getSearchResults($city_name){
        $weathers = CityModel::where("city_name", "LIKE", "%$city_name%")->get();
+       if(count($weathers)===0){
+           $date = Carbon::now()->format("Y-m-d");
+           return view("welcome", compact("weathers","date"));
+       }
 
        return view("search_results", compact("weathers","city_name"));
     }
