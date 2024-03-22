@@ -35,4 +35,12 @@
             </div>
         @endforeach
     </div>
+    <script>
+        function showCityForecast(city){
+            if(city!==null || city!==""){
+                window.location.href="/weather-for/"+city
+            }
+        }
+    </script>
 @endsection
+

@@ -76,7 +76,7 @@
                 alert("please enter a city")
                 return;
             }
-            showCityForecast(city);
+            searchCityForecast(city);
         })
         $("#searchByCountry").on("submit",function (e){
             e.preventDefault();
@@ -102,6 +102,11 @@
         }
         function showAllTime(){
             window.location.href="/all-time-weather";
+        }
+        function searchCityForecast(city){
+            if(city!==null || city!==""){
+                window.location.href="/weather-search/"+city
+            }
         }
         function showCityForecast(city){
            if(city!==null || city!==""){
