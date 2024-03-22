@@ -1,8 +1,7 @@
 @extends("layouts.layout")
 
 @section("content")
-
-    <div class="search_container">
+   <div class="search_container">
         @if(isset($date))
             <h3>Weather on: {{$date}} @if(isset($country)) In: {{ucfirst($country)}} @endif</h3>
         @else
