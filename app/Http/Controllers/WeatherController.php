@@ -29,6 +29,10 @@ class WeatherController extends Controller
             $date = Carbon::today()->format("Y-m-d");
         }
         $weathers = ForecastModel::where(['date'=>$date])->paginate(6);
+
+        if(count($weathers)==0){
+            return view("welcome", compact("weathers","date"))->with("error","There Are No Entries For This Date: $date");
+        }
         foreach ($weathers as $cast){
                 $cast->city_name=$cast->city->city_name;
         }
@@ -37,8 +41,7 @@ class WeatherController extends Controller
     public function getSearchResults($city_name){
        $weathers = CityModel::where("city_name", "LIKE", "%$city_name%")->get();
        if(count($weathers)===0){
-
-           return view("welcome", compact("weathers","city_name"));
+           return view("welcome", compact("weathers","city_name"))->with("error","There Are No Entries For City: $city_name");
        }
 
        return view("search_results", compact("weathers","city_name"));
@@ -72,7 +75,7 @@ class WeatherController extends Controller
         $weathers = WeatherModel::whereIn("city_id", $cities->values())->paginate(6);
         //country not found
         if(count($cities)===0){
-            return view("welcome", compact("weathers","date", 'country'));
+            return view("welcome", compact("weathers","date"))->with("error","There Are No Entries For Country: $country");
         }
 
 
