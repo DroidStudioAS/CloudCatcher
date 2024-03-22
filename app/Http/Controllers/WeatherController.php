@@ -37,8 +37,8 @@ class WeatherController extends Controller
     public function getSearchResults($city_name){
        $weathers = CityModel::where("city_name", "LIKE", "%$city_name%")->get();
        if(count($weathers)===0){
-           $date = Carbon::now()->format("Y-m-d");
-           return view("welcome", compact("weathers","date"));
+
+           return view("welcome", compact("weathers","city_name"));
        }
 
        return view("search_results", compact("weathers","city_name"));

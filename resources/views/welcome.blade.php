@@ -28,9 +28,17 @@
 
     </div>
     <div class="weather_cards_container">
+        <h1 class="no-entries-msg">
         @if(count($weathers)==0)
-        <h1 class="no-entries-msg">There Are No <br> Entries<br> For {{$date}} @if(isset($country)) in {{$country}} @endif</h1>
+            @if(isset($country))
+                    There Are 0 Entries For This {{$country}} Country
+            @elseif(isset($city_name))
+                There Are 0 Entries For {{$city_name}}
+            @elseif(isset($date))
+                    There Are 0 Entries For This {{$date}} Date
+            @endif
         @endif
+        </h1>
         @foreach($weathers->reverse() as $weather)
             <div class="weather_card">
                 <p class="weather_city">{{$weather->city_name}}</p>
