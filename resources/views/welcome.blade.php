@@ -59,7 +59,7 @@
             </div>
         @endforeach
     </div>
-    @if(count($weathers)>6)
+    @if(count($weathers)>=6)
         {{$weathers->links()}}
     @endif
     <script>
