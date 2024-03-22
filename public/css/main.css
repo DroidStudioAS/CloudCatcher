@@ -419,6 +419,24 @@ table{
     margin: 5px;
     width: 50px;
 }
+
+.searchDisplay{
+    margin-top:10px;
+    background-color: #627e75;
+    padding: 20px;
+    border:1px solid black;
+    border-radius: 8px;
+
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    color: white;
+    font-size: large;
+}
+.search_form{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
 .search_filters{
     display: none;
 }
