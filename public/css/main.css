@@ -21,6 +21,7 @@
     font-size:xxx-large;
     color: white;
     cursor: pointer;
+    text-align: center;
 }
 
 /******Weather Card*****/
@@ -243,6 +244,13 @@
 .admin_container h1{
     color: white;
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+}
+.admin_panel_link{
+    color: white;
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    position: absolute;
+    right: 1vw;
+    cursor: pointer;
 }
 .admin_row{
     display: flex;
@@ -537,6 +545,9 @@ table{
         font-size: x-large;
         width: 45vw;
         text-align: center;
+    }
+    .header_title{
+        font-size: 8vw;
     }
 
 }
