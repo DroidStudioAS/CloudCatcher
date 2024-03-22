@@ -7,6 +7,7 @@ class WeatherHelper
     //this function just returns a string based on a random index,
     //while the second descriptionDeterminer() determines the most
     //likely description based on the generated temperature
+    /******Const Arrays*****/
     const icons = [
         "sunny"=>"/res/sun.svg",
         "raining"=>"/res/rain.svg",
@@ -19,32 +20,22 @@ class WeatherHelper
         "cloudy"=>"/res/cloudy.png",
         "snowing"=>"/res/snowy.png"
     ];
-
-    public static function determineDescriptionString($index){
-        $descriptionString = "";
-        switch ($index){
-            case 1:
-                $descriptionString= "sunny";
-                break;
-            case 2:
-                $descriptionString =  "cloudy";
-                break;
-            case 3:
-                $descriptionString = "raining";
-                break;
-            case 4:
-                $descriptionString = "snowing";
-                break;
-        }
-        return $descriptionString;
+    const descriptions=[
+        "Sunny",
+        "Raining",
+        "Snowing",
+        "Cloudy"
+    ];
+    /******Image Helpers*******/
+    public static function determinePathToImage($description){
+        $path_to_image=self::images[strtolower($description)];
+        return $path_to_image;
     }
-
- const descriptions=[
-"Sunny",
-"Raining",
-"Snowing",
-"Cloudy"
-];
+    public static function determineIconPath($description){
+        $path_to_icon = self::icons[strtolower($description)];
+        return $path_to_icon;
+    }
+    /*******Forecast Attribute Helpers*******/
     public static function descriptionDeterminer($temp){
         if($temp<-5){
             //snowing if random num is 0 return sunny else return snowing
@@ -57,11 +48,6 @@ class WeatherHelper
             return rand(0,1)===0? self::descriptions[1]:self::descriptions[0];
         }
         return self::descriptions[0];
-    }
-
-    public static function determinePathToImage($description){
-        $path_to_image=self::images[strtolower($description)];
-        return $path_to_image;
     }
     public static function returnProbability($description){
         //sunny and cloudy
@@ -86,10 +72,7 @@ class WeatherHelper
         return $color;
     }
 
-    public static function determineIconPath($description){
-       $path_to_icon = self::icons[strtolower($description)];
-       return $path_to_icon;
-    }
+
 }
 
 

@@ -18,6 +18,8 @@ class ForecastSeeder extends Seeder
     //WHEN RAN, IT WILL SEED TODAY AND THE NEXT 6 DAYS
     public function run()
     {
+        $wHelper = new WeatherHelper();
+
         $temperatureRange = [-10,30];
 
         $startIndex = CityModel::first()->id;
@@ -39,8 +41,8 @@ class ForecastSeeder extends Seeder
                     "temperature"=>$temperature,
                     "date"=>Carbon::now()->addDays($j),
                     "description"=>$description,
-                    "probability"=>WeatherHelper::returnProbability($description),
-                    "path_to_image"=>WeatherHelper::determinePathToImage($description)
+                    "probability"=>$wHelper::returnProbability($description),
+                    "path_to_image"=>$wHelper::determinePathToImage($description)
                 ]);
                 $this->command->getOutput()->progressAdvance(1);
             }

@@ -3,55 +3,43 @@
 namespace Database\Seeders;
 
 use App\Helpers\WeatherHelper;
-use App\Http\Controllers\WeatherController;
+use App\Models\CityModel;
 use App\Models\WeatherModel;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Validator;
-
-//import this for the determineimagepath function
 
 class WeatherSeeder extends Seeder
 {
-
-
     /**
      * Run the database seeds.
      *
-     * @return void
+     * @return int
      */
+
     public function run()
     {
-        $rulesForValidation = [
-          "city"=>"required|string|unique:weather",
-          "temperature"=>"required|int",
-            "description"=>"required|int|gte:1|lte:4"
-        ];
+        $wHelper = new WeatherHelper();
+        $temperatureRange = [-10,30];
 
-        $validator = Validator::make(
-            [
-                "city"=>$this->command->getOutput()->ask("Enter The City You Are Recording Data For:"),
-                "temperature"=>$this->command->getOutput()->ask("What is the Temperature"),
-                "description"=>$this->command->getOutput()->ask("Is It 1)Sunny 2)Cloudy 3)Raining 4)Snowing (Enter the index)")
-            ], $rulesForValidation);
+        $startIndex = CityModel::get()->first()->id;
+        $endIndex = CityModel::all()->last()->id;
+        //
 
-        if($validator->fails()){
-            foreach ($validator->errors()->all() as $error){
-                $this->command->error($error);
-            }
-            exit();
+
+        $this->command->getOutput()->progressStart();
+        //execution i=city_id
+        for($i=$startIndex; $i<=$endIndex; $i++){
+            $temperature = rand($temperatureRange[0],$temperatureRange[1]);
+            $description = $wHelper::descriptionDeterminer($temperature);
+            $indexOfDescAndImage=WeatherHelper::descriptionDeterminer($temperature);
+           WeatherModel::create([
+               "city_id"=>$i,
+               "temperature"=>$temperature,
+               "description"=>$description,
+               "path_to_image"=>$wHelper::determinePathToImage($description)
+           ]);
+           $this->command->getOutput()->progressAdvance(1);
         }
-
-            $city = $validator->validated()["city"];
-            $temperature = $validator->validated()["temperature"];
-            $description = WeatherHelper::determineDescriptionString($validator->validated()["description"]);
-            $pathToImage = WeatherController::determinePathToimage($description);
-
-            WeatherModel::create([
-                "city"=>$city,
-                "temperature"=>$temperature,
-                "description"=>$description,
-                "path_to_image"=>$pathToImage
-            ]);
-
+        $this->command->getOutput()->progressFinish();
     }
+
 }
