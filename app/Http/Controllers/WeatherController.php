@@ -36,8 +36,6 @@ class WeatherController extends Controller
     public function getSearchResults($city_name){
        $weathers = CityModel::where("city_name", "LIKE", "%$city_name%")->get();
 
-
-
        return view("search_results", compact("weathers"));
     }
     /*public function getWeatherForecastForCity($city){

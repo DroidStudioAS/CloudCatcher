@@ -14,4 +14,8 @@ class CityModel extends Model
         //one to many relationship: One city has many forecasts;
         return $this->hasMany(ForecastModel::class, "city_id","id");
     }
+    public function weather(){
+        return $this->hasOne(WeatherModel::class,"city_id","id");
+    }
+
 }
