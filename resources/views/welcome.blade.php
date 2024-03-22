@@ -7,20 +7,25 @@
         @else
             <h3>All Dates</h3>
         @endif
+       <div class="searchDisplay">
+           Search
+       </div>
+            <div class="search_filters">
+                <form id="searchForm">
+                    <input autocomplete="off" name="date" class="date" type="text" id="datepicker" placeholder="Select A Date">
+                    <input type="submit" class="submit-button" value="search">
+                </form>
+                <div class="geo_search_container">
+                    <form id="searchByName">
+                        <input name="city_name" id="cityInput" class="date"  placeholder="Search By City">
+                        <input type="submit" class="submit-button" value="search">
+                    </form>
+                    <form id="searchByCountry">
+                        <input id="countryInput" class="date"  placeholder="Search By Country">
+                        <input type="submit" class="submit-button" value="search">
+                    </form>
+            </div>
 
-        <form id="searchForm">
-        <input autocomplete="off" name="date" class="date" type="text" id="datepicker" placeholder="Select A Date">
-        <input type="submit" class="submit-button" value="search">
-        </form>
-        <div class="geo_search_container">
-            <form id="searchByName">
-                <input name="city_name" id="cityInput" class="date"  placeholder="Search By City">
-                <input type="submit" class="submit-button" value="search">
-            </form>
-            <form id="searchByCountry">
-                <input id="countryInput" class="date"  placeholder="Search By Country">
-                <input type="submit" class="submit-button" value="search">
-            </form>
         </div>
 
 
@@ -62,12 +67,22 @@
         {{$weathers->links()}}
     @endif
     <script>
+        let searchClickCount = 0;
         $(document).ready(function(){
             $('#datepicker').datepicker({
                 dateFormat:'yy-mm-dd',
                 autoclose:true,
                 todayHighlight:true
             });
+            $(".searchDisplay").on('click',function (){
+                if(searchClickCount%2===0) {
+                    $(".search_filters").slideDown();
+                }else{
+                    $(".search_filters").slideUp();
+                }
+                searchClickCount++
+            })
+
         });
 
         $("#searchForm").on("submit", function (event){

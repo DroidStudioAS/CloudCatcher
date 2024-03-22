@@ -419,7 +419,9 @@ table{
     margin: 5px;
     width: 50px;
 }
-
+.search_filters{
+    display: none;
+}
 .search_container,
 .geo_search_container{
     display: flex;
