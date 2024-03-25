@@ -85,6 +85,10 @@ class WeatherController extends Controller
 
         return view("welcome", compact("weathers","date","country"));
     }
+    public function searchAll(){
+        dd("HEY");
+    }
+
 
 
 

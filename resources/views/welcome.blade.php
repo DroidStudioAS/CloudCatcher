@@ -6,7 +6,7 @@
            Display Filters
        </div>
             <div class="search_filters">
-                <form class="search_form" id="searchForm">
+                <form ACTION="{{route("search")}}" class="search_form" id="searchForm">
                     <input autocomplete="off" name="date" class="date" type="text" id="datepicker" placeholder="Select A Date">
                     <input name="city_name" id="cityInput" class="date"  placeholder="Search By City">
                     <input id="countryInput" class="date"  placeholder="Search By Country">
@@ -78,29 +78,7 @@
 
         });
 
-        $("#searchForm").on("submit", function (event){
-            event.preventDefault();
-            loadWeatherForDate();
-        })
-        $("#searchByName").on('submit',function(event){
-            event.preventDefault();
-            let city = $("#cityInput").val()
-            if(city===null || city===""){
-                alert("please enter a city")
-                return;
-            }
-            searchCityForecast(city);
-        })
-        $("#searchByCountry").on("submit",function (e){
-            e.preventDefault();
-            let country = $("#countryInput").val();
-            if(country==="" || country===null){
-                alert("Please Enter A Country");
-                return;
-            }
-            showCountryWeather(country);
 
-        })
 
 
         function loadWeatherForDate(){
