@@ -49,7 +49,30 @@
 
 
 }
+.home_like_button{
+        opacity: 0;
+
+        height: 10vh;
+
+        position: absolute;
+         top: 65%;
+         left: 48%;
+         transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-self: center;
+        transition: opacity 1s ease;
+        cursor: pointer;
+    }
+.home_like_button img{
+    width: 100px;
+}
+
 .weather_card:hover .show_more_button {
+    opacity: 1;
+}
+.weather_card:hover .home_like_button{
     opacity: 1;
 }
 .weather_card p{
@@ -108,7 +131,7 @@
     height: 10vh;
 
     position: absolute;
-    top: 10vh;
+    top: 5vh;
     left: 10vw;
     display: flex;
     justify-content: center;
@@ -562,6 +585,10 @@ table{
 @media (max-width: 800px) {
     .weather_card{
         width: 90vw;
+    }
+    .show_more_button{
+        left: 5vw;
+        width: 80vw;
     }
     .weather_city{
         padding:8px 14px 8px 14px;

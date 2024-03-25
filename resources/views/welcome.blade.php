@@ -49,6 +49,9 @@
                     <p class="weather_date">{{\Carbon\Carbon::parse($weather->date)->format('d F Y')}}</p>
                 </div>
                 <div onclick="showCityForecast('{{$weather->city->city_name}}')" class="show_more_button">Forecast</div>
+                <div class="home_like_button">
+                    <img src="{{asset("/res/icon_not_liked.svg")}}"/>
+                </div>
 
             </div>
         @endforeach
