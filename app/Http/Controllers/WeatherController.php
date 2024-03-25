@@ -30,9 +30,7 @@ class WeatherController extends Controller
         if(count($weathers)==0){
             return view("welcome", compact("weathers","date"))->with("error","There Are No Entries For This Date: $date");
         }
-        foreach ($weathers as $cast){
-                $cast->city_name=$cast->city->city_name;
-        }
+
         return view("welcome", compact("weathers","date"));
     }
     public function getSearchResults($city_name){
