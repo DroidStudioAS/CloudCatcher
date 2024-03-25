@@ -9,37 +9,26 @@
 @section("admin-content")
     <h1>Current Records:</h1>
     <div class="admin_row">
-        <table>
-            <thead>
-            <tr>
-                <th class="table_header">City</th>
-                <th class="table_header">Description</th>
-                <th class="table_header">Temperature</th>
-                <th class="table_header">Date</th>
-                <th class="table_header">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($weathers as $weather)
-                <tr>
-                    <td class="weather_table_data">{{$weather->city_name}}</td>
-                    <td class="weather_table_data">{{$weather->description}}</td>
-                    <td class="weather_table_data">
-                        {{$weather->temperature}}°
-                        <img class="weather_icon" src="{{asset(\App\Helpers\WeatherHelper::determineIconPath($weather->description))}}">
-                    </td>
-                    <td class="weather_table_data">{{\Carbon\Carbon::now()->format('d F Y')}}</td>
-                    <td class="weather_table_data">
-                        <button onclick="displayEditForm({{json_encode($weather)}})" class="edit_button">Edit</button>
-                        <button onclick="deleteWeatherRecord({{$weather->id}})" class="delete_button">Delete</button>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-    </div>
-    <div class="pagination_container">
-        {{$weathers->links()}}
+        <div class="table_container">
+            <table class="cities_table">
+                <thead>
+                <th class="table_header">Country:</th>
+                <th class="table_header">Name:</th>
+                <th class="table_header">View Forecast</th>
+                </thead>
+                <tbody>
+                @foreach($cities as $city)
+                    <tr>
+                        <td class="weather_table_data">{{$city->country}}</td>
+                        <td class="weather_table_data">{{$city->city_name}}</td>
+                        <td class="weather_table_data">
+                            <button onclick="displayForecastContainer('{{$city->city_name}}',{{json_encode($city->forecast)}})" class="edit_button">See Forecast</button>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
     <h1>Enter Data</h1>
     <div class="admin_row">
@@ -97,28 +86,7 @@
             </form>
         </div>
     </div>
-    <!--Forecast Browse-->
-    <h1>Forecasts For All Cities</h1>
-        <div class="table_container">
-            <table class="cities_table">
-                <thead>
-                <th class="table_header">Country:</th>
-                <th class="table_header">Name:</th>
-                <th class="table_header">View Forecast</th>
-                </thead>
-                <tbody>
-                @foreach($cities as $city)
-                    <tr>
-                        <td class="weather_table_data">{{$city->country}}</td>
-                        <td class="weather_table_data">{{$city->city_name}}</td>
-                        <td class="weather_table_data">
-                            <button onclick="displayForecastContainer('{{$city->city_name}}',{{json_encode($city->forecast)}})" class="edit_button">See Forecast</button>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
+
 
 
 
