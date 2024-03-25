@@ -1,5 +1,8 @@
 @extends("layouts.layout")
 @section("content")
+    <h1>
+        Found {{count($weathers)}} Results For Your Criteria;
+    </h1>
 
     <div class="weather_cards_container">
         @foreach($weathers as $weather)
