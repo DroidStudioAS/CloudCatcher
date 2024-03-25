@@ -26,6 +26,7 @@
                         </td>
                     </tr>
                 @endforeach
+
                 </tbody>
             </table>
         </div>
@@ -44,9 +45,9 @@
                 {{csrf_field()}}
                 <label for="city_name">Name:</label>
                     <select class="weather_input" name="city_id" id="city_id">
-                    @foreach($cities as $city)
-                        <option value="{{$city->id}}">{{$city->city_name}}</option>
-                    @endforeach
+
+                        <option value=""></option>
+
                     </select>
                 <label for="temperature">Current Temperature (Celsius)</label>
                 <input id="forecast_temp" class="weather_input" name="temperature" type="number">
@@ -107,9 +108,9 @@
             </select>
             <label for="city">City</label>
             <select id="weather-edit-city" class="weather_input" name="city" type="text">
-                @foreach($cities as $city)
-                    <option value="{{$city->id}}">{{$city->city_name}}</option>
-                @endforeach
+
+                    <option value=""></option>
+
             </select>
             <label for="temperature">Temperature (Celsius)</label>
             <input id="weather-edit-temp" class="weather_input" name="temperature" type="number">
@@ -189,6 +190,7 @@
             $("#forecast_title").text(name);
             $("#forecast-popup").css("display", "flex");
             console.log(forecastEntry);
+            console.log()
 
             //sort the entries
             forecastEntry.sort((a, b) => new Date(a.date) - new Date(b.date));

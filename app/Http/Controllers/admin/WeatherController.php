@@ -11,7 +11,11 @@ use Illuminate\Http\Request;
 
 class WeatherController extends Controller
 {
-
+    /*****Admin Functions*****/
+    public function getAllWeathersAdmin(){
+        $cities = CityModel::with("forecast")->get();
+        return view("admin.admin", compact('cities'));
+    }
     public function editWeatherEntry(Request $request, WeatherModel $weather)
     {
         $request->validate([
