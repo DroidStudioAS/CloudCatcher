@@ -24,11 +24,10 @@
     </div>
     <div class="weather_cards_container">
         <h1 class="no-entries-msg">
-        @if(count($weathers)==0)
             @if(isset($error))
+
                 {{$error}}
-                @endif
-        @endif
+            @endif
         </h1>
         @foreach($weathers->reverse() as $weather)
             <div class="weather_card">
