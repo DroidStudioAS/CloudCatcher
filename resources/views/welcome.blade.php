@@ -32,7 +32,7 @@
         </h1>
         @foreach($weathers->reverse() as $weather)
             <div class="weather_card">
-                <p class="weather_city">{{$weather->city_name}}</p>
+                <p class="weather_city">{{$weather->city->city_name}}</p>
                 <div class="weather_column">
                     <img class="weather_image" src="{{asset($weather->path_to_image)}}" alt="weather photo">
                     <p class="weather_description">{{$weather->description}}</p>
@@ -49,7 +49,7 @@
                     </div>
                     <p class="weather_date">{{\Carbon\Carbon::parse($weather->date)->format('d F Y')}}</p>
                 </div>
-                <div onclick="showCityForecast('{{$weather->city_name}}')" class="show_more_button">Forecast</div>
+                <div onclick="showCityForecast('{{$weather->city->city_name}}')" class="show_more_button">Forecast</div>
 
             </div>
         @endforeach

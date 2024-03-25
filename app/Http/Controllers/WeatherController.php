@@ -16,11 +16,8 @@ class WeatherController extends Controller
     public function loadTodaysWeathers(){
         $date = Carbon::today()->format('Y-m-d');
 
-        $weathers = WeatherModel::paginate(6);
+        $weathers = ForecastModel::where("date", $date)->paginate(6);
 
-        foreach ($weathers as $weatherEntry){
-            $weatherEntry->city_name=$weatherEntry->city->city_name;
-        }
         return view("welcome", compact('weathers', 'date'));
     }
     public function getWeathersForDate($date)
@@ -33,9 +30,7 @@ class WeatherController extends Controller
         if(count($weathers)==0){
             return view("welcome", compact("weathers","date"))->with("error","There Are No Entries For This Date: $date");
         }
-        foreach ($weathers as $cast){
-                $cast->city_name=$cast->city->city_name;
-        }
+
         return view("welcome", compact("weathers","date"));
     }
     public function getSearchResults($city_name){
