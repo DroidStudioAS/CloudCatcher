@@ -22,10 +22,6 @@ Route::middleware('auth')->group(function (){
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::get("/weather",[WeatherController::class, 'loadTodaysWeathers']);
-    Route::get("/weather/{date?}",[WeatherController::class,'getWeathersForDate'])->name("getWeatherForDate");
-    Route::get("/weather-for/{city}",[WeatherController::class,"getWeatherForecastForCity"])->name("forecast-city.permalink");
-    Route::get("/weather-search/{city}",[WeatherController::class,"getSearchResults"]);
-    Route::get("/weather-for-country/{country}",[WeatherController::class,"getCountryForecast"]);
     Route::get("/weather-searchAll",[ WeatherController::class,"searchAll"])->name("search");
 });
 //admin routes
