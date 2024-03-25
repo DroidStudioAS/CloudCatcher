@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class CityModel extends Model
@@ -17,8 +18,7 @@ class CityModel extends Model
     public function weather(){
         return $this->hasOne(WeatherModel::class,"city_id","id");
     }
-    public function forecastForDate($date){
 
-    }
+
 
 }

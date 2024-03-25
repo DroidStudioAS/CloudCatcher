@@ -22,26 +22,12 @@ class WeatherController extends Controller
     }
 
 
+    //will always return the 5 latest forecasts
     public function getWeatherForecastForCity($city){
-        $weathers = collect([]);
-        //get id from the city name
-        $cityFromDb = CityModel::where(["city_name"=>$city])->first();
-        //the reason i did not bind the city, is because we want to return an empty array for the city
-        //in case it is not found, and if i were to bind the param, i do not have control of the validation
-        if($cityFromDb===null){
-            //return right away (empty array);
-            return view("five-day-forecast",compact("weathers", 'city'));
-        }
-        //city found
-        $forecast = $cityFromDb->forecast;
-        //populate return array
-        foreach ($forecast as $cast){
-            $cast->city_name=$cast->city->city_name;
-            $weathers->push($cast);
-        }
-        //return weathers
-        return view("five-day-forecast",compact("weathers",'city'));
-
+      $forecast = CityModel::where("city_name",$city)->with(["forecast"=> function($query){
+            $query->latest()->limit(5);
+      }])->get();
+      return view("five-day-forecast", compact("forecast"));
     }
 
     public function searchAll(Request $request)
