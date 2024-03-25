@@ -72,7 +72,6 @@ class WeatherController extends Controller
         if($date===null){
             $date=Carbon::now()->format("Y-m-d");
         }
-
         $forecastQuery->where("date",$date);
         /**********/
         if($city_name!==null){
