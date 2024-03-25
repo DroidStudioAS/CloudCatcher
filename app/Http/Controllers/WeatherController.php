@@ -16,11 +16,8 @@ class WeatherController extends Controller
     public function loadTodaysWeathers(){
         $date = Carbon::today()->format('Y-m-d');
 
-        $weathers = WeatherModel::paginate(6);
+        $weathers = ForecastModel::where("date", $date)->paginate(6);
 
-        foreach ($weathers as $weatherEntry){
-            $weatherEntry->city_name=$weatherEntry->city->city_name;
-        }
         return view("welcome", compact('weathers', 'date'));
     }
     public function getWeathersForDate($date)
