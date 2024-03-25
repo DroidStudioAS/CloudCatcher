@@ -110,7 +110,7 @@ class WeatherController extends Controller
         }
 
         $forecastQuery->where("date",$date);
-
+        /**********/
         if($city_name!==null){
             $forecastQuery->whereHas("city", function ($query) use ($city_name){
                $query->where("city_name", "LIKE","%$city_name%");
@@ -122,7 +122,7 @@ class WeatherController extends Controller
             });
         }
 
-        $weathers = $forecastQuery->paginate(6);
+        $weathers = $forecastQuery->get();
 
         return view("search_results", compact("weathers"));
 

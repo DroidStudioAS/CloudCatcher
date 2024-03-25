@@ -19,12 +19,11 @@
                             {{$weather->temperature}}°
                         </h1>
                     </div>
-                    <p class="weather_date">{{\Carbon\Carbon::parse($weather->date)}}</p>
+                    <p class="weather_date">{{$weather->date}}</p>
                 </div>
                 <div onclick="showCityForecast('{{$weather->city->city_name}}')" class="show_more_button">Forecast</div>
             </div>
         @endforeach
-            {{$weathers->links()}}
     </div>
     <script>
         function showCityForecast(city){
