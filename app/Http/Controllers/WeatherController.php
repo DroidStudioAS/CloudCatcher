@@ -71,7 +71,7 @@ class WeatherController extends Controller
             });
         }
 
-        $weathers = $forecastQuery->get();
+        $weathers = $forecastQuery->with("city")->get();
 
         if(count($weathers)===0){
             return view("/welcome", compact("weathers"))->with("error", "No results matched your criteria");
