@@ -9,7 +9,7 @@
                 <form ACTION="{{route("search")}}" class="search_form" id="searchForm">
                     <input autocomplete="off" name="date" class="date" type="text" id="datepicker" placeholder="Select A Date">
                     <input name="city_name" id="cityInput" class="date"  placeholder="Search By City">
-                    <input id="countryInput" class="date"  placeholder="Search By Country">
+                    <input name="country" id="countryInput" class="date"  placeholder="Search By Country">
                     <input type="submit" class="submit-button" value="search">
                 </form>
         </div>
