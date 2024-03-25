@@ -51,9 +51,21 @@
 
 
        </div>
-       <div class="follow_button">
-           <img src="{{asset("/res/icon_not_liked.svg")}}"/>
+       <div onclick="likeButtonClick()" class="follow_button">
+           <img id="likeButton" src="{{asset("/res/icon_not_liked.svg")}}"/>
            <p>Follow City</p>
        </div>
    </div>
+    <script>
+        let clickCount = 0
+        function likeButtonClick(){
+            if(clickCount%2===0) {
+                $("#likeButton").attr("src", '{{asset("/res/icon_liked.svg")}}')
+            }else{
+                $("#likeButton").attr("src", '{{asset("/res/icon_not_liked.svg")}}')
+            }
+
+            clickCount++;
+        }
+    </script>
 @endsection
