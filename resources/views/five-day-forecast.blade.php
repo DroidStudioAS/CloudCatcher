@@ -51,5 +51,9 @@
 
 
        </div>
+       <div class="follow_button">
+           <img src="{{asset("/res/icon_not_liked.svg")}}"/>
+           <p>Follow City</p>
+       </div>
    </div>
 @endsection
