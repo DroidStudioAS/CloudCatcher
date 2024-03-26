@@ -121,7 +121,9 @@
                     "_token": $('meta[name="csrf-token"]').attr('content')
                 },
                 success:function(response){
-                    console.log(response);
+                    if(response.success===true){
+                        location.reload();
+                    }
                 },
                 error(err){
                     console.log(err.responseText);
