@@ -1,5 +1,6 @@
 @extends("layouts.layout")
 @section("content")
+
    <div class="forecast_card">
        <p class="weather_city-forecast">
            {{$forecast[0]->city_name}}
@@ -51,21 +52,58 @@
 
 
        </div>
-       <div onclick="likeButtonClick()" class="follow_button">
-           <img id="likeButton" src="{{asset("/res/icon_not_liked.svg")}}"/>
-           <p>Follow City</p>
+       <div class="follow_button">
+           @if(!$isFollowed)
+              <img onclick="addToFavourites({{$forecast[0]->id}})"
+                  id="likeButton"
+                  src="{{asset("/res/icon_not_liked.svg")}}"/>
+              <p>Follow City</p>
+            @else
+               <img onclick="removeFromFavorites({{$forecast[0]->id}})"
+                   id="likeButton"
+                   src="{{asset("/res/icon_liked.svg")}}"/>
+               <p>Unfollow City</p>
+           @endif
        </div>
    </div>
     <script>
-        let clickCount = 0
-        function likeButtonClick(){
-            if(clickCount%2===0) {
-                $("#likeButton").attr("src", '{{asset("/res/icon_liked.svg")}}')
-            }else{
-                $("#likeButton").attr("src", '{{asset("/res/icon_not_liked.svg")}}')
-            }
+        function addToFavourites(id){
+            console.log(id)
+            $.ajax({
+                url:"/add-user-favourite/"+id,
+                type:"POST",
+                data:{
+                    "_token": $('meta[name="csrf-token"]').attr('content')
+                },
+                success:function(response){
+                    if(response.success===true){
+                        location.reload();
+                    }
+                },
+                error(err){
+                    console.log(err.responseText);
+                }
 
-            clickCount++;
+            })
+        }
+        function removeFromFavorites(id){
+            $.ajax({
+                url:"/remove-user-favourite/"+id,
+                type:"POST",
+                data:{
+                    "_token": $('meta[name="csrf-token"]').attr('content')
+                },
+                success:function(response){
+                    console.log(response);
+                    if(response.success===true){
+                        location.reload();
+                    }
+                },
+                error(err){
+                    console.log(err.responseText);
+                }
+
+            })
         }
     </script>
 @endsection
