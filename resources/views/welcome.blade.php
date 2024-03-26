@@ -77,7 +77,7 @@
                 </div>
                 <div onclick="showCityForecast('{{$weather->city->city_name}}')" class="show_more_button">Forecast</div>
                 <div id="likeButton" class="home_like_button">
-                         @if(in_array($weather->city->id,$favoriteCities))
+                         @if($favoriteCities->contains("city_id", $weather->city->id))
                         <img id="like_image"
                              src="{{asset("/res/icon_liked.svg")}}"
                              onclick="removeFromFavorites({{$weather->city->id}})"/>

@@ -21,7 +21,7 @@ class WeatherController extends Controller
         $weathers = ForecastModel::with("city")->where("date", $date)->paginate(6);
 
         //return favorites
-        $favoriteCities = Auth::user()->cityFavorites->pluck("city_id")->toArray();
+        $favoriteCities = Auth::user()->cityFavorites;
 
         return view("welcome", compact('weathers', 'date',"favoriteCities"));
     }
