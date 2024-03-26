@@ -23,37 +23,39 @@
 
     </div>
    <!--container for favorites  this is how we acess todays forecast through the usercity object  $city->cityModel->todaysForecast[0]-->
-   <h3>Favorite Cities</h3>
+    @if(count($favoriteCities)>0)
+        <h3>Favorite Cities</h3>
+        <div id="favorites_container" class="weather_cards_container">
+            @foreach($favoriteCities as $city)
+                <div class="weather_card">
+                    <p class="weather_city">{{$city->cityModel->city_name}}</p>
+                    <div class="weather_column">
+                        <img class="weather_image"
+                             src="{{asset($city->cityModel->todaysForecast[0]->path_to_image)}}"
+                             alt="weather photo">
+                        <p class="weather_description">{{$city->cityModel->todaysForecast[0]->description}}</p>
+                    </div>
+                    <svg class="divider">
+                        <rect x="0" y="0" width="1px" height="30vh" fill="white"></rect>
+                    </svg>
+                    <div class="weather_column">
+                        <div class="temperature_container">
+                            <h1 class="weather_temperature">{{$city->cityModel->todaysForecast[0]->temperature}}°</h1>
+                        </div>
+                        <p class="weather_date">{{$city->cityModel->todaysForecast[0]->date}}</p>
+                    </div>
+                    <div onclick="showCityForecast('{{$city->cityModel->city_name}}')"
+                         class="show_more_button">Forecast</div>
+                    <div id="likeButton" class="home_like_button">
+                        <img id="like_image"
+                             src="{{asset("/res/icon_liked.svg")}}"
+                             onclick="removeFromFavorites({{$city->city_id}})"/>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @endif
 
-   <div id="favorites_container" class="weather_cards_container">
-       @foreach($favoriteCities as $city)
-               <div class="weather_card">
-                   <p class="weather_city">{{$city->cityModel->city_name}}</p>
-                   <div class="weather_column">
-                       <img class="weather_image"
-                            src="{{asset($city->cityModel->todaysForecast[0]->path_to_image)}}"
-                            alt="weather photo">
-                       <p class="weather_description">{{$city->cityModel->todaysForecast[0]->description}}</p>
-                   </div>
-                   <svg class="divider">
-                       <rect x="0" y="0" width="1px" height="30vh" fill="white"></rect>
-                   </svg>
-                   <div class="weather_column">
-                       <div class="temperature_container">
-                           <h1 class="weather_temperature">{{$city->cityModel->todaysForecast[0]->temperature}}°</h1>
-                       </div>
-                       <p class="weather_date">{{$city->cityModel->todaysForecast[0]->date}}</p>
-                   </div>
-                   <div onclick="showCityForecast('{{$city->cityModel->city_name}}')"
-                        class="show_more_button">Forecast</div>
-                   <div id="likeButton" class="home_like_button">
-                       <img id="like_image"
-                            src="{{asset("/res/icon_liked.svg")}}"
-                            onclick="removeFromFavorites({{$city->city_id}})"/>
-                   </div>
-               </div>
-       @endforeach
-   </div>
    <h3>All Cities</h3>
    <!--container for all cities-->
    <div class="weather_cards_container">
