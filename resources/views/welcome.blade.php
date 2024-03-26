@@ -117,6 +117,9 @@
                 },
                 success:function(response){
                     console.log(response);
+                },
+                error(err){
+                    console.log(err.responseText);
                 }
 
             })
