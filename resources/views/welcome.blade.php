@@ -1,3 +1,4 @@
+<!--Todo:Refactor the weather card into a component to be reused -->
 @extends("layouts.layout")
 
 @section("content")
