@@ -51,7 +51,8 @@ class GetWeather extends Command
        ]);
 
        $json_response = json_decode($response->body(), true);
-       dd($json_response["location"]["name"]);
+       dd($json_response["location"]["name"] . ":" . $json_response["current"]["temp_c"] . " Celsius");
+
 
 
     }
