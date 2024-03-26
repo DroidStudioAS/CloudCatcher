@@ -81,8 +81,10 @@ class WeatherController extends Controller
         if(count($weathers)===0){
             return view("/welcome", compact("weathers"))->with("error", "No results matched your criteria");
         }
+        //return favorites
+        $favoriteCities = Auth::user()->cityFavorites;
 
-        return view("search_results", compact("weathers"));
+        return view("search_results", compact("weathers","favoriteCities"));
 
     }
 
