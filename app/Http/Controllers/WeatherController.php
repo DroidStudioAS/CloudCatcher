@@ -32,7 +32,16 @@ class WeatherController extends Controller
       $forecast = CityModel::where("city_name",$city)->with(["forecast"=> function($query){
             $query->latest()->limit(5);
       }])->get();
-      return view("five-day-forecast", compact("forecast"));
+
+      //determine if city is followed
+      $isFollowed = false;
+      $city = CityModel::where(["city_name"=>$city])->first();
+      $favorites = Auth::user()->cityFavorites()->pluck("city_id")->toArray();
+      if(in_array($city->id, $favorites)){
+          $isFollowed=true;
+      }
+
+      return view("five-day-forecast", compact("forecast","isFollowed"));
     }
 
     public function searchAll(Request $request)
