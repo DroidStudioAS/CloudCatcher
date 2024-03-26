@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use http\Env;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
@@ -43,11 +44,9 @@ class GetWeather extends Command
         //dd($response);
 
        $url = "http://api.weatherapi.com/v1/current.json";
-       $key = "21484ee16dbe4b5a86593731231207";
-       $city = $this->argument("city");
        $response = Http::get($url,[
-           "key"=>$key,
-           "q"=>$city
+           "key"=>env("WEATHER_API_KEY"),
+           "q"=>$this->argument("city")
        ]);
 
        $code = $response->status();
@@ -57,8 +56,6 @@ class GetWeather extends Command
            exit();
        }
         $this->getOutput()->writeln($json_response["location"]["name"] . ":" . $json_response["current"]["temp_c"] . " Celsius");
-
-
 
     }
 }
