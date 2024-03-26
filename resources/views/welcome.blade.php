@@ -22,10 +22,37 @@
 
 
     </div>
-    <div class="weather_cards_container">
+   <!--container for favorites-->
+   <h3>Favorite Cities</h3>
+   <div id="favorites_container" class="weather_cards_container">
+       @foreach($favoriteCities as $city)
+               <div class="weather_card">
+                   <p class="weather_city"></p>
+                   <div class="weather_column">
+                       <img class="weather_image" src="" alt="weather photo">
+                       <p class="weather_description"></p>
+                   </div>
+                   <svg class="divider">
+                       <rect x="0" y="0" width="1px" height="30vh" fill="white"></rect>
+                   </svg>
+                   <div class="weather_column">
+                       <div class="temperature_container">
+                           <h1 class="weather_temperature"></h1>
+                       </div>
+                       <p class="weather_date"></p>
+                   </div>
+                   <div class="show_more_button">Forecast</div>
+                   <div id="likeButton" class="home_like_button">
+                       <img id="like_image" src="" onclick=""/>
+                   </div>
+               </div>
+       @endforeach
+   </div>
+   <h3>All Cities</h3>
+   <!--container for all cities-->
+   <div class="weather_cards_container">
         <h1 class="no-entries-msg">
             @if(isset($error))
-
                 {{$error}}
             @endif
         </h1>
