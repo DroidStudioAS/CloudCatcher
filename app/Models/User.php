@@ -41,6 +41,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function cityFavorites(){
+        return $this->hasMany(UserCity::class, "user_id","id");
+    }
     public static function isAdmin(){
         $usrRole = Auth::user()->role;
         if($usrRole==="admin"){

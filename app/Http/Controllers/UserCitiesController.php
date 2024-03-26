@@ -25,7 +25,7 @@ class UserCitiesController extends Controller
         ]);
         //return true
         return response([
-            "success"=>true
+            "success"=>Auth::user()->cityFavorites
         ]);
     }
 }
