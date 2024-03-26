@@ -49,8 +49,8 @@
                     <p class="weather_date">{{\Carbon\Carbon::parse($weather->date)->format('d F Y')}}</p>
                 </div>
                 <div onclick="showCityForecast('{{$weather->city->city_name}}')" class="show_more_button">Forecast</div>
-                <div class="home_like_button">
-                    <img src="{{asset("/res/icon_not_liked.svg")}}"/>
+                <div onclick="addToFavourites({{$weather->city->id}})" id="likeButton" class="home_like_button">
+                    <img id="like_image" src="{{asset("/res/icon_not_liked.svg")}}"/>
                 </div>
 
             </div>
@@ -79,10 +79,6 @@
             })
 
         });
-
-
-
-
         function loadWeatherForDate(){
             let date = $("#datepicker").val();
             console.log(date)
@@ -110,6 +106,20 @@
             if(country!==null || country!==""){
                 window.location.href="/weather-for-country/"+country;
             }
+        }
+
+        function addToFavourites(id){
+            $.ajax({
+                url:"add-user-favourite/"+id,
+                type:"POST",
+                data:{
+                    "_token": $('meta[name="csrf-token"]').attr('content')
+                },
+                success:function(response){
+                    console.log(response);
+                }
+
+            })
         }
     </script>
 
