@@ -8,17 +8,22 @@ use App\Models\ForecastModel;
 use App\Models\WeatherModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use function PHPUnit\Framework\isEmpty;
 
 
 class WeatherController extends Controller
 {
+    //index method
     public function loadTodaysWeathers(){
         $date = Carbon::today()->format('Y-m-d');
 
         $weathers = ForecastModel::with("city")->where("date", $date)->paginate(6);
 
-        return view("welcome", compact('weathers', 'date'));
+        //return favorites
+        $favoriteCities = Auth::user()->cityFavorites->pluck("city_id")->toArray();
+
+        return view("welcome", compact('weathers', 'date',"favoriteCities"));
     }
 
 

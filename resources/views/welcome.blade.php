@@ -1,6 +1,7 @@
 @extends("layouts.layout")
 
 @section("content")
+    {{dd($favoriteCities)}}
    <div class="search_container">
        <div class="searchDisplay">
            Display Filters
