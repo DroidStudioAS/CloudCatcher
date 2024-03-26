@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserCitiesController;
 use App\Http\Controllers\WeatherController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +27,9 @@ Route::middleware('auth')->group(function (){
     Route::get("/weather-for-country/{country}",[WeatherController::class,"getCountryForecast"]);
     Route::get("/weather-searchAll",[ WeatherController::class,"searchAll"])->name("search");
 
-    Route::post("add-user-favourite/{city}",[\App\Http\Controllers\UserCitiesController::class, "addToFavorites"]);
+    Route::post("add-user-favourite/{city}",[UserCitiesController::class, "addToFavorites"]);
+    Route::post("remove-user-favourite/{city}",[UserCitiesController::class, "removeFromFavorites"]);
+
 });
 //admin routes
 Route::middleware(['auth', AdminMiddleware::class])

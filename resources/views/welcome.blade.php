@@ -49,12 +49,16 @@
                     <p class="weather_date">{{\Carbon\Carbon::parse($weather->date)->format('d F Y')}}</p>
                 </div>
                 <div onclick="showCityForecast('{{$weather->city->city_name}}')" class="show_more_button">Forecast</div>
-                <div onclick="addToFavourites({{$weather->city->id}})" id="likeButton" class="home_like_button">
-                    <img id="like_image"
+                <div id="likeButton" class="home_like_button">
                          @if(in_array($weather->city->id,$favoriteCities))
-                             src="{{asset("/res/icon_liked.svg")}}"/>
+                        <img id="like_image"
+                             src="{{asset("/res/icon_liked.svg")}}"
+                             onclick="removeFromFavorites({{$weather->city->id}})"/>
                         @else
-                         src="{{asset("/res/icon_not_liked.svg")}}"/>
+                        <img
+                            id="unlike_image"
+                            src="{{asset("/res/icon_not_liked.svg")}}"
+                            onclick="addToFavourites({{$weather->city->id}})"/>
                          @endif
                 </div>
 
@@ -121,6 +125,25 @@
                     "_token": $('meta[name="csrf-token"]').attr('content')
                 },
                 success:function(response){
+                    if(response.success===true){
+                        location.reload();
+                    }
+                },
+                error(err){
+                    console.log(err.responseText);
+                }
+
+            })
+        }
+        function removeFromFavorites(id){
+            $.ajax({
+                url:"remove-user-favourite/"+id,
+                type:"POST",
+                data:{
+                    "_token": $('meta[name="csrf-token"]').attr('content')
+                },
+                success:function(response){
+                    console.log(response);
                     if(response.success===true){
                         location.reload();
                     }

@@ -28,4 +28,10 @@ class UserCitiesController extends Controller
             "success"=>true
         ]);
     }
+    public function removeFromFavorites(){
+        return response([
+            "success"=>"heyya"
+        ]);
+        dd("test");
+    }
 }
