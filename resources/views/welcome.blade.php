@@ -1,7 +1,6 @@
 @extends("layouts.layout")
 
 @section("content")
-    {{dd($favoriteCities)}}
    <div class="search_container">
        <div class="searchDisplay">
            Display Filters
@@ -51,7 +50,12 @@
                 </div>
                 <div onclick="showCityForecast('{{$weather->city->city_name}}')" class="show_more_button">Forecast</div>
                 <div onclick="addToFavourites({{$weather->city->id}})" id="likeButton" class="home_like_button">
-                    <img id="like_image" src="{{asset("/res/icon_not_liked.svg")}}"/>
+                    <img id="like_image"
+                         @if(in_array($weather->city->id,$favoriteCities))
+                             src="{{asset("/res/icon_liked.svg")}}"/>
+                        @else
+                         src="{{asset("/res/icon_not_liked.svg")}}"/>
+                         @endif
                 </div>
 
             </div>
