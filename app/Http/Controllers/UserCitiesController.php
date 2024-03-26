@@ -28,10 +28,24 @@ class UserCitiesController extends Controller
             "success"=>true
         ]);
     }
-    public function removeFromFavorites(){
+    public function removeFromFavorites(CityModel $city){
+        //fetch userid (route protected by middelware, so user ID should never be null)
+        $userId = Auth::id();
+        //JUST IN CASE
+        if($userId===null || $city===null){
+            return response([
+                "success"=>false
+            ]);
+        }
+
+        UserCity::where([
+            "user_id"=>$userId,
+            "city_id"=>$city->id
+        ])->delete();
+
+
         return response([
-            "success"=>"heyya"
+            "success"=>true
         ]);
-        dd("test");
     }
 }
