@@ -8,6 +8,7 @@ use App\Models\ForecastModel;
 use App\Models\WeatherModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use function PHPUnit\Framework\isEmpty;
 
@@ -95,6 +96,12 @@ class WeatherController extends Controller
 
         return view("search_results", compact("weathers","favoriteCities"));
 
+    }
+    public function test(Request $request){
+        Artisan::call("forecast:get",[
+            "city"=>$request->city_name
+        ]);
+        dd(Artisan::output());
     }
 
 

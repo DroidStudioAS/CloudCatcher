@@ -12,7 +12,7 @@ class GetForecast extends Command
      *
      * @var string
      */
-    protected $signature = 'forecast:get';
+    protected $signature = 'forecast:get {city}';
 
     /**
      * The console command description.
@@ -42,14 +42,34 @@ class GetForecast extends Command
 
         $response = Http::get($url,[
             "key"=>env("WEATHER_API_KEY"),
-            "q"=>"New York",
-            "days"=>"5",
-            "aqi"=>"no"
+            "q"=> $this->argument("city"),
+            "aqi"=>"no",
+            "days"=>5
 
         ]);
 
-        $jsonResponse = json_decode($response->body());
+        $jsonResponse = json_decode($response->body(), true);
+        $output = "";
+         //dd($jsonResponse);
+        //api only returns todau + 2 days
+        for($i = 0; $i<=2; $i++){
+            //city_name
+            $output.=$jsonResponse["location"]["name"] . " ";
+            //country
+            $output.=$jsonResponse["location"]["country"] . " ";
+            //date
+            $output.=$jsonResponse["forecast"]["forecastday"][$i]["date"] . " ";
+            //MaxTemp
+            $output.=$jsonResponse["forecast"]["forecastday"][$i]["day"]["maxtemp_c"] . " ";
+            //MinTemp
+            $output.=$jsonResponse["forecast"]["forecastday"][$i]["day"]["mintemp_c"] . " ";
+            //condition
+            $output.=$jsonResponse["forecast"]["forecastday"][$i]["day"]["condition"]["text"] . " ";
+            //chance of rain
+            $output.=$jsonResponse["forecast"]["forecastday"][$i]["day"]["daily_chance_of_rain"]. "% \n";
+        }
 
-        dd($jsonResponse)->day;
+
+        $this->output->write($output);
     }
 }

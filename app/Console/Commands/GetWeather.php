@@ -13,7 +13,7 @@ class GetWeather extends Command
      *
      * @var string
      */
-    protected $signature = 'weather:get {city}';
+    protected $signature = 'weather:get';
 
     /**
      * The console command description.
@@ -39,11 +39,15 @@ class GetWeather extends Command
      */
     public function handle()
     {
-        //$url = "https://reqres.in/api/users?page=2n";
-        //$response = Http:get($url);
-        //dd($response);
+        $url = "https://reqres.in/api/users?page=2n";
 
-       $url = "http://api.weatherapi.com/v1/current.json";
+
+        $response = Http::withOptions([
+            "verify"=>false
+        ])->get($url);
+        dd($response);
+
+       /*$url = "http://api.weatherapi.com/v1/current.json";
        $response = Http::get($url,[
            "key"=>env("WEATHER_API_KEY"),
            "q"=>$this->argument("city")
@@ -56,6 +60,6 @@ class GetWeather extends Command
            exit();
        }
         $this->getOutput()->writeln($json_response["location"]["name"] . ":" . $json_response["current"]["temp_c"] . " Celsius");
-
+    */
     }
 }
