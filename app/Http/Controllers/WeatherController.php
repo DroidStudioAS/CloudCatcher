@@ -100,14 +100,16 @@ class WeatherController extends Controller
     }
     public function test(Request $request)
     {
-        //return array
+        //Array to return
         $weathers = collect([]);
         $userFavorites = Auth::user()->cityFavorites->pluck("city_id")->toArray();
-        /******If The city exists, see if there are 3 forecast entries available
-         * if there are, return them without calling the api
-         * if not, continue*******/
+
+        /******If The city exists, see if there is a forecast entry already available
+         * if there is, return them without calling the api
+         * if not, continue to API call and fetch the forecast for 3 days*******/
         $city = CityModel::where("city_name", "LIKE", "%$request->city_name%")
             ->get();
+        //city is not empty
         if(!$city->isEmpty()){
             foreach ($city as $name){
                 foreach ($name->forecast as $forecast) {
@@ -119,6 +121,7 @@ class WeatherController extends Controller
             }
             $weathers=collect([]);
         }
+        /**No forecasts found***/
 
         /******Api Call*****/
         Artisan::call("forecast:get", [
@@ -140,7 +143,9 @@ class WeatherController extends Controller
         $city_name = $forecast["city_name"];
         $country = $forecast["country"];
 
-        /********Create the city if it does not exists********/
+        /********Create the city if it does not exist
+         * if it does exist, pull out the first city, because that is the only
+         * one we have data for********/
         if($city->isEmpty()){
             $city= CityModel::create([
                 "city_name"=>$city_name,
@@ -149,7 +154,6 @@ class WeatherController extends Controller
         }else{
             $city=$city->first();
         }
-
         //forecast data for next 3 days
         $data = $forecast["forecast"];
         //data = associative array of arrays of data holding each returned date and its properties
@@ -166,8 +170,7 @@ class WeatherController extends Controller
                  $probability = $info["chance_of_snow"] ;
              }
             /********End of weather json data extraction********/
-
-
+            //City
             $cityId=$city->id;
             /*****Check If Forecast Exists****/
             $dbForecast = ForecastModel::where(["date"=>$date, "city_id"=>$cityId])->first();

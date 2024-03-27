@@ -1,6 +1,6 @@
 @extends("layouts.layout")
 @section("content")
-    <h1>
+    <h1 class="subtitle">
         Found {{count($weathers)}} Results For Your Criteria;
     </h1>
 
