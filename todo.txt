@@ -1,5 +1,5 @@
 =====
-1)call the forecast command on weather search
-2)if city does not exist, write the city into db
-3)write the forecast into the db
+1)call the forecast command on weather search DONE
+2)if city does not exist, write the city into db DONE
+3)write the forecast into the db DONE
 IMPORTANT: if city already has forecast, do not make api call

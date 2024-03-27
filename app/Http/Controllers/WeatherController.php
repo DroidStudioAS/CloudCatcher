@@ -99,12 +99,28 @@ class WeatherController extends Controller
     }
     public function test(Request $request)
     {
+        //return array
+        $weathers = collect([]);
+
+        /******If The city exists, see if there are 3 forecast entries available
+         * if there are, return them without calling the api
+         * if not, continue*******/
+        $city = CityModel::where("city_name", "LIKE", "%$request->city_name%")->first();
+        if($city!==null){
+            foreach ($city->forecast as $forecast){
+                $weathers->push($forecast);
+            }
+            if(count($weathers)===3) {
+                return view("/welcome", compact("weathers"));
+            }
+            $weathers=collect([]);
+        }
+
+        /******Api Call*****/
         Artisan::call("forecast:get", [
             "city" => $request->city_name
         ]);
         /********Start of weather json decoding********/
-        //return array
-        $weathers = collect([]);
         //raw encoded Json
         $rawForecast = Artisan::output();
         //convert json to associative array
@@ -119,8 +135,7 @@ class WeatherController extends Controller
         $city_name = $forecast["city_name"];
         $country = $forecast["country"];
 
-        /********Check if the city exist... if not, create it********/
-        $city = CityModel::where(["city_name"=>$city_name, "country"=>$country])->first();
+        /********Create the city if it does not exists********/
         if($city===null){
             $city= CityModel::create([
                 "city_name"=>$city_name,
@@ -148,7 +163,6 @@ class WeatherController extends Controller
             $cityId=$city->id;
             /*****Check If Forecast Exists****/
             $dbForecast = ForecastModel::where(["date"=>$date, "city_id"=>$cityId])->first();
-            echo $dbForecast;
             if($dbForecast!==null){
                 //if it exists, return it to user
                 $forecastExists=true;
