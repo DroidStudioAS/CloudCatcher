@@ -62,7 +62,7 @@
                 {{$error}}
             @endif
         </h1>
-        @foreach($weathers->reverse() as $weather)
+        @foreach($weathers as $weather)
             <div class="weather_card">
                 <p class="weather_city">{{$weather->city->city_name}}</p>
                 <div class="weather_column">

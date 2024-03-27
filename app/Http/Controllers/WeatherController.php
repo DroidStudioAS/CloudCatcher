@@ -97,12 +97,40 @@ class WeatherController extends Controller
         return view("search_results", compact("weathers","favoriteCities"));
 
     }
-    public function test(Request $request){
-      Artisan::call("forecast:get",[
-            "city"=>$request->city_name
+    public function test(Request $request)
+    {
+        Artisan::call("forecast:get", [
+            "city" => $request->city_name
         ]);
-        $returnedForecast = Artisan::output();
-        dd($returnedForecast);
+        //Json
+        $weathers = [];
+        $rawForecast = Artisan::output();
+        //convert json to associative array
+        $forecast = json_decode($rawForecast, true);
+        if(array_key_exists("error",$forecast)){
+            return view("/welcome", compact("weathers"))->with("error", "No results matched your criteria");
+        }
+
+        //parse location data
+        $city_name = $forecast["city_name"];
+        $country = $forecast["country"];
+        //forecast data for next 3 days
+        $data = $forecast["forecast"];
+        //data = associative array of arrays of data holding each returned date and its properties
+        //info =  associative array of all the individual properties
+        echo $city_name . ":" . $country . " \n";
+        foreach ($data as $index => $info) {
+             $date = $info["date"];
+             $temperature = $info["avg_temp"];
+             $description = $info["description"];
+             if(str_contains($description, "rain")){
+                 $probability = $info["chance_of_rain"] ;
+             }else{
+                 $probability = $info["chance_of_snow"] ;
+             }
+             echo $date . " " . $temperature . " " . $description . " " . $probability . " ";
+        }
+
     }
 
 

@@ -41,49 +41,47 @@ class GetForecast extends Command
     {
         $url = "http://api.weatherapi.com/v1/forecast.json";
 
-        $response = Http::get($url,[
-            "key"=>env("WEATHER_API_KEY"),
-            "q"=> $this->argument("city"),
-            "aqi"=>"no",
-            "days"=>5
-
+        $response = Http::get($url, [
+            "key" => env("WEATHER_API_KEY"),
+            "q" => $this->argument("city"),
+            "aqi" => "no",
+            "days" => 5
         ]);
 
-
-
         $jsonResponse = json_decode($response->body(), true);
-        $output = "";
-        //check for errors
-        if(isset($jsonResponse["error"])){
-            $output.="Error " . $jsonResponse["error"]["message"];
-            $this->output->write($output);
-            return $output;
+
+        // Initialize an associative array to store weather information
+        $weatherInfo = [];
+
+        // Check for errors
+        if (isset($jsonResponse["error"])) {
+            $weatherInfo['error'] = $jsonResponse["error"]["message"];
+            $this->line(json_encode($weatherInfo));
+            //failure
+            return 1;
         }
 
-         //dd($jsonResponse);
-        //api only returns todau + 2 days
-        //city_name
-        $output.= "City_name: " . $jsonResponse["location"]["name"] . " \n";
-        //country
-        $output.= "Country: " .  $jsonResponse["location"]["country"] . " \n";
-        for($i = 0; $i<=2; $i++){
-            //date
-            $output.= "Date " . $jsonResponse["forecast"]["forecastday"][$i]["date"] . " ";
-            //MaxTemp
-            $output.= "Max Temp " . $jsonResponse["forecast"]["forecastday"][$i]["day"]["maxtemp_c"] . " ";
-            //MinTemp
-            $output.=  "Min Temp " . $jsonResponse["forecast"]["forecastday"][$i]["day"]["mintemp_c"] . " ";
-            //average temp
-            $output.=  "Average Temp " . $jsonResponse["forecast"]["forecastday"][$i]["day"]["avgtemp_c"] . " ";
-            //condition
-            $output.=  "Description " . $jsonResponse["forecast"]["forecastday"][$i]["day"]["condition"]["text"] . " ";
-            //chance of snow
-            $output.=  "Chance Of Snow " . $jsonResponse["forecast"]["forecastday"][$i]["day"]["daily_chance_of_snow"]. "% \n";
-            //chance of rain
-            $output.=  "Chance Of Rain " . $jsonResponse["forecast"]["forecastday"][$i]["day"]["daily_chance_of_rain"]. "% \n";
+        // Add city name and country to the array
+        $weatherInfo['city_name'] = $jsonResponse["location"]["name"];
+        $weatherInfo['country'] = $jsonResponse["location"]["country"];
 
+        // Add forecast information for each day to the array
+        $weatherInfo['forecast'] = [];
+        for ($i = 0; $i <= 2; $i++) {
+            $dayForecast = [
+                'date' => $jsonResponse["forecast"]["forecastday"][$i]["date"],
+                'max_temp' => $jsonResponse["forecast"]["forecastday"][$i]["day"]["maxtemp_c"],
+                'min_temp' => $jsonResponse["forecast"]["forecastday"][$i]["day"]["mintemp_c"],
+                'avg_temp' => $jsonResponse["forecast"]["forecastday"][$i]["day"]["avgtemp_c"],
+                'description' => $jsonResponse["forecast"]["forecastday"][$i]["day"]["condition"]["text"],
+                'chance_of_snow' => $jsonResponse["forecast"]["forecastday"][$i]["day"]["daily_chance_of_snow"],
+                'chance_of_rain' => $jsonResponse["forecast"]["forecastday"][$i]["day"]["daily_chance_of_rain"],
+            ];
+            $weatherInfo['forecast'][] = $dayForecast;
         }
-        $this->output->write($output);
-        return $output;
+        $this->line(json_encode($weatherInfo));
+        //success
+        return 0;
     }
+
 }
