@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\WeatherHelper;
 use App\Models\CityModel;
 use App\Models\ForecastModel;
+use App\Models\UserCity;
 use App\Models\WeatherModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -101,7 +102,7 @@ class WeatherController extends Controller
     {
         //return array
         $weathers = collect([]);
-
+        $userFavorites = Auth::user()->cityFavorites->pluck("city_id")->toArray();
         /******If The city exists, see if there are 3 forecast entries available
          * if there are, return them without calling the api
          * if not, continue*******/
@@ -114,7 +115,7 @@ class WeatherController extends Controller
                 }
             }
             if(count($weathers)!==0) {
-                return view("/search_results", compact("weathers"));
+                return view("/search_results", compact("weathers","userFavorites"));
             }
             $weathers=collect([]);
         }
@@ -129,7 +130,7 @@ class WeatherController extends Controller
         //convert json to associative array
         $forecast = json_decode($rawForecast, true);
         if(array_key_exists("error",$forecast)){
-            return view("/search_results", compact("weathers"))
+            return view("/search_results", compact("weathers","userFavorites"))
                 ->with("error", "No results matched your criteria");
         }
         /********End of weather json decoding********/
@@ -190,7 +191,7 @@ class WeatherController extends Controller
             //reset control booleans for next iteration
             $forecastExists=false;
         }
-        return view("/search_results", compact("weathers"));
+        return view("/search_results", compact("weathers","userFavorites"));
     }
 
 
