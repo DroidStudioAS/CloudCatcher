@@ -3,6 +3,7 @@
 
 @section("content")
    <div class="search_container">
+       <h3>Find Your City:</h3>
        <form ACTION="{{route("search")}}" class="search_form" id="searchForm">
            <input name="city_name" id="cityInput" class="date"  placeholder="Search By City">
            <div class="searchDisplay">
@@ -16,15 +17,9 @@
        </form>
    </div>
 
-   @if(isset($date))
-           <h3>Weather on: {{$date}} @if(isset($country)) In: {{ucfirst($country)}} @endif</h3>
-       @else
-           <h3>All Dates</h3>
-       @endif
-    </div>
    <!--container for favorites  this is how we acess todays forecast through the usercity object  $city->cityModel->todaysForecast[0]-->
-    @if(isset($favoriteCities))
-        <h3>Favorite Cities</h3>
+    @if(isset($favoriteCities) && count($favoriteCities)!==0)
+        <h3 class="subtitle">Favorite Cities</h3>
         <div id="favorites_container" class="weather_cards_container">
             @foreach($favoriteCities as $city)
                 <div class="weather_card">

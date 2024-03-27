@@ -1,12 +1,12 @@
 .content-container{
     display: flex;
     flex-flow: column nowrap;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
 
     background-color: #d2a985;
 
-    min-height: 100vh;
+    min-height: 90vh;
 }
 .app_header{
     height: 100px;
@@ -23,6 +23,13 @@
     font-size:xxx-large;
     color: white;
     cursor: pointer;
+    text-align: center;
+}
+.subtitle{
+    font-family: "Expo M", sans-serif;
+    font-size:x-large;
+    color: white;
+    cursor: none;
     text-align: center;
 }
 
