@@ -54,50 +54,7 @@
         </div>
     @endif
 
-   <h3>All Cities</h3>
-   <!--container for all cities-->
-   <div class="weather_cards_container">
-        <h1 class="no-entries-msg">
-            @if(isset($error))
-                {{$error}}
-            @endif
-        </h1>
-        @foreach($weathers as $weather)
-            <div class="weather_card">
-                <p class="weather_city">{{$weather->city->city_name}}</p>
-                <div class="weather_column">
-                    <img class="weather_image" src="{{asset($weather->path_to_image)}}" alt="weather photo">
-                    <p class="weather_description">{{$weather->description}}</p>
-                </div>
-                <svg class="divider">
-                    <rect x="0" y="0" width="1px" height="30vh" fill="white"></rect>
-                </svg>
 
-                <div class="weather_column">
-                    <div class="temperature_container">
-                        <h1 class="weather_temperature" style="color: {{\App\Helpers\WeatherHelper::determineTemperatureColor($weather->temperature)}}">
-                            {{$weather->temperature}}°
-                        </h1>
-                    </div>
-                    <p class="weather_date">{{\Carbon\Carbon::parse($weather->date)->format('d F Y')}}</p>
-                </div>
-                <div onclick="showCityForecast('{{$weather->city->city_name}}')" class="show_more_button">Forecast</div>
-                <div id="likeButton" class="home_like_button">
-                        <img id="like_image"
-                             src="{{asset("/res/icon_liked.svg")}}"
-                             onclick="removeFromFavorites({{$weather->city->id}})"/>
-                        <img
-                            id="unlike_image"
-                            src="{{asset("/res/icon_not_liked.svg")}}"
-                            onclick="addToFavourites({{$weather->city->id}})"/>
-                </div>
-
-            </div>
-        @endforeach
-    </div>
-    @if(count($weathers)>=6)
-        {{$weathers->links()}}
-    @endif
     <script>
         let searchClickCount = 0;
         $(document).ready(function(){

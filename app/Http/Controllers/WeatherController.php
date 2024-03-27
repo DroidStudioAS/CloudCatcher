@@ -106,7 +106,7 @@ class WeatherController extends Controller
          * if there are, return them without calling the api
          * if not, continue*******/
         $city = CityModel::where("city_name", "LIKE", "%$request->city_name%")->get();
-        if($city!==null){
+        if(!$city->isEmpty()){
             foreach ($city as $name){
                 foreach ($name->forecast as $forecast) {
                     $weathers->push($forecast);
@@ -138,7 +138,7 @@ class WeatherController extends Controller
         $country = $forecast["country"];
 
         /********Create the city if it does not exists********/
-        if($city===null){
+        if($city->isEmpty()){
             $city= CityModel::create([
                 "city_name"=>$city_name,
                 "country"=>$country
