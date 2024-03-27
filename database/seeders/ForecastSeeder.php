@@ -17,14 +17,32 @@ class ForecastSeeder extends Seeder
      * @return void
      */
 
-    public function run()
+    /*public function run()
     {
-        Artisan::call("forecast:get",[
-            "city"=>"Belgrade"
-        ]);
-        dd(Artisan::output());
-    }
-   /* public function run()
+        foreach(CityModel::european_countries as $country=>$city){
+            foreach ($city as $name){
+                Artisan::call("forecast:get",[
+                    "city"=>$name
+                ]);
+                $output=Artisan::output();
+
+                if(str_contains($output, "Error")){
+                    continue;
+                }
+                $this->command->getOutput()->writeln($output);
+
+                if($name==="Pogradec"){
+                    break;
+                }
+            }
+
+
+
+
+
+        }
+    }*/
+   public function run()
     {
         $wHelper = new WeatherHelper();
 
@@ -57,5 +75,5 @@ class ForecastSeeder extends Seeder
         }
         $this->command->getOutput()->progressFinish();
 
-    }*/
+    }
 }

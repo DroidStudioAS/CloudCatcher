@@ -49,8 +49,17 @@ class GetForecast extends Command
 
         ]);
 
+
+
         $jsonResponse = json_decode($response->body(), true);
         $output = "";
+        //check for errors
+        if(isset($jsonResponse["error"])){
+            $output.="Error " . $jsonResponse["error"]["message"];
+            $this->output->write($output);
+            return $output;
+        }
+
          //dd($jsonResponse);
         //api only returns todau + 2 days
         //city_name
