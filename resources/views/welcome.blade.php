@@ -19,12 +19,9 @@
        @else
            <h3>All Dates</h3>
        @endif
-
-
-
     </div>
    <!--container for favorites  this is how we acess todays forecast through the usercity object  $city->cityModel->todaysForecast[0]-->
-    @if(count($favoriteCities)>0)
+    @if(isset($favoriteCities))
         <h3>Favorite Cities</h3>
         <div id="favorites_container" class="weather_cards_container">
             @foreach($favoriteCities as $city)

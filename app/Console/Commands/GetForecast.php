@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
 
 class GetForecast extends Command
@@ -52,24 +53,28 @@ class GetForecast extends Command
         $output = "";
          //dd($jsonResponse);
         //api only returns todau + 2 days
+        //city_name
+        $output.= "City_name: " . $jsonResponse["location"]["name"] . " \n";
+        //country
+        $output.= "Country: " .  $jsonResponse["location"]["country"] . " \n";
         for($i = 0; $i<=2; $i++){
-            //city_name
-            $output.=$jsonResponse["location"]["name"] . " ";
-            //country
-            $output.=$jsonResponse["location"]["country"] . " ";
             //date
-            $output.=$jsonResponse["forecast"]["forecastday"][$i]["date"] . " ";
+            $output.= "Date " . $jsonResponse["forecast"]["forecastday"][$i]["date"] . " ";
             //MaxTemp
-            $output.=$jsonResponse["forecast"]["forecastday"][$i]["day"]["maxtemp_c"] . " ";
+            $output.= "Max Temp " . $jsonResponse["forecast"]["forecastday"][$i]["day"]["maxtemp_c"] . " ";
             //MinTemp
-            $output.=$jsonResponse["forecast"]["forecastday"][$i]["day"]["mintemp_c"] . " ";
+            $output.=  "Min Temp " . $jsonResponse["forecast"]["forecastday"][$i]["day"]["mintemp_c"] . " ";
+            //average temp
+            $output.=  "Average Temp " . $jsonResponse["forecast"]["forecastday"][$i]["day"]["avgtemp_c"] . " ";
             //condition
-            $output.=$jsonResponse["forecast"]["forecastday"][$i]["day"]["condition"]["text"] . " ";
+            $output.=  "Description " . $jsonResponse["forecast"]["forecastday"][$i]["day"]["condition"]["text"] . " ";
+            //chance of snow
+            $output.=  "Chance Of Snow " . $jsonResponse["forecast"]["forecastday"][$i]["day"]["daily_chance_of_snow"]. "% \n";
             //chance of rain
-            $output.=$jsonResponse["forecast"]["forecastday"][$i]["day"]["daily_chance_of_rain"]. "% \n";
+            $output.=  "Chance Of Rain " . $jsonResponse["forecast"]["forecastday"][$i]["day"]["daily_chance_of_rain"]. "% \n";
+
         }
-
-
         $this->output->write($output);
+        return $output;
     }
 }

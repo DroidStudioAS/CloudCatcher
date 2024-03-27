@@ -98,10 +98,11 @@ class WeatherController extends Controller
 
     }
     public function test(Request $request){
-        Artisan::call("forecast:get",[
+      Artisan::call("forecast:get",[
             "city"=>$request->city_name
         ]);
-        dd(Artisan::output());
+        $returnedForecast = Artisan::output();
+        dd($returnedForecast);
     }
 
 
