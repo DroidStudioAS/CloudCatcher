@@ -102,25 +102,30 @@ class WeatherController extends Controller
         Artisan::call("forecast:get", [
             "city" => $request->city_name
         ]);
-        //Json
-        $weathers = [];
+        //return array
+        $weathers = collect([]);
+        //raw encoded Json
         $rawForecast = Artisan::output();
         //convert json to associative array
         $forecast = json_decode($rawForecast, true);
         if(array_key_exists("error",$forecast)){
             return view("/welcome", compact("weathers"))->with("error", "No results matched your criteria");
         }
-
+        $cityExists = false;
         //parse location data
         $city_name = $forecast["city_name"];
         $country = $forecast["country"];
+
+        //check if the city is in our records
+
         //forecast data for next 3 days
         $data = $forecast["forecast"];
         //data = associative array of arrays of data holding each returned date and its properties
         //info =  associative array of all the individual properties
         echo $city_name . ":" . $country . " \n";
         foreach ($data as $index => $info) {
-             $date = $info["date"];
+            $forecastExists = false;
+            $date = $info["date"];
              $temperature = $info["avg_temp"];
              $description = $info["description"];
              if(str_contains($description, "rain")){
@@ -128,9 +133,53 @@ class WeatherController extends Controller
              }else{
                  $probability = $info["chance_of_snow"] ;
              }
-             echo $date . " " . $temperature . " " . $description . " " . $probability . " ";
-        }
+            $dbCity = CityModel::where(["city_name"=>$city_name, "country"=>$country])->first();
+            if($dbCity!==null){
+                $cityExists=true;
+            }
+             //check for forecast if city exists
+            if($cityExists){
+                $cityId=$dbCity->id;
+                $dbForecast = ForecastModel::where(["date"=>$date, "city_id"=>$cityId])->first();
+                echo $dbForecast;
+                if($dbForecast!==null){
+                    $forecastExists=true;
+                    $weathers->push($dbForecast);
+                    return view("/welcome", compact("weathers"));
+                }
+            }
+            $newCity = CityModel::class;
+            if(!$cityExists){
+                //create city and forecast
+                $newCity = CityModel::create([
+                    "country"=>$country,
+                    "city_name"=>$city_name
+                ]);
+                $newForecast = ForecastModel::create([
+                    "city_id"=>$newCity->id,
+                    "temperature"=>$temperature,
+                    "date"=>$date,
+                    "description"=>$description,
+                    "probability"=>$probability,
+                    "path_to_image"=>"/res/sunny.png"
+                ]);
+                $weathers->push($newForecast);
+            }
+            //other option city exists but no forecast
+            $newForecast = ForecastModel::create([
+                "city_id"=>$dbCity->id,
+                "temperature"=>$temperature,
+                "date"=>$date,
+                "description"=>$description,
+                "probability"=>$probability,
+                "path_to_image"=>"/res/sunny.png"
+            ]);
+            $weathers->push($newForecast);
 
+            //reset control booleans for next iteration
+            $cityExists=false;
+        }
+        return view("/welcome", compact("weathers"));
     }
 
 

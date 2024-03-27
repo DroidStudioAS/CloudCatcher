@@ -17,6 +17,7 @@ class ForecastSeeder extends Seeder
      * @return void
      */
 
+    //testing, ignore
     /*public function run()
     {
         foreach(CityModel::european_countries as $country=>$city){
@@ -35,11 +36,6 @@ class ForecastSeeder extends Seeder
                     break;
                 }
             }
-
-
-
-
-
         }
     }*/
    public function run()

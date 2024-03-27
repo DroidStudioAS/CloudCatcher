@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function (){
     Route::get("/weather",[WeatherController::class, 'loadTodaysWeathers']);
     Route::get("/weather-for/{city}",[WeatherController::class,"getWeatherForecastForCity"])->name("forecast-city.permalink");
     Route::get("/weather-for-country/{country}",[WeatherController::class,"getCountryForecast"]);
-    Route::get("/weather-searchAll",[ WeatherController::class,"searchAll"])->name("search");
+    Route::get("/weather-searchAll",[ WeatherController::class,"test"])->name("search");
 
     Route::post("add-user-favourite/{city}",[UserCitiesController::class, "addToFavorites"]);
     Route::post("remove-user-favourite/{city}",[UserCitiesController::class, "removeFromFavorites"]);
