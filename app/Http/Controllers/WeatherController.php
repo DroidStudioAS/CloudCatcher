@@ -129,7 +129,8 @@ class WeatherController extends Controller
         //convert json to associative array
         $forecast = json_decode($rawForecast, true);
         if(array_key_exists("error",$forecast)){
-            return view("/search_results", compact("weathers"))->with("error", "No results matched your criteria");
+            return view("/search_results", compact("weathers"))
+                ->with("error", "No results matched your criteria");
         }
         /********End of weather json decoding********/
 
@@ -182,7 +183,7 @@ class WeatherController extends Controller
                     "date"=>$date,
                     "description"=>$description,
                     "probability"=>$probability,
-                    "path_to_image"=>"/res/sunny.png"
+                    "path_to_image"=>WeatherHelper::realDataImagePathDeterminer($description)
                 ]);
                 $weathers->push($newForecast);
             }

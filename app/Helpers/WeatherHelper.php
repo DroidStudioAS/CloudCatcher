@@ -15,10 +15,10 @@ class WeatherHelper
         "cloudy"=>"/res/clouds.svg"
     ];
     const images = [
-        "sunny"=> "/res/sunny.png",
-        "raining"=> "/res/rainy.png",
-        "cloudy"=>"/res/cloudy.png",
-        "snowing"=>"/res/snowy.png"
+        0=> "/res/sunny.png",
+        1=> "/res/rainy.png",
+        2=>"/res/cloudy.png",
+        3=>"/res/snowy.png"
     ];
     const descriptions=[
         "Sunny",
@@ -71,6 +71,34 @@ class WeatherHelper
         }
         return $color;
     }
+    public static function realDataImagePathDeterminer($apiDescription){
+        $lowerCaseApiDesc = strtolower($apiDescription);
+        $description = "";
+        //variants of rainy
+        if(str_contains($lowerCaseApiDesc,"rain") || str_contains($lowerCaseApiDesc, "thunder")
+            || str_contains($lowerCaseApiDesc,"drizzle")){
+            return self::images[1];
+        }
+        //variants of snowy
+        if(str_contains($lowerCaseApiDesc,"snow") || str_contains($lowerCaseApiDesc,"sleet")
+            || str_contains($lowerCaseApiDesc,"blizzard") || str_contains($lowerCaseApiDesc,"ice")){
+            return self::images[3];
+        }
+        //variants of sunny
+        if(str_contains($lowerCaseApiDesc, "sunny") || str_contains($lowerCaseApiDesc,"clear")){
+            return self::images[0];
+        }
+        //variants of cloudy
+        if(str_contains($lowerCaseApiDesc,"fog") || str_contains($lowerCaseApiDesc,"cloudy")
+            || str_contains($lowerCaseApiDesc,"overcast") || str_contains($lowerCaseApiDesc,"mist")){
+            return self::images[2];
+        }
+
+
+        return $description;
+
+    }
+
 
 
 }

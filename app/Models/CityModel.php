@@ -63,7 +63,7 @@ class CityModel extends Model
     public function forecast(){
         //one to many relationship: One city has many forecasts;
         return $this->hasMany(ForecastModel::class, "city_id", "id")
-            ->orderBy('date', 'desc')
+            ->orderBy('date')
             ->limit(3);
     }
     public function todaysForecast(){
