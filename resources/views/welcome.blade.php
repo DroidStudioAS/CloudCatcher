@@ -3,18 +3,20 @@
 
 @section("content")
    <div class="search_container">
-       <div class="searchDisplay">
+       <form ACTION="{{route("search")}}" class="search_form" id="searchForm">
+           <input name="city_name" id="cityInput" class="date"  placeholder="Search By City">
+           <div class="searchDisplay">
            Display Filters
        </div>
             <div class="search_filters">
-                <form ACTION="{{route("search")}}" class="search_form" id="searchForm">
-                    <input autocomplete="off" name="date" class="date" type="text" id="datepicker" placeholder="Select A Date">
-                    <input name="city_name" id="cityInput" class="date"  placeholder="Search By City">
+                <input autocomplete="off" name="date" class="date" type="text" id="datepicker" placeholder="Select A Date">
                     <input name="country" id="countryInput" class="date"  placeholder="Search By Country">
-                    <input type="submit" class="submit-button" value="search">
-                </form>
-        </div>
-       @if(isset($date))
+            </div>
+           <input type="submit" class="submit-button" value="search">
+       </form>
+   </div>
+
+   @if(isset($date))
            <h3>Weather on: {{$date}} @if(isset($country)) In: {{ucfirst($country)}} @endif</h3>
        @else
            <h3>All Dates</h3>

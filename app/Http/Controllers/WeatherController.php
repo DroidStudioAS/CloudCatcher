@@ -105,7 +105,8 @@ class WeatherController extends Controller
         /******If The city exists, see if there are 3 forecast entries available
          * if there are, return them without calling the api
          * if not, continue*******/
-        $city = CityModel::where("city_name", "LIKE", "%$request->city_name%")->get();
+        $city = CityModel::where("city_name", "LIKE", "%$request->city_name%")
+            ->get();
         if(!$city->isEmpty()){
             foreach ($city as $name){
                 foreach ($name->forecast as $forecast) {
@@ -143,7 +144,9 @@ class WeatherController extends Controller
                 "city_name"=>$city_name,
                 "country"=>$country
             ]);
-            }
+        }else{
+            $city=$city->first();
+        }
 
         //forecast data for next 3 days
         $data = $forecast["forecast"];
@@ -161,6 +164,7 @@ class WeatherController extends Controller
                  $probability = $info["chance_of_snow"] ;
              }
             /********End of weather json data extraction********/
+
 
             $cityId=$city->id;
             /*****Check If Forecast Exists****/

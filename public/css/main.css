@@ -5,6 +5,8 @@
     align-items: center;
 
     background-color: #d2a985;
+
+    min-height: 100vh;
 }
 .app_header{
     height: 100px;
