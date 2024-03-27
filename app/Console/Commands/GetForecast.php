@@ -65,7 +65,7 @@ class GetForecast extends Command
         $weatherInfo['city_name'] = $jsonResponse["location"]["name"];
         $weatherInfo['country'] = $jsonResponse["location"]["country"];
 
-        // Add forecast information for each day to the array
+        // Add forecast information for each day to the array (api only returns 3 days)
         $weatherInfo['forecast'] = [];
         for ($i = 0; $i <= 2; $i++) {
             $dayForecast = [
