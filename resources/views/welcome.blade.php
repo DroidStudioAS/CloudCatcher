@@ -26,7 +26,7 @@
         <div id="favorites_container" class="weather_cards_container">
             @foreach($favoriteCities as $city)
                 <div class="weather_card">
-                    <p class="weather_city">{{$city->cityModel->city_name}}</p>
+                    <p class="weather_city">{{$city->cityModel->city_name}} , {{$city->cityModel->country}}</p>
                     <div class="weather_column">
                         <img class="weather_image"
                              src="{{asset($city->cityModel->todaysForecast[0]->path_to_image)}}"
