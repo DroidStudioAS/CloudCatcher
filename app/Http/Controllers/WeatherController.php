@@ -105,13 +105,15 @@ class WeatherController extends Controller
         /******If The city exists, see if there are 3 forecast entries available
          * if there are, return them without calling the api
          * if not, continue*******/
-        $city = CityModel::where("city_name", "LIKE", "%$request->city_name%")->first();
+        $city = CityModel::where("city_name", "LIKE", "%$request->city_name%")->get();
         if($city!==null){
-            foreach ($city->forecast as $forecast){
-                $weathers->push($forecast);
+            foreach ($city as $name){
+                foreach ($name->forecast as $forecast) {
+                    $weathers->push($forecast);
+                }
             }
-            if(count($weathers)===3) {
-                return view("/welcome", compact("weathers"));
+            if(count($weathers)!==0) {
+                return view("/search_results", compact("weathers"));
             }
             $weathers=collect([]);
         }
@@ -126,7 +128,7 @@ class WeatherController extends Controller
         //convert json to associative array
         $forecast = json_decode($rawForecast, true);
         if(array_key_exists("error",$forecast)){
-            return view("/welcome", compact("weathers"))->with("error", "No results matched your criteria");
+            return view("/search_results", compact("weathers"))->with("error", "No results matched your criteria");
         }
         /********End of weather json decoding********/
 
@@ -183,7 +185,7 @@ class WeatherController extends Controller
             //reset control booleans for next iteration
             $forecastExists=false;
         }
-        return view("/welcome", compact("weathers"));
+        return view("/search_results", compact("weathers"));
     }
 
 

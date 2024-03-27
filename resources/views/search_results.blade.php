@@ -26,16 +26,13 @@
                 </div>
                 <div onclick="showCityForecast('{{$weather->city->city_name}}')" class="show_more_button">Forecast</div>
                 <div id="likeButton" class="home_like_button">
-                    @if($favoriteCities->contains("city_id", $weather->city->id))
                         <img id="like_image"
                              src="{{asset("/res/icon_liked.svg")}}"
                              onclick="removeFromFavorites({{$weather->city->id}})"/>
-                    @else
                         <img
                             id="unlike_image"
                             src="{{asset("/res/icon_not_liked.svg")}}"
                             onclick="addToFavourites({{$weather->city->id}})"/>
-                    @endif
                 </div>
             </div>
         @endforeach
