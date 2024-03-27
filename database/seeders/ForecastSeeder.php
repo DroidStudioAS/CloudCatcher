@@ -7,6 +7,7 @@ use App\Models\CityModel;
 use App\Models\ForecastModel;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 
 class ForecastSeeder extends Seeder
 {
@@ -15,8 +16,15 @@ class ForecastSeeder extends Seeder
      *
      * @return void
      */
-    //WHEN RAN, IT WILL SEED TODAY AND THE NEXT 6 DAYS
+
     public function run()
+    {
+        Artisan::call("forecast:get",[
+            "city"=>"Belgrade"
+        ]);
+        dd(Artisan::output());
+    }
+   /* public function run()
     {
         $wHelper = new WeatherHelper();
 
@@ -49,5 +57,5 @@ class ForecastSeeder extends Seeder
         }
         $this->command->getOutput()->progressFinish();
 
-    }
+    }*/
 }
