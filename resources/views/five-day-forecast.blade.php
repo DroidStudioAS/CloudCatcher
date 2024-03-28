@@ -36,48 +36,48 @@
         </div>
         <div style="background-image: url('{{asset(\App\Helpers\WeatherHelper::dailyForecastBackgroundDeterminer($dailyData['description'])[1])}}');
                    background-size: cover " class="df_colum_data">
-            <p class="city_name">
+            <p style="color: {{\App\Helpers\WeatherHelper::dailyForecastBackgroundDeterminer($dailyData["description"])[2]}}" class="city_name">
                 {{$dailyData["city_name"]}}, {{$dailyData["country"]}}
                 <br>
                 {{$dailyData["description"]}}
             </p>
 
-            <p class="forecast_text">
+            <p style="color: {{\App\Helpers\WeatherHelper::dailyForecastBackgroundDeterminer($dailyData["description"])[2]}}" class="forecast_text">
                 {{\Carbon\Carbon::parse($dailyData["date"])->format("l, Y-m-d T")}},
             </p>
-            <p class="forecast_extended_description">
+            <p style="color: {{\App\Helpers\WeatherHelper::dailyForecastBackgroundDeterminer($dailyData["description"])[2]}}" class="forecast_extended_description">
                 {{\App\Helpers\WeatherHelper::presentationDescriptionDeterminer($dailyData["description"])}}
             </p>
             <div class="minmax">
-                <div class="minxmax_child">
-                    <p class="forecast_text">
+                <div  class="minxmax_child">
+                    <p style="color: {{\App\Helpers\WeatherHelper::dailyForecastBackgroundDeterminer($dailyData["description"])[2]}}" class="forecast_text">
                         Daily Minimum <br> Temperature: <br>
-                        <span class="weather_temp_small">{{$dailyData['min_temp']}}°</span>
+                        <span style="color: {{\App\Helpers\WeatherHelper::dailyForecastBackgroundDeterminer($dailyData["description"])[2]}}" class="weather_temp_small">{{$dailyData['min_temp']}}°</span>
                     </p>
 
                 </div>
                 <div class="minxmax_child">
-                    <p class="forecast_text">
+                    <p style="color: {{\App\Helpers\WeatherHelper::dailyForecastBackgroundDeterminer($dailyData["description"])[2]}}" class="forecast_text">
                         Daily Maximum <br> Temperature: <br>
-                        <span class="weather_temp_small">{{$dailyData['max_temp']}}°</span>
+                        <span style="color: {{\App\Helpers\WeatherHelper::dailyForecastBackgroundDeterminer($dailyData["description"])[2]}}" class="weather_temp_small">{{$dailyData['max_temp']}}°</span>
                     </p>
                 </div>
                 <div class="minxmax_child">
-                    <p class="forecast_text">
+                    <p style="color: {{\App\Helpers\WeatherHelper::dailyForecastBackgroundDeterminer($dailyData["description"])[2]}}" class="forecast_text">
                         Daily Average <br> Temperature: <br>
-                        <span class="weather_temp_small">{{$dailyData['avg_temp']}}°</span>
+                        <span style="color: {{\App\Helpers\WeatherHelper::dailyForecastBackgroundDeterminer($dailyData["description"])[2]}}" class="weather_temp_small">{{$dailyData['avg_temp']}}°</span>
                     </p>
                 </div>
             </div>
             <div class="title_container">
-                <p class="important">Hourly forecast</p>
+                <p style="color: {{\App\Helpers\WeatherHelper::dailyForecastBackgroundDeterminer($dailyData["description"])[2]}}" class="important">Hourly forecast</p>
             </div>
             <div class="hour_container">
                 @for($i =0; $i<6; $i++)
                     <div class="hour">
-                        <p class="forecast_text">{{\Carbon\Carbon::parse($dailyData["h-t-h"][$i]["time"])->format("H")}}</p>
+                        <p style="color: {{\App\Helpers\WeatherHelper::dailyForecastBackgroundDeterminer($dailyData["description"])[2]}}" class="forecast_text">{{\Carbon\Carbon::parse($dailyData["h-t-h"][$i]["time"])->format("H")}}</p>
                         <img src="{{asset(\App\Helpers\WeatherHelper::realDataImagePathDeterminer($dailyData["h-t-h"][$i]["condition"]))}}"/>
-                        <p class="forecast_text">{{$dailyData["h-t-h"][$i]["temp_c"]}}°</p>
+                        <p style="color: {{\App\Helpers\WeatherHelper::dailyForecastBackgroundDeterminer($dailyData["description"])[2]}}" class="forecast_text">{{$dailyData["h-t-h"][$i]["temp_c"]}}°</p>
                     </div>
                 @endfor
             </div>
