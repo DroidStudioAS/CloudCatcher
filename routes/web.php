@@ -23,10 +23,8 @@ Route::middleware('auth')->group(function (){
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::get("/weather",[WeatherController::class, 'loadTodaysWeathers']);
-    Route::get("/weather-for/{city}",[WeatherController::class,"getWeatherForecastForCity"])->name("forecast-city.permalink");
-    Route::get("/weather-for-country/{country}",[WeatherController::class,"getCountryForecast"]);
-    Route::get("/weather-searchAll",[ WeatherController::class,"test"])->name("search");
-
+    Route::get("/search", [WeatherController::class,'test'])->name("search");
+    Route::get("/search/{city}/{date}",[WeatherController::class,"getDailyWeatherForCity"])->name("forecast.city.permalink");
     Route::post("add-user-favourite/{city}",[UserCitiesController::class, "addToFavorites"]);
     Route::post("remove-user-favourite/{city}",[UserCitiesController::class, "removeFromFavorites"]);
 
@@ -43,8 +41,7 @@ Route::middleware(['auth', AdminMiddleware::class])
         Route::post("/add-city",[CityController::class,"addCity"])
             ->name("addCity");
 });
-Route::get("/testing", [WeatherController::class,'test']);
-Route::get("/test/{city}/{date}",[WeatherController::class,"getDailyWeatherForCity"]);
+
 
 
 Auth::routes();

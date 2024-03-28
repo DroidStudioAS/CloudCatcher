@@ -91,14 +91,10 @@
         function showAllTime(){
             window.location.href="/all-time-weather";
         }
-        function searchCityForecast(city){
-            if(city!==null || city!==""){
-                window.location.href="/weather-search/"+city
-            }
-        }
+
         function showCityForecast(city,date){
            if(city!==null || city!==""){
-               window.location.href="/test/"+city+"/"+date;
+               window.location.href="/search/"+city+"/"+date;
            }
         }
         function showCountryWeather(country){

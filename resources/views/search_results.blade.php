@@ -44,7 +44,7 @@
         function showCityForecast(city, date){
 
             if(city!==null || city!==""){
-                window.location.href="/test/"+city+"/"+date;
+                window.location.href="/search/"+city+"/"+date;
             }
         }
 
