@@ -58,6 +58,9 @@ class GetDailyForecast extends Command
             //failure
             return 1;
         }
+        //neccesary for hour to hour forecast
+        $forecastday=$jsonResponse["forecast"]["forecastday"][0];
+        $hours = $forecastday["hour"];
 
         // Add city name and country to the array
         $weatherInfo['city_name'] = $jsonResponse["location"]["name"];
@@ -76,6 +79,25 @@ class GetDailyForecast extends Command
         $weatherInfo['chance_of_snow'] = $jsonResponse["forecast"]["forecastday"][0]["day"]["daily_chance_of_snow"];
         $weatherInfo['chance_of_rain'] = $jsonResponse["forecast"]["forecastday"][0]["day"]["daily_chance_of_rain"];
         $weatherInfo["aqi"]=$jsonResponse["current"]["air_quality"]["us-epa-index"];
+
+        $hourlyForecast = [];
+        $currentUnixTime = time();
+
+        foreach ($hours as $hour){
+            // Extract specific properties from each hour
+            $time = $hour['time'];
+            $temp_c = $hour['temp_c'];
+            $condition = $hour['condition']['text'];
+            if(strtotime($time)>$currentUnixTime) {
+                // Store extracted properties in the hourly forecast array
+                $hourlyForecast[] = [
+                    'time' => $time,
+                    'temp_c' => $temp_c,
+                    'condition' => $condition
+                ];
+            }
+        }
+        $weatherInfo["h-t-h"]=$hourlyForecast;
 
 
 
