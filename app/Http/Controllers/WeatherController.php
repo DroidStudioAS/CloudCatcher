@@ -125,6 +125,8 @@ class WeatherController extends Controller
                     }
                 }
             }
+            //if any records are found, return them..
+            //if not make an api call even if the city exists
             if(count($weathers)!==0) {
                 return view("/search_results", compact("weathers","userFavorites"));
             }
@@ -162,14 +164,19 @@ class WeatherController extends Controller
         /********Create the city if it does not exist
          * if it does exist, pull out the first city, because that is the only
          * one we have data for********/
-        if($city->isEmpty()){
+
+            //check if city exists through api data before creating it
+            //Api can send the country name like united states, but the user could have searched
+            //usa... This check is to prevent duplicate entries;
+            $city= CityModel::where(["city_name"=>$city_name, "country"=>$country])->get();
+            if($city->isEmpty()){
             $city= CityModel::create([
                 "city_name"=>$city_name,
                 "country"=>$country
             ]);
-        }else{
+             }else{
             $city=$city->first();
-        }
+         }
         //forecast data for next 3 days
         $data = $forecast["forecast"];
         //data = associative array of arrays of data holding each returned date and its properties
