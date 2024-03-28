@@ -2,7 +2,8 @@
 @section("content")
 
     <div class="daily_forecast">
-        <div class="df_colum_general">
+        <div style="background-color: #77b5cb"
+            class="df_colum_general">
             <p class="forecast_text">Current Temperature:</p>
             <div class="weather_temperature">
                 {{$dailyData["current_temp"]}}°
@@ -33,7 +34,8 @@
                 </div>
             </div>
         </div>
-        <div class="df_colum_data">
+        <div style="background-image: url('{{asset(\App\Helpers\WeatherHelper::dailyForecastBackgroundDeterminer($dailyData['description']))}}');
+                   background-size: cover " class="df_colum_data">
             <p class="city_name">
                 {{$dailyData["city_name"]}}, {{$dailyData["country"]}}
                 <br>

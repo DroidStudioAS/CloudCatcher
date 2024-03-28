@@ -205,6 +205,28 @@ class WeatherHelper
         return $desc;
     }
 
+    public static function dailyForecastBackgroundDeterminer($description){
+        $path_to_image = "";
+        $trimedLowerCaseDesc = trim(strtolower($description));
+        if (str_contains($trimedLowerCaseDesc, "sunny")) {
+             $path_to_image = "res/back/back_sunny.jpg";
+        } elseif (str_contains($trimedLowerCaseDesc, "cloudy")) {
+            $path_to_image = "res/back/back_partly_cloudy.jpg";
+        }elseif(str_contains($trimedLowerCaseDesc, "rain") || str_contains($trimedLowerCaseDesc, "drizzle")){
+            $path_to_image="res/back/back_rainy.jpg";
+        }elseif(str_contains($trimedLowerCaseDesc, "overcast")){
+            $path_to_image="res/back/back_overcast.jpg";
+        }elseif(str_contains($trimedLowerCaseDesc, "fog")){
+            $path_to_image="res/back/back_fog.jpg";
+        }elseif(str_contains($trimedLowerCaseDesc, "snow") || str_contains($trimedLowerCaseDesc,"blizzard")
+            || str_contains($trimedLowerCaseDesc, "pellets") || str_contains($trimedLowerCaseDesc,"sleet")){
+            $path_to_image="res/back/back_snow.jpg";
+        }
+
+        return $path_to_image;
+
+    }
+
 
 
 }
