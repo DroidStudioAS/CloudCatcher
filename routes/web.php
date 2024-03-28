@@ -44,6 +44,7 @@ Route::middleware(['auth', AdminMiddleware::class])
             ->name("addCity");
 });
 Route::get("/testing", [WeatherController::class,'test']);
+Route::get("/test/{city}",[WeatherController::class,"getDailyWeatherForCity"]);
 
 
 Auth::routes();

@@ -65,22 +65,19 @@ class GetDailyForecast extends Command
         $weatherInfo['date'] = $jsonResponse["forecast"]["forecastday"][0]["date"];
 
         // Add forecast information for each day to the array (api only returns 3 days)
-        $weatherInfo['forecast'] = [];
+        $weatherInfo["current_temp"] = $jsonResponse["current"]["temp_c"];
+        $weatherInfo["wind_kph"]= $jsonResponse["current"]["wind_kph"];
+        $weatherInfo["sunrise"]=$jsonResponse["forecast"]["forecastday"][0]["astro"]["sunrise"];
+        $weatherInfo["sunset"]=$jsonResponse["forecast"]["forecastday"][0]["astro"]["sunset"];
+        $weatherInfo['max_temp'] = $jsonResponse["forecast"]["forecastday"][0]["day"]["maxtemp_c"];
+        $weatherInfo['min_temp'] = $jsonResponse["forecast"]["forecastday"][0]["day"]["mintemp_c"];
+        $weatherInfo['avg_temp'] = $jsonResponse["forecast"]["forecastday"][0]["day"]["avgtemp_c"];
+        $weatherInfo['description'] = $jsonResponse["forecast"]["forecastday"][0]["day"]["condition"]["text"];
+        $weatherInfo['chance_of_snow'] = $jsonResponse["forecast"]["forecastday"][0]["day"]["daily_chance_of_snow"];
+        $weatherInfo['chance_of_rain'] = $jsonResponse["forecast"]["forecastday"][0]["day"]["daily_chance_of_rain"];
+        $weatherInfo["aqi"]=$jsonResponse["current"]["air_quality"]["us-epa-index"];
 
-        $dayForecast = [
-            "current_temp" => $jsonResponse["current"]["temp_c"],
-            "wind_kph"=> $jsonResponse["current"]["wind_kph"],
-            "sunrise"=>$jsonResponse["forecast"]["forecastday"][0]["astro"]["sunrise"],
-            "sunset"=>$jsonResponse["forecast"]["forecastday"][0]["astro"]["sunset"],
-            'max_temp' => $jsonResponse["forecast"]["forecastday"][0]["day"]["maxtemp_c"],
-            'min_temp' => $jsonResponse["forecast"]["forecastday"][0]["day"]["mintemp_c"],
-            'avg_temp' => $jsonResponse["forecast"]["forecastday"][0]["day"]["avgtemp_c"],
-            'description' => $jsonResponse["forecast"]["forecastday"][0]["day"]["condition"]["text"],
-            'chance_of_snow' => $jsonResponse["forecast"]["forecastday"][0]["day"]["daily_chance_of_snow"],
-            'chance_of_rain' => $jsonResponse["forecast"]["forecastday"][0]["day"]["daily_chance_of_rain"],
-            "aqi"=>$jsonResponse["current"]["air_quality"]["us-epa-index"]
-        ];
-        $weatherInfo['forecast'][] = $dayForecast;
+
 
         $this->line(json_encode($weatherInfo));
         //success

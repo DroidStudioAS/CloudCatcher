@@ -92,7 +92,7 @@
         }
         function showCityForecast(city){
            if(city!==null || city!==""){
-               window.location.href="/weather-for/"+city
+               window.location.href="/test/"+city
            }
         }
         function showCountryWeather(country){

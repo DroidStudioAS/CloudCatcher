@@ -196,6 +196,15 @@ class WeatherController extends Controller
         }
         return view("/search_results", compact("weathers","userFavorites"));
     }
+    public function getDailyWeatherForCity($city){
+
+        Artisan::call("forecast:daily",[
+
+            "city"=>$city
+        ]);
+        $jsonResponse = json_decode(Artisan::output(),true);
+        dd($jsonResponse);
+    }
 
 
 
