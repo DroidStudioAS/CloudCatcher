@@ -122,11 +122,18 @@ class WeatherController extends Controller
             $weathers=collect([]);
         }
         /**No forecasts found***/
+        $params =[];
+        //build request params
+        if(!is_null($request->country)){
+            $params["country"]=$request->country;
+        }
+        if(!is_null($request->city_name)){
+            $params["city"]= $request->city_name;
+        }
+
 
         /******Api Call*****/
-        Artisan::call("forecast:get", [
-            "city" => $request->city_name
-        ]);
+        Artisan::call("forecast:get", $params);
         /********Start of weather json decoding********/
         //raw encoded Json
         $rawForecast = Artisan::output();

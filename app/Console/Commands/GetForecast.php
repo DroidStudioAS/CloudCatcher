@@ -13,7 +13,7 @@ class GetForecast extends Command
      *
      * @var string
      */
-    protected $signature = 'forecast:get {city}';
+    protected $signature = 'forecast:get {city} {country?}';
 
     /**
      * The console command description.
@@ -41,9 +41,17 @@ class GetForecast extends Command
     {
         $url = "http://api.weatherapi.com/v1/forecast.json";
 
+        //build the q param
+        $q=$this->argument("city");
+        if($this->argument("country")!==null){
+            $q.= ", " . $this->argument("country");
+        }
+
+
+
         $response = Http::get($url, [
             "key" => env("WEATHER_API_KEY"),
-            "q" => $this->argument("city"),
+            "q" => $q,
             "aqi" => "no",
             "days" => 5
         ]);
