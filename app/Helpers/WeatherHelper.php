@@ -26,6 +26,58 @@ class WeatherHelper
         "Snowing",
         "Cloudy"
     ];
+    const extendedDescriptions = [
+        'partly cloudy' => 'Mix Of Sun And Clouds, Changing Sky Conditions',
+        'sunny' => 'Clear Skies, Abundant Sunshine, Perfect For Outdoor Activities',
+        'cloudy' => 'Overcast Sky, No Direct Sunlight, Dim Light',
+        'overcast' => 'Complete Cloud Cover, Dull Atmosphere, Limited Visibility',
+        'mist' => 'Light Fog, Slightly Reduced Visibility, Damp Surroundings',
+        'patchy rain possible' => 'Occasional Light Rain Showers, Intermittent Wet Conditions',
+        'patchy snow possible' => 'Chance Of Light Snowfall, Scattered Snowflakes',
+        'patchy sleet possible' => 'Possibility Of Light Sleet Showers, Mixed Precipitation',
+        'patchy freezing drizzle possible' => 'Chance Of Light Freezing Drizzle, Icy Conditions',
+        'thundery outbreaks possible' => 'Possibility Of Thunderstorms, Electric Activity In The Sky',
+        'blowing snow' => 'Snow Being Blown By Strong Winds, Reduced Visibility',
+        'blizzard' => 'Severe Snowstorm With Strong Winds, Near-Zero Visibility, Hazardous Travel',
+        'fog' => 'Thick Fog, Limited Visibility, Misty Atmosphere',
+        'freezing fog' => 'Fog With Below-Freezing Temperatures, Icy Surfaces, Hazardous Driving',
+        'patchy light drizzle' => 'Occasional Light Drizzle, Damp Conditions, Wet Surfaces',
+        'light drizzle' => 'Continuous Light Rain, Persistent Dampness, Light Precipitation',
+        'freezing drizzle' => 'Rain Freezing Upon Contact, Icy Surfaces, Slippery Conditions',
+        'heavy freezing drizzle' => 'Intense Freezing Rain, Hazardous Driving Conditions, Icy Roads',
+        'patchy light rain' => 'Sporadic Light Rain Showers, Occasional Dampness, Scattered Drops',
+        'patchy rain nearby' => 'Sporadic Light Rain Showers, Occasional Dampness, Scattered Drops',
+        'light rain' => 'Persistent Light Rain, Wet Conditions, Umbrella Weather',
+        'moderate rain at times' => 'Periods Of Moderate Rain, Varying Intensity, Wet Conditions',
+        'moderate rain' => 'Steady Rainfall, Moderate Intensity, Damp Surroundings',
+        'heavy rain at times' => 'Periods Of Heavy Rain, Intense Downpours, Localized Flooding',
+        'heavy rain' => 'Continuous Heavy Rainfall, Strong Intensity, Significant Accumulation',
+        'light freezing rain' => 'Light Rain Freezing Upon Contact, Icy Surfaces, Slippery Conditions',
+        'moderate or heavy freezing rain' => 'Intense Freezing Rain, Hazardous Driving, Icy Roads',
+        'light sleet' => 'Light Icy Pellets, Mixed Precipitation, Slippery Conditions',
+        'moderate or heavy sleet' => 'Intense Icy Pellets, Hazardous Driving, Slippery Surfaces',
+        'patchy light snow' => 'Occasional Light Snow Showers, Scattered Flakes, Cold Conditions',
+        'light snow' => 'Gentle Snowfall, Light Accumulation, Picturesque Scenery',
+        'patchy moderate snow' => 'Occasional Moderate Snow Showers, Intermittent Accumulation',
+        'moderate snow' => 'Steady Snowfall, Moderate Accumulation, Winter Wonderland',
+        'patchy heavy snow' => 'Occasional Heavy Snow Showers, Intermittent Accumulation',
+        'heavy snow' => 'Intense Snowfall, Heavy Accumulation, Winter Storm Conditions',
+        'ice pellets' => 'Pellets Of Ice Falling From The Sky, Hazardous Road Conditions',
+        'light rain shower' => 'Brief Light Rainfall, Passing Shower, Temporary Wetness',
+        'moderate or heavy rain shower' => 'Intense Rainfall In Brief Periods, Heavy Droplets',
+        'torrential rain shower' => 'Heavy, Violent Rainfall, Extreme Downpour',
+        'light sleet showers' => 'Brief Light Icy Pellets, Passing Showers, Slippery Conditions',
+        'moderate or heavy sleet showers' => 'Intense Icy Pellets In Brief Periods, Hazardous Driving',
+        'light snow showers' => 'Brief Light Snowfall, Passing Showers, Scattered Flakes',
+        'moderate or heavy snow showers' => 'Intense Snowfall In Brief Periods, Accumulating Snow',
+        'light showers of ice pellets' => 'Brief Pellets Of Ice Falling From Sky, Slippery Conditions',
+        'moderate or heavy showers of ice pellets' => 'Intense Pellets Of Ice Falling, Hazardous Road Conditions',
+        'patchy light rain with thunder' => 'Occasional Light Rain With Thunder, Passing Storm',
+        'moderate or heavy rain with thunder' => 'Intense Rainfall With Thunder, Electric Activity',
+        'patchy light snow with thunder' => 'Occasional Light Snow With Thunder, Passing Winter Storm',
+        'moderate or heavy snow with thunder' => 'Intense Snowfall With Thunder, Winter Storm Conditions',
+    ];
+
     /******Image Helpers*******/
     public static function determinePathToImage($description){
         $path_to_image=self::images[strtolower($description)];
@@ -97,6 +149,10 @@ class WeatherHelper
 
         return $description;
 
+    }
+
+    public static function presentationDescriptionDeterminer($description){
+        return self::extendedDescriptions[trim(strtolower($description))];
     }
 
 

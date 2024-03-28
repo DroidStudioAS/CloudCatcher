@@ -2,76 +2,55 @@
 @section("content")
 
     <div class="daily_forecast">
-        <div class="df_colum_general"></div>
-        <div class="df_colum_data"></div>
+        <div class="df_colum_general">
+            <p class="forecast_text">Current Temperature:</p>
+            <div class="weather_temperature">
+                {{$dailyData["current_temp"]}}°
+            </div>
+            <div>
+                <p class="forecast_text"><span class="important">Wind Strength:</span> {{$dailyData["wind_kph"]}} KPH</p>
+            </div>
+            <div class="card">
+                    <div class="front_content">
+                        <p class="forecast_text">Aqi</p>
+                        <p class="forecast_text">Safe</p>
+                    </div>
+                    <div class="back_content">
+                        <p class="forecast_text">Description</p>
+                    </div>
+            </div>
+            <div class="astro">
+                <div class="astro_child">
+                    <p class="forecast_text">Sunrise</p>
+                    <p class="forecast_text">{{$dailyData["sunrise"]}}</p>
+                </div>
+                <div class="astro_child">
+                    <p class="forecast_text">Sunset</p>
+                    <p class="forecast_text">{{$dailyData["sunset"]}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="df_colum_data">
+            <p class="city_name">
+                {{$dailyData["city_name"]}}, {{$dailyData["country"]}}
+                <br>
+                {{$dailyData["description"]}}
+            </p>
+
+            <p class="forecast_text">
+                {{\Carbon\Carbon::parse($dailyData["date"])->format("l, Y-m-d T")}},
+            </p>
+            <p class="forecast_text">
+                {{\App\Helpers\WeatherHelper::presentationDescriptionDeterminer($dailyData["description"])}}
+            </p>
+
+        </div>
 
     </div>
 
-    {{dd($dailyData)}}
 
-   <!-- Old Layoutdiv class="forecast_card">
-       <p class="weather_city-forecast">
-           {{$forecast[0]->city_name}}
-       </p>
-       <div class="forecast_row_container">
-           <div class="forecast_box">
-               <img src="{{$forecast[0]->forecast[0]->path_to_image}}"/>
-               <p> {{$forecast[0]->forecast[0]->description}} </p>
-           </div>
-           <svg class="forecast-divider">
-               <rect x="0" y="0" width="1px" height="40vh" fill="white"></rect>
-           </svg>
-           <div class="forecast_box">
-               <div class="temperature_container">
-                   <h1 class="weather_temperature">
-                       {{$forecast[0]->forecast[0]->temperature}}°
-                   </h1>
-               </div>
-               <p class="weather_date">
-                   {{$forecast[0]->forecast[0]->date}}
-               </p>
-           </div>
-       </div>
-       <div class="forecast_four_day_container">
-           @for($i=1; $i<=2; $i++)
-               <div class="forecast_day">
-                   <div class="card">
-                       <div class="front_content">
-                           <p class="weather_date">
-                               {{$forecast[0]->forecast[$i]->date}}
-                           </p>
-                           <img src="{{asset($forecast[0]->forecast[$i]->path_to_image)}}" alt="weather_photo" class="forecast_photo">
-                           <p>{{$forecast[0]->forecast[$i]->description}}</p>
-                       </div>
-                       <div class="back_content">
-                           <p>Chance Of Rain/Snow:</p>
-                           <p>
-                               @if($forecast[0]->forecast[$i]->probability===null)
-                                    0
-                               @else
-                                   {{$forecast[0]->forecast[$i]->probability}}
-                               @endif
-                               %
-                           </p>
-                       </div>
-                   </div>
-               </div>
-           @endfor
-       </div>
-       <div class="follow_button">
-           @if(!$isFollowed)
-              <img onclick="addToFavourites({{$forecast[0]->id}})"
-                  id="likeButton"
-                  src="{{asset("/res/icon_not_liked.svg")}}"/>
-              <p>Follow City</p>
-            @else
-               <img onclick="removeFromFavorites({{$forecast[0]->id}})"
-                   id="likeButton"
-                   src="{{asset("/res/icon_liked.svg")}}"/>
-               <p>Unfollow City</p>
-           @endif
-       </div>
-   </div-->
+
+
     <script>
         function addToFavourites(id){
             console.log(id)
