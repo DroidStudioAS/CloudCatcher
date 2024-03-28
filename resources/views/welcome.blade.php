@@ -43,7 +43,7 @@
                         </div>
                         <p class="weather_date">{{$city->cityModel->todaysForecast[0]->date}}</p>
                     </div>
-                    <div onclick="showCityForecast('{{$city->cityModel->id}}')"
+                    <div onclick="showCityForecast('{{$city->cityModel->id}}','{{\Carbon\Carbon::now()->format("Y-m-d")}}')"
                          class="show_more_button">Forecast</div>
                     <div id="likeButton" class="home_like_button">
                         <img id="like_image"
@@ -94,9 +94,9 @@
                 window.location.href="/weather-search/"+city
             }
         }
-        function showCityForecast(city){
+        function showCityForecast(city,date){
            if(city!==null || city!==""){
-               window.location.href="/test/"+city
+               window.location.href="/test/"+city+"/"+date;
            }
         }
         function showCountryWeather(country){

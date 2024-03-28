@@ -24,7 +24,7 @@
                     </div>
                     <p class="weather_date">{{$weather->date}}</p>
                 </div>
-                <div onclick="showCityForecast('{{$weather->city->id}}')" class="show_more_button">Forecast</div>
+                <div onclick="showCityForecast('{{$weather->city->id}}', '{{$weather->date}}')" class="show_more_button">Forecast</div>
                 <div id="likeButton" class="home_like_button">
                     @if(in_array($weather->city->id, $userFavorites))
                         <img id="like_image"
@@ -41,9 +41,9 @@
         @endforeach
     </div>
     <script>
-        function showCityForecast(city){
+        function showCityForecast(city, date){
             if(city!==null || city!==""){
-                window.location.href="/test/"+city
+                window.location.href="/test/"+city+"/"+date;
             }
         }
 

@@ -222,12 +222,12 @@ class WeatherController extends Controller
         }
         return view("/search_results", compact("weathers","userFavorites"));
     }
-    public function getDailyWeatherForCity(CityModel $city){
-
+    public function getDailyWeatherForCity(CityModel $city, $date){
 
         $params =[];
         $params ["city"]=$city->city_name;
         $params["country"]=$city->country;
+        $params["date"]=$date;
 
         $favoriteCities = Auth::user()->cityFavorites;
 

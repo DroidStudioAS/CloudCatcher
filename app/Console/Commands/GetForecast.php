@@ -52,11 +52,13 @@ class GetForecast extends Command
 
 
 
+
         $response = Http::get($url, [
             "key" => env("WEATHER_API_KEY"),
             "q" => $q,
             "aqi" => "no",
-            "days" => 5
+            "days" => 5,
+            "dt"=>$this->argument("date")
         ]);
 
         $jsonResponse = json_decode($response->body(), true);
@@ -77,19 +79,28 @@ class GetForecast extends Command
         $weatherInfo['country'] = $jsonResponse["location"]["country"];
 
         // Add forecast information for each day to the array (api only returns 3 days)
-        $weatherInfo['forecast'] = [];
-        for ($i = 0; $i <= 2; $i++) {
-            $dayForecast = [
-                'date' => $jsonResponse["forecast"]["forecastday"][$i]["date"],
-                'max_temp' => $jsonResponse["forecast"]["forecastday"][$i]["day"]["maxtemp_c"],
-                'min_temp' => $jsonResponse["forecast"]["forecastday"][$i]["day"]["mintemp_c"],
-                'avg_temp' => $jsonResponse["forecast"]["forecastday"][$i]["day"]["avgtemp_c"],
-                'description' => $jsonResponse["forecast"]["forecastday"][$i]["day"]["condition"]["text"],
-                'chance_of_snow' => $jsonResponse["forecast"]["forecastday"][$i]["day"]["daily_chance_of_snow"],
-                'chance_of_rain' => $jsonResponse["forecast"]["forecastday"][$i]["day"]["daily_chance_of_rain"],
-            ];
-            $weatherInfo['forecast'][] = $dayForecast;
-        }
+        //this is only in case date was not sent
+
+            $weatherInfo['forecast'] = [];
+            for ($i = 0; $i <= 2; $i++) {
+                //if user sent a date, we only want to retrive the first forecast day
+                if($this->argument("date")!==null){
+                    if($i===1){
+                        break;
+                    }
+                }
+                $dayForecast = [
+                    'date' => $jsonResponse["forecast"]["forecastday"][$i]["date"],
+                    'max_temp' => $jsonResponse["forecast"]["forecastday"][$i]["day"]["maxtemp_c"],
+                    'min_temp' => $jsonResponse["forecast"]["forecastday"][$i]["day"]["mintemp_c"],
+                    'avg_temp' => $jsonResponse["forecast"]["forecastday"][$i]["day"]["avgtemp_c"],
+                    'description' => $jsonResponse["forecast"]["forecastday"][$i]["day"]["condition"]["text"],
+                    'chance_of_snow' => $jsonResponse["forecast"]["forecastday"][$i]["day"]["daily_chance_of_snow"],
+                    'chance_of_rain' => $jsonResponse["forecast"]["forecastday"][$i]["day"]["daily_chance_of_rain"],
+                ];
+                $weatherInfo['forecast'][] = $dayForecast;
+            }
+
         $this->line(json_encode($weatherInfo));
         //success
         return 0;
