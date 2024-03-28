@@ -11,7 +11,7 @@
             <div>
                 <p class="forecast_text"><span class="important">Wind Strength:</span> {{$dailyData["wind_kph"]}} KPH</p>
             </div>
-            <div class="card">
+            <div style="background-color: {{\App\Helpers\WeatherHelper::aqiBackgroudDeterminer($dailyData['aqi'])}}" class="card">
                     <div class="front_content">
                         <p class="forecast_text">Air Quality:</p>
                         <p class="forecast_text">{{$dailyData["aqi"]}}</p>

@@ -204,6 +204,32 @@ class WeatherHelper
         }
         return $desc;
     }
+    public static function aqiBackgroudDeterminer($index){
+        $color="";
+        switch ($index){
+            case 1:
+                $color = "#8BC34A";
+                break;
+            case 2:
+                $color = "#FFD54F";
+                break;
+            case 3:
+                $color = "#FF9800";
+                break;
+            case 4:
+                $color = "#F44336";
+                break;
+            case 5:
+                $color = "#9C27B0";
+                break;
+            case 6:
+                $color = "#757575";
+                break;
+        }
+        return $color;
+    }
+
+    /****AQI END***/
 
     public static function dailyForecastBackgroundDeterminer($description){
         $path_to_image = collect([]);
