@@ -616,15 +616,38 @@ table{
         font-size: 25vw;
         text-align: center;
     }
+
     .weather_date{
         font-size: x-large;
         width: 45vw;
         text-align: center;
+        font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    }
+    .test{
+        color: purple;
     }
     .header_title{
         font-size: 8vw;
     }
 
+}
+.daily_forecast{
+    background-color: #226ba3;
+    width: 70vw;
+    height: 80vh;
+
+    display: flex;
+    flex-flow: row nowrap;
+    border-radius: 20px;
+}
+.df_colum_general{
+    flex: 1.5;
+    border-right: 1px solid white;
+    padding: 8px;
+}
+.df_colum_data{
+    flex: 5;
+    padding: 8px;
 }
 
 
