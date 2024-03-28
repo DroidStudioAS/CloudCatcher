@@ -13,7 +13,7 @@ class GetForecast extends Command
      *
      * @var string
      */
-    protected $signature = 'forecast:get {city} {country?}';
+    protected $signature = 'forecast:get {city} {country?} {date?}';
 
     /**
      * The console command description.
@@ -45,6 +45,9 @@ class GetForecast extends Command
         $q=$this->argument("city");
         if($this->argument("country")!==null){
             $q.= ", " . $this->argument("country");
+        }
+        if($this->argument("date")!==null){
+            $q.=", " . $this->argument("date");
         }
 
 

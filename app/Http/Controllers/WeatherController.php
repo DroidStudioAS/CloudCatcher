@@ -141,6 +141,9 @@ class WeatherController extends Controller
         if(!is_null($request->city_name)){
             $params["city"]= $request->city_name;
         }
+        if(!is_null($request->date)){
+            $params["date"]=$request->date;
+        }
 
 
         /******Api Call*****/
