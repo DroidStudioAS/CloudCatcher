@@ -64,6 +64,17 @@
                     </p>
                 </div>
             </div>
+            <div class="hour_container">
+                @for($i =0; $i<6; $i++)
+                    <div class="hour">
+                        <p class="forecast_text">{{\Carbon\Carbon::parse($dailyData["h-t-h"][$i]["time"])->format("H")}}</p>
+                        <img src="{{asset(\App\Helpers\WeatherHelper::realDataImagePathDeterminer($dailyData["h-t-h"][$i]["condition"]))}}"/>
+                        <p class="forecast_text">{{$dailyData["h-t-h"][$i]["temp_c"]}}°</p>
+                    </div>
+                @endfor
+            </div>
+
+
 
         </div>
 

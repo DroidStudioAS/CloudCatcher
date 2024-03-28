@@ -614,10 +614,7 @@ table{
     .weather_description{
         font-size: x-large;
     }
-    .weather_temperature{
-        font-size: 25vw;
-        text-align: center;
-    }
+
 
     .weather_date{
         font-size: x-large;
@@ -716,6 +713,26 @@ table{
     text-decoration: underline;
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
     font-weight: 900;
+}
+.hour_container{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: 53vw;
+}
+.hour{
+    border-right: 1px solid white;
+    border-left: 1px solid white;
+    width: 8vw;
+    height: 20vh;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.hour img{
+    width: 5vw;
 }
 
 
