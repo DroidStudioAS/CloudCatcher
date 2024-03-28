@@ -26,10 +26,12 @@
             <div class="astro">
                 <div class="astro_child">
                     <p class="forecast_text">Sunrise</p>
+                    <img src="{{asset("/res/icon_sunrise.svg")}}"/>
                     <p class="forecast_text">{{$dailyData["sunrise"]}}</p>
                 </div>
                 <div class="astro_child">
                     <p class="forecast_text">Sunset</p>
+                    <img src="{{asset("/res/icon_sunset.svg")}}"/>
                     <p class="forecast_text">{{$dailyData["sunset"]}}</p>
                 </div>
             </div>

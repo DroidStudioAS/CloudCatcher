@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
@@ -81,7 +82,7 @@ class GetDailyForecast extends Command
 
 
         // Add forecast information for each day to the array (api only returns 3 days)
-        if($this->argument("date")===null) {
+        if($this->argument("date")===null || $this->argument("date")===Carbon::now()->format("Y-m-d")) {
             $weatherInfo["current_temp"] = $jsonResponse["current"]["temp_c"];
             $weatherInfo["wind_kph"] = $jsonResponse["current"]["wind_kph"];
         }else{

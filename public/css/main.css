@@ -673,6 +673,9 @@ table{
     align-items: center;
     margin: 20px;
 }
+.astro_child img{
+    width: 35px;
+}
 
 .df_colum_data{
     flex: 5;
