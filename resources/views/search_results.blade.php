@@ -7,7 +7,7 @@
     <div class="weather_cards_container">
         @foreach($weathers as $weather)
             <div class="weather_card">
-                <p class="weather_city">{{$weather->city->city_name}}</p>
+                <p class="weather_city">{{$weather->city->city_name}} , {{$weather->city->country}}</p>
                 <div class="weather_column">
                     <img class="weather_image" src="{{asset($weather->path_to_image)}}" alt="weather photo">
                     <p class="weather_description">{{$weather->description}}</p>
