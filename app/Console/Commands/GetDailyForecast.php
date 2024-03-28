@@ -119,7 +119,6 @@ class GetDailyForecast extends Command
         $weatherInfo["h-t-h"]=$hourlyForecast;
 
 
-
         $this->line(json_encode($weatherInfo));
         //success
         return 0;

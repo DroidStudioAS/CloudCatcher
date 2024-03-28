@@ -229,7 +229,9 @@ class WeatherController extends Controller
         $params["country"]=$city->country;
         $params["date"]=$date;
 
-        $favoriteCities = Auth::user()->cityFavorites;
+        $cityId = $city->id;
+
+        $favoriteCities = Auth::user()->cityFavorites->pluck("city_id")->toArray();
 
 
 
@@ -239,7 +241,7 @@ class WeatherController extends Controller
             return view("/welcome", compact("favoriteCities"))->with("error", "No Locations Were Found By $city");
         }
 
-        return view("five-day-forecast", compact("dailyData"));
+        return view("five-day-forecast", compact("dailyData", "favoriteCities","cityId"));
 
 
     }

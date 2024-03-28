@@ -192,26 +192,7 @@
     border-bottom: 1px solid white;
     justify-content: space-evenly;
 }
-.follow_button{
-    position: absolute;
-    top: 0;
-    right: -199px;
 
-    width: 200px;
-    background-color:#226ba3;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    text-align: center;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: flex-start;
-    align-items: center;
-
-
-}
-.follow_button img{
-    width: 100px;
-}
 .forecast_four_day_container{
     justify-content: space-evenly;
     align-items: flex-start;
@@ -639,6 +620,7 @@ table{
     display: flex;
     flex-flow: row nowrap;
     border-radius: 20px;
+    position: relative;
 }
 .df_colum_general{
     flex: 1.5;
@@ -746,6 +728,23 @@ table{
     text-align: center;
     width: 53vw;
 }
+.follow_button{
+    position: absolute;
+    top: 20px;
+    right: -20px;
+
+    width: 100px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+
+
+}
+
 
 
 

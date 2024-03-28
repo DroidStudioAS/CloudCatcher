@@ -70,6 +70,24 @@
                         <span style="color: {{\App\Helpers\WeatherHelper::dailyForecastBackgroundDeterminer($dailyData["description"])[2]}}" class="weather_temp_small">{{$dailyData['avg_temp']}}°</span>
                     </p>
                 </div>
+                <div class="minxmax_child">
+                    <p style="color: {{\App\Helpers\WeatherHelper::dailyForecastBackgroundDeterminer($dailyData["description"])[2]}}" class="forecast_text">
+                        Chance Of
+                        <br>
+                            Snow:
+                            <br>
+                            <span style="color: {{\App\Helpers\WeatherHelper::dailyForecastBackgroundDeterminer($dailyData["description"])[2]}}" class="weather_temp_small">{{$dailyData['chance_of_snow']}}%</span>
+                    </p>
+                </div>
+                <div class="minxmax_child">
+                    <p style="color: {{\App\Helpers\WeatherHelper::dailyForecastBackgroundDeterminer($dailyData["description"])[2]}}" class="forecast_text">
+                        Chance Of
+                        <br>
+                        Rain:
+                        <br>
+                        <span style="color: {{\App\Helpers\WeatherHelper::dailyForecastBackgroundDeterminer($dailyData["description"])[2]}}" class="weather_temp_small">{{$dailyData['chance_of_rain']}}%</span>
+                    </p>
+                </div>
             </div>
             <div class="title_container">
                 <p style="color: {{\App\Helpers\WeatherHelper::dailyForecastBackgroundDeterminer($dailyData["description"])[2]}}" class="important">Hourly forecast</p>
@@ -83,11 +101,18 @@
                     </div>
                 @endfor
             </div>
-
-
-
         </div>
-
+        @if(in_array($cityId, $favoriteCities))
+            <img class="follow_button" id="like_image"
+                 src="{{asset("/res/icon_liked.svg")}}"
+                 onclick="removeFromFavorites({{$cityId}})"/>
+        @else
+            <img
+                class="follow_button"
+                id="unlike_image"
+                src="{{asset("/res/icon_not_liked.svg")}}"
+                onclick="addToFavourites({{$cityId}})"/>
+        @endif
     </div>
 
 
