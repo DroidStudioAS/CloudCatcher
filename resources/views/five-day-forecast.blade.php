@@ -102,17 +102,23 @@
                 @endfor
             </div>
         </div>
-        @if(in_array($cityId, $favoriteCities))
-            <img class="follow_button" id="like_image"
-                 src="{{asset("/res/icon_liked.svg")}}"
-                 onclick="removeFromFavorites({{$cityId}})"/>
-        @else
-            <img
-                class="follow_button"
-                id="unlike_image"
-                src="{{asset("/res/icon_not_liked.svg")}}"
-                onclick="addToFavourites({{$cityId}})"/>
-        @endif
+        <div class="follow_button">
+            @if(in_array($cityId, $favoriteCities))
+                <img
+                    id="like_image"
+                     src="{{asset("/res/icon_liked.svg")}}"
+                     onclick="removeFromFavorites({{$cityId}})"/>
+                <p class="important">Unollow City</p>
+            @else
+                <img
+                    id="unlike_image"
+                    src="{{asset("/res/icon_not_liked.svg")}}"
+                    onclick="addToFavourites({{$cityId}})"/>
+                <p class="important">Follow City</p>
+
+            @endif
+        </div>
+
     </div>
 
 

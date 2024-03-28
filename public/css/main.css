@@ -731,9 +731,9 @@ table{
 .follow_button{
     position: absolute;
     top: 20px;
-    right: -20px;
+    right: 20px;
 
-    width: 100px;
+    width: 110px;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     text-align: center;
@@ -742,7 +742,15 @@ table{
     justify-content: flex-start;
     align-items: center;
 
-
+}
+.follow_button img{
+    width: 90px;
+}
+.follow_button:hover p{
+    display: block;
+}
+.follow_button p{
+    display: none;
 }
 
 
