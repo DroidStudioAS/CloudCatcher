@@ -114,7 +114,15 @@ class WeatherController extends Controller
         if(!$city->isEmpty()){
             foreach ($city as $name){
                 foreach ($name->forecast as $forecast) {
-                    $weathers->push($forecast);
+                    //if date is set, add only existing records for that date
+                    if($request->date!==null) {
+                        if ($request->date === $forecast->date) {
+                            $weathers->push($forecast);
+                        }
+                        //else add all existing records
+                    }else{
+                        $weathers->push($forecast);
+                    }
                 }
             }
             if(count($weathers)!==0) {
