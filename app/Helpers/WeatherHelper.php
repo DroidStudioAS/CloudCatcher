@@ -206,25 +206,29 @@ class WeatherHelper
     }
 
     public static function dailyForecastBackgroundDeterminer($description){
-        $path_to_image = "";
+        $path_to_image = collect([]);
         $trimedLowerCaseDesc = trim(strtolower($description));
         if (str_contains($trimedLowerCaseDesc, "sunny")) {
-             $path_to_image = "res/back/back_sunny.jpg";
+            $path_to_image->push("#77b5cb");
+            $path_to_image->push("res/back/back_sunny.jpg");
         } elseif (str_contains($trimedLowerCaseDesc, "cloudy")) {
-            $path_to_image = "res/back/back_partly_cloudy.jpg";
+            $path_to_image->push("#435e7e");
+            $path_to_image->push("res/back/back_partly_cloudy.jpg");
         }elseif(str_contains($trimedLowerCaseDesc, "rain") || str_contains($trimedLowerCaseDesc, "drizzle")){
-            $path_to_image="res/back/back_rainy.jpg";
-        }elseif(str_contains($trimedLowerCaseDesc, "overcast")){
-            $path_to_image="res/back/back_overcast.jpg";
+            $path_to_image->push("#525c69");
+            $path_to_image->push("res/back/back_rainy.jpg");
+        }elseif(str_contains($trimedLowerCaseDesc, "overcast")|| str_contains($trimedLowerCaseDesc,"thunder")){
+            $path_to_image->push("#5d595c");
+            $path_to_image->push("res/back/back_overcast.jpg");
         }elseif(str_contains($trimedLowerCaseDesc, "fog")){
-            $path_to_image="res/back/back_fog.jpg";
+            $path_to_image->push("#989ea6");
+            $path_to_image->push("res/back/back_fog.jpg");
         }elseif(str_contains($trimedLowerCaseDesc, "snow") || str_contains($trimedLowerCaseDesc,"blizzard")
             || str_contains($trimedLowerCaseDesc, "pellets") || str_contains($trimedLowerCaseDesc,"sleet")){
-            $path_to_image="res/back/back_snow.jpg";
+            $path_to_image->push("#8ccbe6");
+            $path_to_image->push("res/back/back_snow.jpg");
         }
-
         return $path_to_image;
-
     }
 
 
