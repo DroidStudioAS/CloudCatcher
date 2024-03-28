@@ -12,7 +12,7 @@ class GetDailyForecast extends Command
      *
      * @var string
      */
-    protected $signature = 'forecast:daily {city} {country?}';
+    protected $signature = 'forecast:daily {city} {country?} {date?}';
 
     /**
      * The console command description.
@@ -42,14 +42,19 @@ class GetDailyForecast extends Command
 
         //build the q param
         $q=$this->argument("city");
+        $dt="";
         if($this->argument("country")!==null){
             $q.= ", " . $this->argument("country");
+        }
+        if($this->argument("date")!==null){
+            $dt=$this->argument("country");
         }
 
         $response = Http::get($url, [
             "key" => env("WEATHER_API_KEY"),
             "q" => $q,
-            "aqi"=>"yes"
+            "aqi"=>"yes",
+            "dt"=>$dt
         ]);
 
         $jsonResponse = json_decode($response->body(), true);
