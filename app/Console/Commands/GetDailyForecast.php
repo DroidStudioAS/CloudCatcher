@@ -47,8 +47,9 @@ class GetDailyForecast extends Command
             $q.= ", " . $this->argument("country");
         }
         if($this->argument("date")!==null){
-            $dt=$this->argument("country");
+            $dt=$this->argument("date");
         }
+
 
         $response = Http::get($url, [
             "key" => env("WEATHER_API_KEY"),
@@ -78,9 +79,15 @@ class GetDailyForecast extends Command
         $weatherInfo['country'] = $jsonResponse["location"]["country"];
         $weatherInfo['date'] = $jsonResponse["forecast"]["forecastday"][0]["date"];
 
+
         // Add forecast information for each day to the array (api only returns 3 days)
-        $weatherInfo["current_temp"] = $jsonResponse["current"]["temp_c"];
-        $weatherInfo["wind_kph"]= $jsonResponse["current"]["wind_kph"];
+        if($this->argument("date")===null) {
+            $weatherInfo["current_temp"] = $jsonResponse["current"]["temp_c"];
+            $weatherInfo["wind_kph"] = $jsonResponse["current"]["wind_kph"];
+        }else{
+            $weatherInfo["current_temp"] = $jsonResponse["forecast"]["forecastday"][0]["day"]["avgtemp_c"];
+            $weatherInfo["wind_kph"] = $jsonResponse["forecast"]["forecastday"][0]["day"]["maxwind_kph"];
+        }
         $weatherInfo["sunrise"]=$jsonResponse["forecast"]["forecastday"][0]["astro"]["sunrise"];
         $weatherInfo["sunset"]=$jsonResponse["forecast"]["forecastday"][0]["astro"]["sunset"];
         $weatherInfo['max_temp'] = $jsonResponse["forecast"]["forecastday"][0]["day"]["maxtemp_c"];

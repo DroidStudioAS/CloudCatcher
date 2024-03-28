@@ -42,6 +42,7 @@
     </div>
     <script>
         function showCityForecast(city, date){
+
             if(city!==null || city!==""){
                 window.location.href="/test/"+city+"/"+date;
             }
