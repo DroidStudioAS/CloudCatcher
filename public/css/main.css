@@ -225,6 +225,7 @@
 
     border-radius: 20px;
     border: 2px solid white;
+    text-align: center;
 }
 .card:hover {
     transform: rotateY(180deg);
@@ -652,6 +653,8 @@ table{
 .important{
     font-weight: 900;
     text-decoration: underline;
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    color: white;
 }
 .forecast_text{
     color: white;
@@ -679,6 +682,8 @@ table{
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: flex-start;
+
+
 }
 .city_name{
     color: white;
@@ -733,6 +738,10 @@ table{
 }
 .hour img{
     width: 5vw;
+}
+.title_container{
+    text-align: center;
+    width: 53vw;
 }
 
 

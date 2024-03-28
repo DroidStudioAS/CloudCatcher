@@ -12,11 +12,14 @@
             </div>
             <div class="card">
                     <div class="front_content">
-                        <p class="forecast_text">Aqi</p>
-                        <p class="forecast_text">Safe</p>
+                        <p class="forecast_text">Air Quality:</p>
+                        <p class="forecast_text">{{$dailyData["aqi"]}}</p>
+                        <p class="forecast_text">{{\App\Helpers\WeatherHelper::aqiShortDescriptionDeterminer($dailyData['aqi'])}}</p>
                     </div>
                     <div class="back_content">
-                        <p class="forecast_text">Description</p>
+                        <p class="forecast_text">
+                            {{\App\Helpers\WeatherHelper::aqiLongDescriptionDeterminer($dailyData["aqi"])}}
+                        </p>
                     </div>
             </div>
             <div class="astro">
@@ -63,6 +66,9 @@
                         <span class="weather_temp_small">{{$dailyData['avg_temp']}}°</span>
                     </p>
                 </div>
+            </div>
+            <div class="title_container">
+                <p class="important">Hourly forecast</p>
             </div>
             <div class="hour_container">
                 @for($i =0; $i<6; $i++)

@@ -155,6 +155,56 @@ class WeatherHelper
         return self::extendedDescriptions[trim(strtolower($description))];
     }
 
+    /*****AQI****/
+    public static function aqiShortDescriptionDeterminer($index){
+        $desc="";
+        switch ($index){
+            case 1:
+                $desc = "Good";
+                break;
+            case 2:
+                $desc= "Moderate";
+                break;
+            case 3:
+                $desc = "Unhealthy For Sensitive Groups";
+                break;
+            case 4:
+                $desc="Unhealthy";
+                break;
+            case 5:
+                $desc = "Very Unhealthy";
+                break;
+            case 6:
+                $desc="Hazardous";
+                break;
+        }
+        return $desc;
+    }
+    public static function aqiLongDescriptionDeterminer($index){
+        $desc="";
+        switch ($index){
+            case 1:
+                $desc = "Air quality is good, suitable for outdoor activities and prolonged exposure.";
+                break;
+            case 2:
+                $desc = "Air quality is moderate, may cause some discomfort for sensitive individuals.";
+                break;
+            case 3:
+                $desc = "Air quality is unhealthy for sensitive groups, limit outdoor activities.";
+                break;
+            case 4:
+                $desc = "Air quality is unhealthy, reduce prolonged outdoor or strenuous activities.";
+                break;
+            case 5:
+                $desc = "Air quality is very unhealthy, avoid outdoor activities, especially for sensitive individuals.";
+                break;
+            case 6:
+                $desc = "Air quality is hazardous, stay indoors, and keep outdoor exposure to a minimum.";
+                break;
+        }
+        return $desc;
+    }
+
 
 
 }
