@@ -43,7 +43,7 @@
                         </div>
                         <p class="weather_date">{{$city->cityModel->todaysForecast[0]->date}}</p>
                     </div>
-                    <div onclick="showCityForecast('{{$city->cityModel->city_name}}')"
+                    <div onclick="showCityForecast('{{$city->cityModel->id}}')"
                          class="show_more_button">Forecast</div>
                     <div id="likeButton" class="home_like_button">
                         <img id="like_image"

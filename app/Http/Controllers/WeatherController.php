@@ -203,13 +203,18 @@ class WeatherController extends Controller
         }
         return view("/search_results", compact("weathers","userFavorites"));
     }
-    public function getDailyWeatherForCity($city){
+    public function getDailyWeatherForCity(CityModel $city){
+
+
+        $params =[];
+        $params ["city"]=$city->city_name;
+        $params["country"]=$city->country;
 
         $favoriteCities = Auth::user()->cityFavorites;
 
-        Artisan::call("forecast:daily",[
-            "city"=>$city
-        ]);
+
+
+        Artisan::call("forecast:daily", $params);
         $dailyData = json_decode(Artisan::output(),true);
         if(array_key_exists("error",$dailyData)){
             return view("/welcome", compact("favoriteCities"))->with("error", "No Locations Were Found By $city");

@@ -24,7 +24,7 @@
                     </div>
                     <p class="weather_date">{{$weather->date}}</p>
                 </div>
-                <div onclick="showCityForecast('{{$weather->city->city_name}}')" class="show_more_button">Forecast</div>
+                <div onclick="showCityForecast('{{$weather->city->id}}')" class="show_more_button">Forecast</div>
                 <div id="likeButton" class="home_like_button">
                     @if(in_array($weather->city->id, $userFavorites))
                         <img id="like_image"
