@@ -690,6 +690,33 @@ table{
     font-weight: bolder;
     font-size: xx-large;
 }
+.forecast_extended_description{
+    font-size: large;
+    color: white;
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    line-height: 1.2em;
+    width: 60%;
+}
+.minmax{
+    display: flex;
+    flex-flow: row nowrap;
+}
+.minxmax_child{
+    display: flex;
+    flex-flow: column nowrap;
+    text-align: center;
+
+    justify-content: center;
+    align-items: center;
+    margin-right: 30px;
+}
+.weather_temp_small{
+    font-size: x-large;
+    color: white;
+    text-decoration: underline;
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    font-weight: 900;
+}
 
 
 

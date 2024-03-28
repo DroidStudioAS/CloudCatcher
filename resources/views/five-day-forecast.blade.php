@@ -40,9 +40,30 @@
             <p class="forecast_text">
                 {{\Carbon\Carbon::parse($dailyData["date"])->format("l, Y-m-d T")}},
             </p>
-            <p class="forecast_text">
+            <p class="forecast_extended_description">
                 {{\App\Helpers\WeatherHelper::presentationDescriptionDeterminer($dailyData["description"])}}
             </p>
+            <div class="minmax">
+                <div class="minxmax_child">
+                    <p class="forecast_text">
+                        Daily Minimum <br> Temperature: <br>
+                        <span class="weather_temp_small">{{$dailyData['min_temp']}}°</span>
+                    </p>
+
+                </div>
+                <div class="minxmax_child">
+                    <p class="forecast_text">
+                        Daily Maximum <br> Temperature: <br>
+                        <span class="weather_temp_small">{{$dailyData['max_temp']}}°</span>
+                    </p>
+                </div>
+                <div class="minxmax_child">
+                    <p class="forecast_text">
+                        Daily Average <br> Temperature: <br>
+                        <span class="weather_temp_small">{{$dailyData['avg_temp']}}°</span>
+                    </p>
+                </div>
+            </div>
 
         </div>
 
