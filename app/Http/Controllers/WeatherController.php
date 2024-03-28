@@ -108,6 +108,7 @@ class WeatherController extends Controller
          * if there is, return them without calling the api
          * if not, continue to API call and fetch the forecast for 3 days*******/
         $city = CityModel::where("city_name", "LIKE", "%$request->city_name%")
+            ->where("country","LIKE","%$request->country%")
             ->get();
         //city is not empty
         if(!$city->isEmpty()){
