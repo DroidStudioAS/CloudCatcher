@@ -7,7 +7,7 @@
 
     </div>
 
-
+    {{dd($dailyData)}}
 
    <!-- Old Layoutdiv class="forecast_card">
        <p class="weather_city-forecast">

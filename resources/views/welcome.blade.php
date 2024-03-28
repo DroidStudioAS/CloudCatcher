@@ -2,6 +2,10 @@
 @extends("layouts.layout")
 
 @section("content")
+    @if(isset($error))
+        <h3 class="no-entries-msg">{{$error}}</h3>
+    @endif
+
    <div class="search_container">
        <h3>Find Your City:</h3>
        <form ACTION="{{route("search")}}" class="search_form" id="searchForm">

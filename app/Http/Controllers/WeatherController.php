@@ -198,12 +198,19 @@ class WeatherController extends Controller
     }
     public function getDailyWeatherForCity($city){
 
-        Artisan::call("forecast:daily",[
+        $favoriteCities = Auth::user()->cityFavorites;
 
+        Artisan::call("forecast:daily",[
             "city"=>$city
         ]);
-        $jsonResponse = json_decode(Artisan::output(),true);
-        dd($jsonResponse);
+        $dailyData = json_decode(Artisan::output(),true);
+        if(array_key_exists("error",$dailyData)){
+            return view("/welcome", compact("favoriteCities"))->with("error", "No Locations Were Found By $city");
+        }
+
+        return view("five-day-forecast", compact("dailyData"));
+
+
     }
 
 
