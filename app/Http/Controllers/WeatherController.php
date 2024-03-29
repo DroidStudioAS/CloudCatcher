@@ -26,6 +26,7 @@ class WeatherController extends Controller
         return view("welcome", compact( 'date',"favoriteCities"));
     }
 
+    //used for the global search from home screen
     public function searchAll(Request $request)
     {
         //Array to return
@@ -151,6 +152,7 @@ class WeatherController extends Controller
         }
         return view("/search_results", compact("weathers","userFavorites"));
     }
+    //used to reterive the daily forecast for the city clicked
     public function getDailyWeatherForCity(CityModel $city, $date){
 
         $params =[];
