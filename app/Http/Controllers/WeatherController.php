@@ -20,12 +20,10 @@ class WeatherController extends Controller
     public function loadTodaysWeathers(){
         $date = Carbon::today()->format('Y-m-d');
 
-        $weathers = ForecastModel::with("city")->where("date", $date)->paginate(6);
-
         //return favorites
         $favoriteCities = Auth::user()->cityFavorites;
 
-        return view("welcome", compact('weathers', 'date',"favoriteCities"));
+        return view("welcome", compact( 'date',"favoriteCities"));
     }
 
     public function searchAll(Request $request)
