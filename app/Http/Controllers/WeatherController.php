@@ -28,77 +28,7 @@ class WeatherController extends Controller
         return view("welcome", compact('weathers', 'date',"favoriteCities"));
     }
 
-
-    //will always return the 5 latest forecasts
-    public function getWeatherForecastForCity($city){
-      $forecast = CityModel::where("city_name",$city)->with(["forecast"=> function($query){
-            $query->latest()->limit(5);
-      }])->get();
-
-      //determine if city is followed
-      $isFollowed = false;
-      $city = CityModel::where(["city_name"=>$city])->first();
-      $favorites = Auth::user()->cityFavorites()->pluck("city_id")->toArray();
-      if(in_array($city->id, $favorites)){
-          $isFollowed=true;
-      }
-
-      return view("five-day-forecast", compact("forecast","isFollowed"));
-    }
-
     public function searchAll(Request $request)
-    {
-        $request->validate([
-            "city_name" => "nullable|string",
-            "country" => "nullable|string",
-            "date" => "nullable|string"
-        ]);
-
-        $paramsSent = false;
-        foreach ($request->all() as $param) {
-            if ($param !== null) {
-                $paramsSent = true;
-                break;
-            }
-        }
-
-        if($paramsSent===false){
-            return redirect("/weather");
-        }
-
-        $forecastQuery = ForecastModel::query();
-        // Initialize the variables from the request
-        $city_name = $request->city_name;
-        $date = $request->date;
-        $country = $request->country;
-        if($date===null){
-            $date=Carbon::now()->format("Y-m-d");
-        }
-        $forecastQuery->where("date",$date);
-        /**********/
-        if($city_name!==null){
-            $forecastQuery->whereHas("city", function ($query) use ($city_name){
-               $query->where("city_name", "LIKE","%$city_name%");
-            });
-        }
-        if($country!==null){
-            $forecastQuery->whereHas("city", function ($query) use ($country){
-                $query->where("country", "LIKE","%$country%");
-            });
-        }
-
-        $weathers = $forecastQuery->with("city")->get();
-
-        if(count($weathers)===0){
-            return view("/welcome", compact("weathers"))->with("error", "No results matched your criteria");
-        }
-        //return favorites
-        $favoriteCities = Auth::user()->cityFavorites;
-
-        return view("search_results", compact("weathers","favoriteCities"));
-
-    }
-    public function test(Request $request)
     {
         //Array to return
         $weathers = collect([]);
@@ -110,8 +40,9 @@ class WeatherController extends Controller
         $city = CityModel::where("city_name", "LIKE", "%$request->city_name%")
             ->where("country","LIKE","%$request->country%")
             ->get();
-        //city is not empty
         if(!$city->isEmpty()){
+            //city is not empty, check if there are any
+            //forecasts matching the search criteria
             foreach ($city as $name){
                 foreach ($name->forecast as $forecast) {
                     //if date is set, add only existing records for that date
@@ -168,17 +99,17 @@ class WeatherController extends Controller
          * if it does exist, pull out the first city, because that is the only
          * one we have data for********/
 
-            //check if city exists through api data before creating it
-            //Api can send the country name like united states, but the user could have searched
-            //usa... This check is to prevent duplicate entries;
-            $city= CityModel::where(["city_name"=>$city_name, "country"=>$country])->get();
-            if($city->isEmpty()){
-            $city= CityModel::create([
-                "city_name"=>$city_name,
-                "country"=>$country
-            ]);
-             }else{
-            $city=$city->first();
+         //check if city exists through api data before creating it
+         //Api can send the country name like united states, but the user could have searched
+         //usa... This check is to prevent duplicate entries;
+         $city= CityModel::where(["city_name"=>$city_name, "country"=>$country])->get();
+         if($city->isEmpty()){
+         $city= CityModel::create([
+             "city_name"=>$city_name,
+             "country"=>$country
+         ]);
+          }else{
+         $city=$city->first();
          }
         //forecast data for next 3 days
         $data = $forecast["forecast"];
