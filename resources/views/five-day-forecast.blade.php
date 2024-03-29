@@ -43,7 +43,6 @@
                 <br>
                 {{$dailyData["description"]}}
             </p>
-
             <p style="color: {{\App\Helpers\WeatherHelper::dailyForecastBackgroundDeterminer($dailyData["description"])[2]}}" class="forecast_text">
                 {{\Carbon\Carbon::parse($dailyData["date"])->format("l, Y-m-d T")}},
             </p>
