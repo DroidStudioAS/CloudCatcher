@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Helpers\ParamHelper;
 use App\Services\WeatherService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -40,19 +41,9 @@ class GetDailyForecast extends Command
      */
     public function handle()
     {
-        //build the q param
-        $q="";
-        $dt="";
-        if($this->argument("city")!==null){
-            $q.= $this->argument("city") . ",";
-        }
-        if($this->argument("country")!==null){
-            $q.= $this->argument("country");
-        }
-        if($this->argument("date")!==null){
-            $dt=$this->argument("date");
-        }
-
+        //build request params
+        $q = ParamHelper::buildQ($this->argument("city"),$this->argument("country"));
+        $dt = ParamHelper::buildDt($this->argument("date"));
 
         $jsonResponse = WeatherService::getForecast($q,$dt);
 

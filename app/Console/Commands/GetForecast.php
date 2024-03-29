@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Helpers\ParamHelper;
 use App\Services\WeatherService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
@@ -40,19 +41,9 @@ class GetForecast extends Command
      */
     public function handle()
     {
-
-        //build the q and dt param
-        $q= "";
-        $dt="";
-        if($this->argument("city")!==null){
-            $q.= $this->argument("city") .",";
-        }
-        if($this->argument("country")!==null){
-            $q.= $this->argument("country");
-        }
-        if($this->argument("date")!==null){
-            $dt=$this->argument("date");
-        }
+        //build request parameters
+        $q = ParamHelper::buildQ($this->argument("city"), $this->argument("country"));
+        $dt = ParamHelper::buildDt($this->argument("date"));
         //make api call in weather service
         $jsonResponse = WeatherService::getForecast($q,$dt);
         // Initialize an associative array to store weather information

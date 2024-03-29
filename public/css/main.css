@@ -315,7 +315,7 @@
 /****Flip card AQI******/
 .card {
     width: 100%;
-    height: 25%;
+    height: 100%;
     position: relative;
     transition: transform 0.5s;
     transform-style: preserve-3d;
@@ -323,6 +323,11 @@
     border-radius: 20px;
     border: 2px solid white;
     text-align: center;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
 }
 .card:hover {
     transform: rotateY(180deg);
