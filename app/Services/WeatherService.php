@@ -10,7 +10,7 @@ class WeatherService
         $response = Http::get(env("WEATHER_API_URL"), [
             "key" => env("WEATHER_API_KEY"),
             "q" => $q,
-            "aqi" => "no",
+            "aqi" => "yes",
             "days" => 5,
             "dt"=>$dt
         ]);

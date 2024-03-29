@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Services\WeatherService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
@@ -40,24 +41,20 @@ class GetDailyForecast extends Command
     public function handle()
     {
         //build the q param
-        $q=$this->argument("city");
+        $q="";
         $dt="";
+        if($this->argument("city")!==null){
+            $q.= $this->argument("city") . ",";
+        }
         if($this->argument("country")!==null){
-            $q.= ", " . $this->argument("country");
+            $q.= $this->argument("country");
         }
         if($this->argument("date")!==null){
             $dt=$this->argument("date");
         }
 
 
-        $response = Http::get(env("WEATHER_API_URL"), [
-            "key" => env("WEATHER_API_KEY"),
-            "q" => $q,
-            "aqi"=>"yes",
-            "dt"=>$dt
-        ]);
-
-        $jsonResponse = json_decode($response->body(), true);
+        $jsonResponse = WeatherService::getForecast($q,$dt);
 
         // Initialize an associative array to store weather information
         $weatherInfo = [];

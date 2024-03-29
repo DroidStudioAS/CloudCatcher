@@ -53,10 +53,8 @@ class GetForecast extends Command
         if($this->argument("date")!==null){
             $dt=$this->argument("date");
         }
-
-
+        //make api call in weather service
         $jsonResponse = WeatherService::getForecast($q,$dt);
-
         // Initialize an associative array to store weather information
         $weatherInfo = [];
 
@@ -77,8 +75,8 @@ class GetForecast extends Command
 
             $weatherInfo['forecast'] = [];
             for ($i = 0; $i <= 2; $i++) {
-                //if user sent a date, we only want to retrive the first forecast day
-                if($this->argument("date")!==null){
+                //If user sent a date param, we only want to retrieve the first forecast day: $i===0
+                if($dt!==null){
                     if($i===1){
                         break;
                     }
