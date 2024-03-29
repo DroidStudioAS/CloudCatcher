@@ -1,3 +1,4 @@
+/**************************Global Styles Start*****************************/
 .content-container{
     display: flex;
     flex-flow: column nowrap;
@@ -32,8 +33,22 @@
     cursor: none;
     text-align: center;
 }
+/***Input Field Used Globally**/
+.date{
+    width: 15vw;
+    padding: 10px 8px 10px 8px;
+    text-align: center;
+    font-size: large;
+    margin: 8px;
+    border-radius: 8px;
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 
-/******Weather Card*****/
+    border-bottom: 4px solid #627e75;
+}
+
+/**************************Global Styles Start*****************************/
+
+/******Weather Card Start*****/
 .weather_cards_container{
     display: flex;
     flex-flow: row wrap;
@@ -157,461 +172,7 @@
     transition: opacity 1s ease;
     cursor: pointer;
 }
-/****Forecast card******/
-.forecast_card{
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: space-around;
-    background-color: #226ba3;
-
-    width: 70vw;
-    height: 70vh;
-    margin: 20px 20px 150px 20px;
-
-    position: relative;
-    border-radius: 8px 0 8px 8px;
-}
-
-.forecast_card p{
-    color: white;
-    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-    font-weight: bold;
-    font-size: large;
-}
-.forecast_row_container,
-.forecast_four_day_container{
-    display: flex;
-    flex-flow:row nowrap;
-    width: 68vw;
-    margin: 15px;
-}
-.forecast_row_container{
-    height: 40vh;
-    padding-bottom: 10px;
-    border-bottom: 1px solid white;
-    justify-content: space-evenly;
-}
-
-.forecast_four_day_container{
-    justify-content: space-evenly;
-    align-items: flex-start;
-}
-.card {
-    width: 100%;
-    height: 25%;
-    position: relative;
-    transition: transform 0.5s;
-    transform-style: preserve-3d;
-
-    border-radius: 20px;
-    border: 2px solid white;
-    text-align: center;
-}
-.card:hover {
-    transform: rotateY(180deg);
-}
-.forecast_box{
-    height: 40vh;
-    width: 30vw;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-around;
-    align-items: center;
-    text-align: center;
-}
-.forecast_box img{
-    width: 23vw;
-    height: 30vh;
-}
-.forecast-divider{
-    position: absolute;
-    left: 35vw;
-    height: 40vh;
-}
-.forecast_day{
-    height: 20vh;
-    width: 15vw ;
-
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    border-radius: 15px;
-}
-.front_content, .back_content{
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    backface-visibility: hidden;
-}
-.front_content{
-    z-index: 2;
-}
-.back_content {
-    transform: rotateY(180deg);
-}
-.forecast_day p{
-    font-weight: bold;
-    color: black;
-}
-.forecast_day img{
-    width: 3vw;
-}
-.weather_city-forecast{
-    padding-bottom: 16px;
-}
-
-
-
-/*******Admin Dash*********/
-.admin_container{
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: #d2a985;
-}
-.admin_container h1{
-    color: white;
-    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-}
-.admin_panel_link{
-    color: white;
-    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-    position: absolute;
-    right: 1vw;
-    cursor: pointer;
-}
-.admin_row{
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-   /* background-color: pink;*/
-}
-table{
-    border-collapse: collapse;
-    background-color: #627e75;
-    color: white;
-
-}
-.table_container{
-    height: 50vh;
-    overflow-y: auto;
-    margin: 20px;
-}
-.cities_table{
-    height: 200px;
-    overflow-y: auto;
-
-}
-.table_header{
-    font-size: xx-large;
-}
-.table_header,
-.weather_table_data{
-    font-size: xx-large;
-    text-align: left;
-    width: 14vw;
-    border: 1px solid white;
-    padding: 10px;
-}
-.weather_table_data_flex{
-
-
-
-}
-.edit_button{
-    background-color: #226ba3;
-}
-.delete_button{
-    background-color: red;
-}
-.edit_button,
-.delete_button{
-    font-size: large;
-    padding: 10px;
-    margin: 8px;
-    border-radius: 8px;
-    color: white;
-}
-
-.pagination_nav{
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: center;
-    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-    color: white;
-}
-.pagination_nav a:visited{
-    color: white;
-}
-.pagination_nav a:link{
-    color: white;
-}
-.result_nav{
-    text-align: center;
-}
-.pages{
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-
-}
-.pages svg{
-    width: 2vw;
-}
-.pages span{
-    text-align: center;
-
-}
-/*****End of table styling****/
-.entry_form_container,
-.entry_form_container-edit{
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-    background-color: #627e75;
-
-    margin: 30px;
-    padding: 15px;
-    border-radius: 8px;
-
-    color: white;
-
-    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-}
-.entry_form_container h1{
-    text-align: center;
-}
-.entry-form{
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: 20vw;
-    background-color: #226ba3;
-    padding: 15px;
-    border-radius: 8px;
-}
-.entry-form-dropdown{
-    width: 10vw;
-    padding: 10px 8px 10px 8px;
-    text-align: center;
-    font-size: large;
-    margin: 8px;
-    border-radius: 8px;
-    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-    border-bottom: 4px solid #627e75;
-
-}
-.weather_input{
-    width: 15vw;
-    padding: 10px 8px 10px 8px;
-    text-align: center;
-    font-size: large;
-    margin: 8px;
-    border-radius: 8px;
-    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-
-     border-bottom: 4px solid #627e75;
-
-}
-.submit-button{
-    font-size: large;
-    padding: 10px;
-    margin: 8px;
-    border-radius: 8px;
-    color: white;
-    background-color: #627e75;
-}
-
-
-/**Edit Popup**/
-.entry_form_container-edit{
-    display: none;
-    position: fixed;
-    top: 20vh;
-    background-color: #627e75;
-    width: 30vw;
-    height: 60vh;
-}
-.entry_form_container-edit img,
-.closeButton{
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 5px;
-    width: 50px;
-}
-
-.searchDisplay{
-    margin-top:10px;
-    background-color: #627e75;
-    padding: 20px;
-    border:1px solid black;
-    border-radius: 8px;
-
-    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-    color: white;
-    font-size: large;
-}
-.search_form{
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-}
-.search_filters{
-    display: none;
-}
-.search_container,
-.geo_search_container{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-flow: column nowrap;
-}
-.geo_search_container{
-    flex-flow: row nowrap;
-}
-
-.search_container h3{
-    font-size: xx-large;
-    color: white;
-    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-}
-.no-entries-msg{
-    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-    font-size: xxx-large;
-    text-align: center;
-    color: red;
-}
-.date{
-    width: 15vw;
-    padding: 10px 8px 10px 8px;
-    text-align: center;
-    font-size: large;
-    margin: 8px;
-    border-radius: 8px;
-    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-
-    border-bottom: 4px solid #627e75;
-}
-/******Forecast popup****/
-.forecast_popup{
-    display: none;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-
-    position: fixed;
-    left: 5vw;
-    top: 5vh;
-
-    width: 90vw;
-    height: 90vh;
-
-    background-color: #226ba3;
-    padding: 20px;
-    overflow-y: auto;
-}
-.weather_icon{
-    width: 20px;
-    margin-left: 20px;
-
-}
-/*****Datepicker*****/
-.datepicker {
-    position: fixed;
-    padding: 20px;
-    font-size: large;
-}
-.datepicker table{
-    background-color: #627e75;
-    padding: 10px;
-}
-.datepicker th{
-    color: black;
-    padding: 10px;
-}
-.datepicker td{
-    padding: 10px;
-
-}
-.datepicker-dropdown{
-}
-.datepicker-months{
-    position: fixed;
-    padding: 20px;
-}
-.datepicker-months span{
-    margin-right: 10px;
-}
-.datepicker-years{
-    position: fixed;
-    padding: 20px;
-}
-.datepicker-years span{
-    margin-right: 10px;
-}
-.dropdown-menu{
-}
-.datepicker-orient-left{
-}
-.disabled{
-    color: red;
-
-}
-
-@media (max-width: 800px) {
-    .weather_card{
-        width: 90vw;
-    }
-    .show_more_button{
-        left: 5vw;
-        width: 80vw;
-    }
-    .weather_city{
-        padding:8px 14px 8px 14px;
-        font-size: x-large;
-    }
-    .divider{
-        left:45vw ;
-    }
-    .weather_image{
-        width: 25vw;
-    }
-    .weather_description{
-        font-size: x-large;
-    }
-
-
-    .weather_date{
-        font-size: x-large;
-        width: 45vw;
-        text-align: center;
-        font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-    }
-    .test{
-        color: purple;
-    }
-    .header_title{
-        font-size: 8vw;
-    }
-
-}
+/******Daily Forecast Card Start*****/
 .daily_forecast{
     background-color: #226ba3;
     width: 70vw;
@@ -658,7 +219,6 @@ table{
 .astro_child img{
     width: 35px;
 }
-
 .df_colum_data{
     flex: 5;
     padding: 8px;
@@ -752,6 +312,338 @@ table{
 .follow_button p{
     display: none;
 }
+/****Flip card AQI******/
+.card {
+    width: 100%;
+    height: 25%;
+    position: relative;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+
+    border-radius: 20px;
+    border: 2px solid white;
+    text-align: center;
+}
+.card:hover {
+    transform: rotateY(180deg);
+}
+.front_content, .back_content{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+}
+.front_content{
+    z-index: 2;
+}
+.back_content {
+    transform: rotateY(180deg);
+}
+/******Daily Forecast Card End*****/
+
+/**************************Admin Dash Start*****************************/
+.admin_container{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #d2a985;
+}
+.admin_container h1{
+    color: white;
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+}
+.admin_panel_link{
+    color: white;
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    position: absolute;
+    right: 1vw;
+    cursor: pointer;
+}
+.admin_row{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+   /* background-color: pink;*/
+}
+
+/******Pagination Style Start******/
+.pagination_nav{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    color: white;
+}
+.pagination_nav a:visited{
+    color: white;
+}
+.pagination_nav a:link{
+    color: white;
+}
+.pages{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+
+}
+.pages svg{
+    width: 2vw;
+}
+.pages span{
+    text-align: center;
+
+}
+/******Pagination Style End******/
+
+/******Table Style Start******/
+table{
+    border-collapse: collapse;
+    background-color: #627e75;
+    color: white;
+
+}
+.table_container{
+    height: 50vh;
+    overflow-y: auto;
+    margin: 20px;
+}
+.cities_table{
+    height: 200px;
+    overflow-y: auto;
+
+}
+.table_header{
+    font-size: xx-large;
+}
+
+.table_header,
+.weather_table_data{
+    font-size: xx-large;
+    text-align: left;
+    width: 14vw;
+    border: 1px solid white;
+    padding: 10px;
+}
+
+.edit_button,
+.delete_button{
+    font-size: large;
+    padding: 10px;
+    margin: 8px;
+    border-radius: 8px;
+    color: white;
+}
+
+.edit_button{
+    background-color: #226ba3;
+}
+.delete_button{
+    background-color: red;
+}
+/*****End of table styling****/
+.entry_form_container,
+.entry_form_container-edit{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #627e75;
+
+    margin: 30px;
+    padding: 15px;
+    border-radius: 8px;
+
+    color: white;
+
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+}
+.entry_form_container h1{
+    text-align: center;
+}
+.entry-form{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 20vw;
+    background-color: #226ba3;
+    padding: 15px;
+    border-radius: 8px;
+}
+.entry-form-dropdown{
+    width: 10vw;
+    padding: 10px 8px 10px 8px;
+    text-align: center;
+    font-size: large;
+    margin: 8px;
+    border-radius: 8px;
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    border-bottom: 4px solid #627e75;
+
+}
+.weather_input{
+    width: 15vw;
+    padding: 10px 8px 10px 8px;
+    text-align: center;
+    font-size: large;
+    margin: 8px;
+    border-radius: 8px;
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+
+     border-bottom: 4px solid #627e75;
+
+}
+.submit-button{
+    font-size: large;
+    padding: 10px;
+    margin: 8px;
+    border-radius: 8px;
+    color: white;
+    background-color: #627e75;
+}
+
+
+/**Edit Popup Start**/
+.entry_form_container-edit{
+    display: none;
+    position: fixed;
+    top: 20vh;
+    background-color: #627e75;
+    width: 30vw;
+    height: 60vh;
+}
+.entry_form_container-edit img,
+.closeButton{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+    width: 50px;
+}
+
+.searchDisplay{
+    margin-top:10px;
+    background-color: #627e75;
+    padding: 20px;
+    border:1px solid black;
+    border-radius: 8px;
+
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    color: white;
+    font-size: large;
+}
+.search_form{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.search_filters{
+    display: none;
+}
+.search_container,
+.geo_search_container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-flow: column nowrap;
+}
+.geo_search_container{
+    flex-flow: row nowrap;
+}
+
+.search_container h3{
+    font-size: xx-large;
+    color: white;
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+}
+.no-entries-msg{
+    font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    font-size: xxx-large;
+    text-align: center;
+    color: red;
+}
+
+/**Edit Popup End**/
+
+/******Forecast popup****/
+.forecast_popup{
+    display: none;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    left: 5vw;
+    top: 5vh;
+
+    width: 90vw;
+    height: 90vh;
+
+    background-color: #226ba3;
+    padding: 20px;
+    overflow-y: auto;
+}
+.weather_icon{
+    width: 20px;
+    margin-left: 20px;
+
+}
+
+.disabled{
+    color: red;
+}
+/**************************Admin Dash End*****************************/
+
+/***************************Media Querys Start************************/
+@media (max-width: 800px) {
+    .weather_card{
+        width: 90vw;
+    }
+    .show_more_button{
+        left: 5vw;
+        width: 80vw;
+    }
+    .weather_city{
+        padding:8px 14px 8px 14px;
+        font-size: x-large;
+    }
+    .divider{
+        left:45vw ;
+    }
+    .weather_image{
+        width: 25vw;
+    }
+    .weather_description{
+        font-size: x-large;
+    }
+
+
+    .weather_date{
+        font-size: x-large;
+        width: 45vw;
+        text-align: center;
+        font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    }
+    .test{
+        color: purple;
+    }
+    .header_title{
+        font-size: 8vw;
+    }
+
+}
+
 
 
 
