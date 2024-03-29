@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Services\WeatherService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
@@ -13,7 +14,7 @@ class GetForecast extends Command
      *
      * @var string
      */
-    protected $signature = 'forecast:get {city} {country?} {date?}';
+    protected $signature = 'forecast:get {city?} {country?} {date?}';
 
     /**
      * The console command description.
@@ -39,29 +40,22 @@ class GetForecast extends Command
      */
     public function handle()
     {
-        $url = "http://api.weatherapi.com/v1/forecast.json";
 
-        //build the q param
-        $q=$this->argument("city");
+        //build the q and dt param
+        $q= "";
+        $dt="";
+        if($this->argument("city")!==null){
+            $q.= $this->argument("city") .",";
+        }
         if($this->argument("country")!==null){
-            $q.= ", " . $this->argument("country");
+            $q.= $this->argument("country");
         }
         if($this->argument("date")!==null){
-            $q.=", " . $this->argument("date");
+            $dt=$this->argument("date");
         }
 
 
-
-
-        $response = Http::get($url, [
-            "key" => env("WEATHER_API_KEY"),
-            "q" => $q,
-            "aqi" => "no",
-            "days" => 5,
-            "dt"=>$this->argument("date")
-        ]);
-
-        $jsonResponse = json_decode($response->body(), true);
+        $jsonResponse = WeatherService::getForecast($q,$dt);
 
         // Initialize an associative array to store weather information
         $weatherInfo = [];

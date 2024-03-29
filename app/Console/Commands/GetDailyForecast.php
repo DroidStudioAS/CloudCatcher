@@ -39,8 +39,6 @@ class GetDailyForecast extends Command
      */
     public function handle()
     {
-        $url = "http://api.weatherapi.com/v1/forecast.json";
-
         //build the q param
         $q=$this->argument("city");
         $dt="";
@@ -52,7 +50,7 @@ class GetDailyForecast extends Command
         }
 
 
-        $response = Http::get($url, [
+        $response = Http::get(env("WEATHER_API_URL"), [
             "key" => env("WEATHER_API_KEY"),
             "q" => $q,
             "aqi"=>"yes",
